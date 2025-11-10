@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3qnpvvipeh62"]
+
+[ext_resource type="Script" uid="uid://copdwdcvsjoc0" path="res://scripts/agent.gd" id="1_jv27j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gv5m4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gv5m4"]
+
+[node name="Agent" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_jv27j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gv5m4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gv5m4")
