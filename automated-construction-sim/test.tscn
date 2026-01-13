@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7t73q6m010w3"]
+
+[ext_resource type="Shader" uid="uid://beitshygwq63" path="res://src/displacementShader.gdshader" id="1_8uh7m"]
+[ext_resource type="Script" uid="uid://drayfonut4g1o" path="res://src/mesh.gd" id="1_37kl0"]
+[ext_resource type="Texture2D" uid="uid://bl1xkboafaiim" path="res://Heightmaps/selfmade.png" id="2_6uqi0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_37kl0"]
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6uqi0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6uqi0"]
+noise = SubResource("FastNoiseLite_6uqi0")
+as_normal_map = true
+bump_strength = 6.6
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uqi0"]
+render_priority = 0
+shader = ExtResource("1_8uh7m")
+shader_parameter/noise = ExtResource("2_6uqi0")
+shader_parameter/height_scale = 0.5
+shader_parameter/normalmap = SubResource("NoiseTexture2D_6uqi0")
+
+[node name="Test" type="Node3D"]
+
+[node name="Plane" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005799532, -0.0036518574, 0.0022666454)
+mesh = SubResource("PlaneMesh_37kl0")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_6uqi0")
+script = ExtResource("1_37kl0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.99050707, 0.13746183, 0, -0.13746183, 0.99050707, 0, 0, 0, 1, -0.1042881, 0.592078, 1.2052233)
+omni_range = 3.4116488
