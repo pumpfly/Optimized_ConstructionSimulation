@@ -23,14 +23,14 @@ func actor_setup():
 
 func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
-func _process(delta: float) -> void:
-	pass
+	
 func _physics_process(delta):
 	if navigation_agent.is_navigation_finished():
 		return
 
 	var current_agent_position: Vector3 = global_position
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+	$Pivot.basis = Basis.looking_at(-navigation_agent.get_next_path_position())
 
 	velocity = current_agent_position.direction_to(next_path_position) * movement_speed
 	move_and_slide()

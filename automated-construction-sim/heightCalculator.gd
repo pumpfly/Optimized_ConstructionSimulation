@@ -10,7 +10,7 @@ extends CollisionShape3D
 		max_height = new_max_height
 		update_map_data()
 
-@export var heightmap = ResourceLoader.load("res://Heightmaps/28_179_86_691_15_505_505_16bit.png")
+@export var heightmap = ResourceLoader.load("res://Heightmaps/twentytwentyHM+1.png")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_map_data()

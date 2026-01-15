@@ -1,6 +1,6 @@
 shader_type spatial;
 
-uniform sampler2D noise;
+uniform sampler2D heightmap: filter_nearest, repeat_disable;
 uniform float height_scale = 1;
 uniform sampler2D normalmap;
 
@@ -8,8 +8,8 @@ varying vec2 tex_position;
 
 void vertex() {
 	tex_position = UV;
-  float height = texture(noise, tex_position).x;
-  VERTEX.y += height * height_scale;
+	float height = texture(heightmap, tex_position).r;
+	VERTEX.y += height * height_scale;
 }
 
 void fragment() {
