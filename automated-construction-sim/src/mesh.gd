@@ -8,4 +8,4 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# called from the MeshInstance3D
-	mesh.material.set_shader_parameter("height_scale", 0.5)
+	pass

@@ -1,13 +1,13 @@
 shader_type spatial;
 
 uniform sampler2D noise;
-uniform float height_scale = 0.5;
+uniform float height_scale = 1;
 uniform sampler2D normalmap;
 
 varying vec2 tex_position;
 
 void vertex() {
-	tex_position = VERTEX.xz / 2.0 + 0.5;
+	tex_position = UV;
   float height = texture(noise, tex_position).x;
   VERTEX.y += height * height_scale;
 }
