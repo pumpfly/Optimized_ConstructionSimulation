@@ -41,14 +41,14 @@ navigation_mesh = SubResource("NavigationMesh_a7x1e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/StaticBody3D"]
 shape = SubResource("HeightMapShape3D_fayh3")
 
-[node name="CharacterBody3D" parent="Terrain/NavigationRegion3D/StaticBody3D" instance=ExtResource("2_s77cx")]
+[node name="Bagger" parent="Terrain" instance=ExtResource("2_s77cx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5607481, 1.4259913, -5.4208612)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fayh3")
 camera_attributes = SubResource("CameraAttributesPractical_fayh3")
 
-[node name="ProtoController" parent="." instance=ExtResource("2_vv0gm")]
+[node name="Camera" parent="." instance=ExtResource("2_vv0gm")]
 can_sprint = true
 can_freefly = true
 input_left = "move_left"

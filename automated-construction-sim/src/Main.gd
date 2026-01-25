@@ -1,12 +1,22 @@
 extends Node3D
 
+var heightmap_width
+
 func _ready():
-	#Check for the argument
+	# Check for the argument
+	## Heightmap
 	var heightmap_path = get_cmd_argument("--heightmap")
 	
 	if heightmap_path:
 		print("Loading heightmap from: ", heightmap_path)
-		load_external_heightmap(heightmap_path)
+		
+		var img = Image.new()
+		var error = img.load(heightmap_path)
+		if error != OK:
+			printerr("Failed to load image at path: ", heightmap_path)
+			return
+		load_external_heightmap(img)
+		find_spawn_point(img)
 	else:
 		print("No heightmap argument found")
 
@@ -22,14 +32,7 @@ func get_cmd_argument(argument_name: String) -> String:
 			
 	return "" # Return empty if not found
 
-func load_external_heightmap(file_path: String):
-	var img = Image.new()
-	
-	var error = img.load(file_path)
-	if error != OK:
-		printerr("Failed to load image at path: ", file_path)
-		return
-	
+func load_external_heightmap(img: Image):
 	# Heightmap dimensions
 	var heightmap_img_width = img.get_width()
 	var heightmap_img_height = img.get_height()
@@ -82,4 +85,17 @@ func load_external_heightmap(file_path: String):
 		navigation_region.bake_navigation_mesh()
 		navigation_region.navigation_mesh.cell_size = 2.0
 		navigation_region.navigation_mesh.set_collision_mask_value(1, true)
+
+func find_spawn_point(img: Image)-> Vector3:
+	var bagger_scene: CharacterBody3D = $Bagger
+	for i in range(img.get_width()):
+		for j in range(img.get_height()):
+			if img.get_pixel(i, j).g == 255:
+				var spawnpoint: Vector3 = Vector3(i, 0, j)
+				bagger_scene.position = spawnpoint
+				return spawnpoint
+			else:
+				continue
+	return Vector3(0,0,0)
+	
 	
