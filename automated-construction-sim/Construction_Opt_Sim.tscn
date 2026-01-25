@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxrtog4sdwmm1"]
+
+[ext_resource type="Script" uid="uid://d43urrdwww4w" path="res://src/Main.gd" id="1_fayh3"]
+[ext_resource type="PackedScene" uid="uid://b6ktq8v8ibkrb" path="res://scenes/Bagger.scn" id="2_s77cx"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_vv0gm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a7x1e"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a7x1e"]
+material = SubResource("ShaderMaterial_a7x1e")
+size = Vector2(20, 20)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_a7x1e"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_fayh3"]
+
+[sub_resource type="Environment" id="Environment_fayh3"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fayh3"]
+auto_exposure_enabled = true
+auto_exposure_scale = 0.2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.2973748, 0.80702287, -0.51017874, 0, 0.5343524, 0.8452618, 0.95476085, -0.25135958, 0.15890294, 0, 12.120247, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 165.0
+
+[node name="Terrain" type="Node3D" parent="."]
+script = ExtResource("1_fayh3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain"]
+mesh = SubResource("PlaneMesh_a7x1e")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Terrain"]
+navigation_mesh = SubResource("NavigationMesh_a7x1e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_fayh3")
+
+[node name="CharacterBody3D" parent="Terrain/NavigationRegion3D/StaticBody3D" instance=ExtResource("2_s77cx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5607481, 1.4259913, -5.4208612)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fayh3")
+camera_attributes = SubResource("CameraAttributesPractical_fayh3")
+
+[node name="ProtoController" parent="." instance=ExtResource("2_vv0gm")]
+can_sprint = true
+can_freefly = true
+input_left = "move_left"
+input_right = "move_right"
+input_forward = "move_forward"
+input_back = "move_back"
+input_freefly = "freefly_toggle"
