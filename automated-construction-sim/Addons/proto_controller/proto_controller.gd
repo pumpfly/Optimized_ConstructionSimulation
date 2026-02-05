@@ -54,7 +54,7 @@ var freeflying : bool = false
 @onready var collider: CollisionShape3D = $Collider
 
 func _ready() -> void:
-	check_input_mappings()
+	#check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
 
@@ -94,12 +94,8 @@ func _physics_process(delta: float) -> void:
 	if can_jump:
 		if Input.is_action_just_pressed(input_jump) and is_on_floor():
 			velocity.y = jump_velocity
-
-	# Modify speed based on sprinting
-	if can_sprint and Input.is_action_pressed(input_sprint):
-			move_speed = sprint_speed
-	else:
-		move_speed = base_speed
+			
+	move_speed = base_speed
 
 	# Apply desired movement to velocity
 	if can_move:
@@ -154,6 +150,7 @@ func release_mouse():
 
 ## Checks if some Input Actions haven't been created.
 ## Disables functionality accordingly.
+"""
 func check_input_mappings():
 	if can_move and not InputMap.has_action(input_left):
 		push_error("Movement disabled. No InputAction found for input_left: " + input_left)
@@ -176,3 +173,4 @@ func check_input_mappings():
 	if can_freefly and not InputMap.has_action(input_freefly):
 		push_error("Freefly disabled. No InputAction found for input_freefly: " + input_freefly)
 		can_freefly = false
+"""

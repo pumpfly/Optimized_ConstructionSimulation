@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dxrtog4sdwmm1"]
+
+[ext_resource type="Script" uid="uid://d43urrdwww4w" path="res://src/simulation_main.gd" id="1_eskbf"]
+[ext_resource type="PackedScene" uid="uid://b6ktq8v8ibkrb" path="res://Scenes/Bagger.scn" id="2_jux0o"]
+[ext_resource type="Script" uid="uid://upprbg152oq5" path="res://src/agent_spawner.gd" id="3_jux0o"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://Addons/proto_controller/proto_controller.tscn" id="3_m3l0r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a7x1e"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a7x1e"]
+material = SubResource("ShaderMaterial_a7x1e")
+size = Vector2(20, 20)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_a7x1e"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_fayh3"]
+
+[sub_resource type="Environment" id="Environment_fayh3"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fayh3"]
+auto_exposure_scale = 0.2
+
+[node name="Node3D" type="Node3D" unique_id=1067758714]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=356231429]
+transform = Transform3D(0.2973748, 0.80702287, -0.51017874, 0, 0.5343524, 0.8452618, 0.95476085, -0.25135958, 0.15890294, 0, 12.120247, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 165.0
+
+[node name="Terrain" type="Node3D" parent="." unique_id=53822216]
+script = ExtResource("1_eskbf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain" unique_id=1690649171]
+mesh = SubResource("PlaneMesh_a7x1e")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Terrain" unique_id=1270971585]
+navigation_mesh = SubResource("NavigationMesh_a7x1e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/NavigationRegion3D" unique_id=1545310144]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/StaticBody3D" unique_id=1904982207]
+shape = SubResource("HeightMapShape3D_fayh3")
+
+[node name="Bagger" parent="Terrain" unique_id=1038402200 instance=ExtResource("2_jux0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5607481, 1.4259913, -5.4208612)
+axis_lock_linear_z = false
+motion_mode = 0
+platform_floor_layers = 4294934528
+
+[node name="AgentSpawner" type="Node" parent="Terrain" unique_id=583317402]
+script = ExtResource("3_jux0o")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=892837578]
+environment = SubResource("Environment_fayh3")
+camera_attributes = SubResource("CameraAttributesPractical_fayh3")
+
+[node name="Camera" parent="." unique_id=374391361 instance=ExtResource("3_m3l0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 20, 50)
+has_gravity = false
+can_sprint = true
+can_freefly = true
+input_left = "move_left"
+input_right = "move_right"
+input_forward = "move_forward"
+input_back = "move_back"
+input_freefly = "freefly_toggle"
