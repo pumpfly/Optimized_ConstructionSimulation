@@ -1,48 +1,7 @@
+class_name Terrain
 extends Node3D
 
-func _ready():
-	# Check for the argument
-	## Heightmap
-	var heightmap_path = get_cmd_argument("--heightmap")
-	## Simulation speed
-	var simulation_speed = get_cmd_argument("--speed")
-	
-	if heightmap_path:
-		var img = Image.new()
-		var error = img.load(heightmap_path)
-		if error != OK:
-			printerr("Failed to load image at path: ", heightmap_path)
-			return
-		# Heightmap dimensions
-		var heightmap_img_width = img.get_width()
-		var heightmap_img_height = img.get_height()
-		
-		load_external_heightmap(img, heightmap_img_width, heightmap_img_height)
-		find_spawn_point(img, heightmap_img_width, heightmap_img_height)
-	else:
-		print("No heightmap argument found")
-	
-	if simulation_speed:
-		var speed: int = simulation_speed.to_int()
-		Engine.time_scale = speed
-		Engine.physics_ticks_per_second = 60*speed
-	else:
-		print("No speed argument found")
-
-# Helper function to find the value of a specific argument
-func get_cmd_argument(argument_name: String) -> String:
-	var args = OS.get_cmdline_args()
-	
-	# Iterate through the arguments
-	for i in range(args.size()):
-		# If we find the flag, and there is an argument after it...
-		if args[i] == argument_name and i < args.size() - 1:
-			return args[i + 1] # Return the next string (the file path)
-			
-	return "" # Return empty if not found
-
-func load_external_heightmap(img: Image, heightmap_img_width: int, heightmap_img_height: int):
-	
+func build_terrain_with_heightmap(img: Image, heightmap_img_width: int, heightmap_img_height: int):
 	#Create a heightmap from the Image
 	var heightmap = ImageTexture.create_from_image(img)
 	
@@ -93,15 +52,3 @@ func load_external_heightmap(img: Image, heightmap_img_width: int, heightmap_img
 		navigation_region.navigation_mesh.cell_size = 2.0
 		navigation_region.navigation_mesh.set_collision_mask_value(1, true)
 		collision_shape.disabled = true
-
-func find_spawn_point(img: Image, heightmap_width: int , heightmap_height: int)-> Vector3:
-	for i in range(img.get_width()):
-		for j in range(img.get_height()):
-			if img.get_pixel(i, j).g >= 0.9:
-				var spawnpoint: Vector3 = Vector3(i - heightmap_width/2, 2, j - heightmap_height/2)
-				return spawnpoint
-			else:
-				continue
-	return Vector3(0,0,0)
-	
-	

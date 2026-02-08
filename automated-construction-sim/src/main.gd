@@ -53,7 +53,7 @@ func _http_request_completed(result, _response_code, _headers, body):
 
 	# The Bagger Node has the navigation script
 	# which will send out a signal after the simulation reached its goal
-	var bagger: CharacterBody3D = simulation_instance.get_node("Terrain/Bagger")
+	var bagger: CharacterBody3D = simulation_instance.get_node("Bagger")
 	print(bagger.position)
 	bagger.goal_reached.connect(_on_bagger_goal_reached)
 	print("Signal connected") 
