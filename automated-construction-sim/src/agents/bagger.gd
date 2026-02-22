@@ -7,6 +7,7 @@ var grid: Grid
 var construction_zone: Array[Cell]
 var current_construction_cell: Cell = null  # Track which cell is currently being excavated
 var dirt_truck: DirtTruck = null # The Truck which stands next to the bagger and can be loaded
+var is_available = true
 
 @onready var obstacle_container: Node3D = %ObstacleContainer
 
@@ -62,11 +63,19 @@ func perform_work():
 
 
 func _on_timer_timeout():
+	# loading truck
 	dirt_truck.current_load_level += 1
+	
+	# Marking cell as completed and lowering height + updating terrain
 	current_construction_cell.current_state = Cell.WorkState.COMPLETED
 	var x: int = current_construction_cell.grid_x
 	var y: int = current_construction_cell.grid_y
 	main.set_heightmap_depth_by_pixel(-1, x, y)
+	
+	# Setting new goal
+	set_movement_target(get_target())
+	has_reached_goal = false
+	
 
 # Adding an obstacle to a cell that is currently being worked on by a bagger unsures that other agents do not drive through those cells
 func add_construction_obstacle(cell: Cell) -> void:

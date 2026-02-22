@@ -10,6 +10,11 @@ var time:int
 @onready var material_truck: PackedScene = preload("res://Scenes/Truck.scn")
 @onready var crane: PackedScene = preload("res://Scenes/Crane.scn")
 
+@onready var bagger_parent: Node = $BaggerParent
+@onready var dirt_truck_parent: Node = $DirtTruckParent
+@onready var crane_parent: Node = $CraneParent
+@onready var material_truck_parent: Node = $MaterialTruckParent
+
 @onready var spawnpoint: Vector3 = grid.get_spawn_cell().world_pos
 
 func _process(_delta: float) -> void:
@@ -22,19 +27,19 @@ func create_agents(agent_schedule: Dictionary):
 				var bagger_instance = bagger.instantiate()
 				bagger_instance.position = spawnpoint
 				bagger_instance.grid = grid
-				add_child(bagger_instance)
+				bagger_parent.add_child(bagger_instance)
 			if agent_type == "DirtTruck":
 				var dirt_truck_instance = dirt_truck.instantiate()
 				dirt_truck_instance.position = spawnpoint
 				dirt_truck_instance.grid = grid
-				add_child(dirt_truck_instance)
+				dirt_truck_parent.add_child(dirt_truck_instance)
 			if agent_type == "MaterialTruck":
 				var material_truck_instance = material_truck.instantiate()
 				material_truck_instance.position = spawnpoint
 				material_truck_instance.grid = grid
-				add_child(material_truck_instance)
+				crane_parent.add_child(material_truck_instance)
 			if agent_type == "Crane":
 				var crane_instance = crane.instantiate()
 				crane_instance.position = spawnpoint
 				crane_instance.grid = grid
-				add_child(crane_instance)
+				material_truck_parent.add_child(crane_instance)
