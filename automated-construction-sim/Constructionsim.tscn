@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dxrtog4sdwmm1"]
 
 [ext_resource type="Script" uid="uid://d43urrdwww4w" path="res://src/terrain.gd" id="1_eskbf"]
-[ext_resource type="Script" uid="uid://cm3to56ke8cdc" path="res://simulation_main.gd" id="1_m3l0r"]
+[ext_resource type="Script" uid="uid://cm3to56ke8cdc" path="res://src/simulation_main.gd" id="1_m3l0r"]
 [ext_resource type="Script" uid="uid://upprbg152oq5" path="res://src/agent_spawner.gd" id="3_jux0o"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://Addons/proto_controller/proto_controller.tscn" id="3_m3l0r"]
 [ext_resource type="Script" uid="uid://cji8daisubidg" path="res://stopwatch.gd" id="5_m3l0r"]
@@ -21,7 +21,7 @@ size = Vector2(20, 20)
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fayh3"]
 auto_exposure_scale = 0.2
 
-[node name="Node3D" type="Node3D" unique_id=1067758714]
+[node name="SimulationMain" type="Node3D" unique_id=1067758714]
 script = ExtResource("1_m3l0r")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=356231429]
@@ -66,3 +66,6 @@ input_freefly = "freefly_toggle"
 [node name="StopWatch" type="Node" parent="." unique_id=1634582443]
 unique_name_in_owner = true
 script = ExtResource("5_m3l0r")
+
+[node name="ObstacleContainer" type="Node3D" parent="." unique_id=1163068447]
+unique_name_in_owner = true
