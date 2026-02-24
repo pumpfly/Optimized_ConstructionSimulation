@@ -8,7 +8,7 @@ var movement_target_position: Vector3 = Vector3.ZERO
 var has_reached_goal: bool = false
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var main: SimulationMain = SimulationMain.new()
+@onready var main: SimulationMain = $SimulationMain
 
 ## "Virtual" methods - agents should override them
 func get_target() -> Vector3:

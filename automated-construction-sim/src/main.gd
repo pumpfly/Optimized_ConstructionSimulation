@@ -1,7 +1,6 @@
 extends Node
 
 @onready var simulation_scene: PackedScene = preload("res://Constructionsim.tscn")
-@onready var stop_watch: Node = %StopWatch
 var simulation_instance: Node = null  # Store the instantiated scene
 var timer: Timer
 
@@ -53,7 +52,7 @@ func _http_request_completed(result, _response_code, _headers, body):
 	print("Simulation added to tree")
 
 	# If the construction process has not finished in 2 hours, than stop simulation
-	stop_watch.timeout.connect(_construction_timout)
+	simulation_instance.stop_watch.timeout.connect(_construction_timout)
 	
 	# Get Task ID
 	var response_text = body.get_string_from_utf8()

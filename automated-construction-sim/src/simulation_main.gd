@@ -3,6 +3,7 @@ extends Node3D
 
 @onready var terrain: Terrain = %Terrain
 @onready var agent_spawner: AgentSpawner = %AgentSpawner
+@onready var stop_watch: Node = %StopWatch
 
 var img: Image = null
 var grid: Grid = null
@@ -19,6 +20,7 @@ func _ready() -> void:
 	terrain.build_terrain_with_heightmap(img, img.get_width(), img.get_height())
 	grid = Grid.new(img)
 	agent_spawner.grid = grid
+	agent_spawner.spawnpoint = grid.get_spawn_cell().world_pos
 	
 	# Setting spawn and navigation points
 	#agent_spawner.spawnpoint = find_spawn_point(img.get_width(), img.get_height())

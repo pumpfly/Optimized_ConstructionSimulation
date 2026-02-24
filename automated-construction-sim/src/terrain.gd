@@ -17,9 +17,6 @@ func build_terrain_with_heightmap(img: Image, heightmap_img_width: int, heightma
 	shader_material.shader = displacement_shader
 	shader_material.set_shader_parameter("heightmap", heightmap)
 	shader_material.set_shader_parameter("height_scale", 255.0)
-	# Color range for gradient visualization - adjust based on your heightmap
-	shader_material.set_shader_parameter("color_min", 0.0)
-	shader_material.set_shader_parameter("color_max", 0.3)
 
 	# Apply heightmap to mesh shader
 	var mesh_instance: MeshInstance3D = $MeshInstance3D

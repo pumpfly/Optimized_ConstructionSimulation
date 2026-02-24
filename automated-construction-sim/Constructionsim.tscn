@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxrtog4sdwmm1"]
+[gd_scene format=3 uid="uid://dxrtog4sdwmm1"]
 
 [ext_resource type="Script" uid="uid://d43urrdwww4w" path="res://src/terrain.gd" id="1_eskbf"]
 [ext_resource type="Script" uid="uid://cm3to56ke8cdc" path="res://src/simulation_main.gd" id="1_m3l0r"]
@@ -17,50 +17,53 @@ size = Vector2(20, 20)
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_fayh3"]
 
 [sub_resource type="Environment" id="Environment_fayh3"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fayh3"]
 auto_exposure_scale = 0.2
 
-[node name="SimulationMain" type="Node3D"]
+[node name="SimulationMain" type="Node3D" unique_id=1519879799]
 script = ExtResource("1_m3l0r")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1481596799]
 transform = Transform3D(0.2973748, 0.80702287, -0.51017874, 0, 0.5343524, 0.8452618, 0.95476085, -0.25135958, 0.15890294, 0, 12.120247, 0)
+visible = false
 shadow_enabled = true
 directional_shadow_max_distance = 165.0
 
-[node name="AgentSpawner" type="Node" parent="."]
+[node name="AgentSpawner" type="Node" parent="." unique_id=402656582]
 unique_name_in_owner = true
 script = ExtResource("3_jux0o")
 
-[node name="BaggerParent" type="Node" parent="AgentSpawner"]
+[node name="BaggerParent" type="Node" parent="AgentSpawner" unique_id=712349216]
 
-[node name="DirtTruckParent" type="Node" parent="AgentSpawner"]
+[node name="DirtTruckParent" type="Node" parent="AgentSpawner" unique_id=48131134]
 
-[node name="CraneParent" type="Node" parent="AgentSpawner"]
+[node name="CraneParent" type="Node" parent="AgentSpawner" unique_id=2145487999]
 
-[node name="MaterialTruckParent" type="Node" parent="AgentSpawner"]
+[node name="MaterialTruckParent" type="Node" parent="AgentSpawner" unique_id=2051036063]
 
-[node name="Terrain" type="Node3D" parent="."]
+[node name="Terrain" type="Node3D" parent="." unique_id=2131404555]
 unique_name_in_owner = true
 script = ExtResource("1_eskbf")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain" unique_id=1669932944]
 mesh = SubResource("PlaneMesh_a7x1e")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Terrain"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Terrain" unique_id=1709178205]
 navigation_mesh = SubResource("NavigationMesh_a7x1e")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/NavigationRegion3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/NavigationRegion3D" unique_id=279536316]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/StaticBody3D" unique_id=1858408361]
 shape = SubResource("HeightMapShape3D_fayh3")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=589295793]
 environment = SubResource("Environment_fayh3")
 camera_attributes = SubResource("CameraAttributesPractical_fayh3")
 
-[node name="Camera" parent="." instance=ExtResource("3_m3l0r")]
+[node name="Camera" parent="." unique_id=2098556947 instance=ExtResource("3_m3l0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 20, 50)
 has_gravity = false
 can_sprint = true
@@ -71,9 +74,9 @@ input_forward = "move_forward"
 input_back = "move_back"
 input_freefly = "freefly_toggle"
 
-[node name="StopWatch" type="Node" parent="."]
+[node name="ObstacleContainer" type="Node3D" parent="." unique_id=130972657]
+unique_name_in_owner = true
+
+[node name="StopWatch" type="Node" parent="." unique_id=577662678]
 unique_name_in_owner = true
 script = ExtResource("5_m3l0r")
-
-[node name="ObstacleContainer" type="Node3D" parent="."]
-unique_name_in_owner = true

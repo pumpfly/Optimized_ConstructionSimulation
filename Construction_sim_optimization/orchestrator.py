@@ -1,4 +1,5 @@
-from flask import Flask, request, random
+from flask import Flask, request
+import random
 # from PIL import Image
 
 
@@ -8,9 +9,9 @@ if __name__ == "__main__":
     # 1,5 months = 3942000 seconds
     # 2 hours = 7200 seconds
 
-    baggerCount = random(1, 15)
-    dirtTruckCount = random(1, 15)
-    materialTruckCount = random(1, 4) # four because for now four pipes will be installed and each truck can carry at least one and at max two
+    baggerCount = random.randrange(1, 15)
+    dirtTruckCount = random.randrange(1, 15)
+    materialTruckCount = random.randrange(1, 4) # four because for now four pipes will be installed and each truck can carry at least one and at max two
     # A material truck with two pipes is slower than trucks with just one
 
     # The dictionary of all agents and their schedule
@@ -18,28 +19,28 @@ if __name__ == "__main__":
 
     # bagger schedule
     for i in range(baggerCount):
-        key = random(1, 7200)
-        if not mainSchedule[key]:
+        key = random.randrange(1, 7200)
+        if key not in mainSchedule:
             mainSchedule[key] = []
         mainSchedule[key].append("Bagger") # 2 hours max for debuging purposes
     
     # dirt truck schedule
     for i in range(dirtTruckCount):
-        key = random(1, 7200)
-        if not mainSchedule[key]:
+        key = random.randrange(1, 7200)
+        if key not in mainSchedule:
             mainSchedule[key] = []
         mainSchedule[key].append("DirtTruck")
     
     # material truck schedule
     for i in range(materialTruckCount):
-        key = random(1, 7200)
-        if not mainSchedule[key]:
+        key = random.randrange(1, 7200)
+        if key not in mainSchedule:
             mainSchedule[key] = []
         mainSchedule[key].append("MaterialTruck")
 
     # crane schedule - There will only be one crane
-    key = random(1, 7200)
-    if not mainSchedule[key]:
+    key = random.randrange(1, 7200)
+    if key not in mainSchedule:
         mainSchedule[key] = []
     mainSchedule[key].append("Crane")
 
@@ -60,7 +61,7 @@ if __name__ == "__main__":
 
         del mainSchedule[agentKey]
 
-        return f"{agentKey}.) {input}"
+        return f"{agentKey} - {input}"
 
 
     # The Orchestrator recieves answers (Output)

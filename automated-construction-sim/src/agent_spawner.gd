@@ -1,7 +1,6 @@
 class_name AgentSpawner
 extends Node
 
-var grid: Grid = null
 
 var time:int
 
@@ -15,7 +14,8 @@ var time:int
 @onready var crane_parent: Node = $CraneParent
 @onready var material_truck_parent: Node = $MaterialTruckParent
 
-@onready var spawnpoint: Vector3 = grid.get_spawn_cell().world_pos
+var grid: Grid
+var spawnpoint: Vector3
 
 func _process(_delta: float) -> void:
 	time = %StopWatch.get_time()

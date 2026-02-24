@@ -6,12 +6,15 @@ var timer_digging: Timer
 var grid: Grid
 var construction_zone: Array[Cell]
 var current_construction_cell: Cell = null  # Track which cell is currently being excavated
-var dirt_truck: DirtTruck = null # The Truck which stands next to the bagger and can be loaded
+
+var dirt_truck: CharacterBody3D = null # The Truck which stands next to the bagger and can be loaded
+
 var is_available = true
 
 @onready var obstacle_container: Node3D = %ObstacleContainer
 
-enum WorkPhase{DIGGING, EXITING}
+enum WorkPhase{WORKING, EXITING}
+var current_phase = WorkPhase.WORKING
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,10 +31,11 @@ func _ready():
 	timer_digging.wait_time = 120 # That is how long it takes for a midsized excavator to finish one cubic meter (on average)
 	timer_digging.timeout.connect(_on_timer_timeout)
 	add_child(timer_digging)
+	
 
 # Override: Define where the bagger should go
 func get_target() -> Vector3:
-	if WorkPhase.DIGGING:
+	if current_phase == WorkPhase.WORKING:
 		var cell_index_x: int = 0
 		var cell_index_y: int = 0
 		
@@ -49,7 +53,7 @@ func get_target() -> Vector3:
 					current_construction_cell.current_state = Cell.WorkState.ASSIGNED
 					
 					return current_construction_cell.world_pos
-	elif WorkPhase.EXITING:
+	elif current_phase == WorkPhase.EXITING:
 		return spawnpoint
 	return Vector3.ZERO 
 
@@ -64,7 +68,7 @@ func perform_work():
 
 func _on_timer_timeout():
 	# loading truck
-	dirt_truck.current_load_level += 1
+	dirt_truck.get_script().load_truck()
 	
 	# Marking cell as completed and lowering height + updating terrain
 	current_construction_cell.current_state = Cell.WorkState.COMPLETED
