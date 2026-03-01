@@ -13,5 +13,5 @@ func get_time() -> float:
 	return time
 
 func signal_timeout():
-	if time == 7200:
+	if time >= 10800:
 		timeout.emit() 

@@ -3,6 +3,7 @@ extends Node
 @onready var simulation_scene: PackedScene = preload("res://Constructionsim.tscn")
 var simulation_instance: Node = null  # Store the instantiated scene
 var timer: Timer
+var current_task_id: int = -1
 
 # Checks if the simulation scene is currently running
 func is_simulation_running() -> bool:
@@ -20,12 +21,12 @@ func _on_timer_timeout():
 	# Creates an HTTP request node and connects its completion signal.
 	var http_request: HTTPRequest = HTTPRequest.new()
 	add_child(http_request)
-	
+
 	var error = http_request.request("http://127.0.0.1:7999/input")
 	print("asking for work")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
-		
+
 	# The function _http_request_completed gets called
 	http_request.request_completed.connect(self._http_request_completed)
 	# Cleanup
@@ -36,51 +37,66 @@ func _http_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		push_error("something went wrong")
 		return
-	
+
 	# If all tasks are done: terminate
 	if body.size() > 0 and body[0] == 102:
 		print("finished")
 		return
-	
+
 	timer.stop()
 
+	# Parse the JSON response from the orchestrator
+	var response_text = body.get_string_from_utf8()
+	var parsed = JSON.parse_string(response_text)
+	if parsed == null:
+		push_error("Failed to parse JSON from orchestrator: " + response_text)
+		timer.start()
+		return
+
+	current_task_id = int(parsed["id"])
+	print("Task ID: " + str(current_task_id))
+
+	# Convert string keys to int keys (JSON requires string keys)
+	var int_schedule: Dictionary = {}
+	for key in parsed["schedule"].keys():
+		int_schedule[int(key)] = parsed["schedule"][key]
+
 	# Initialize Constructionsim Scene
-	# Create instance of a scene.
 	print("Creating simulation instance...")
 	simulation_instance = simulation_scene.instantiate()
+	# Pass schedule before adding to tree so _ready() sees it
+	simulation_instance.agent_schedule = int_schedule
 	add_child(simulation_instance)
 	print("Simulation added to tree")
 
-	# If the construction process has not finished in 2 hours, than stop simulation
+	# Connect finish/timeout signals — handover is sent from those callbacks
+	simulation_instance.construction_finished.connect(_construction_finished)
 	simulation_instance.stop_watch.timeout.connect(_construction_timout)
-	
-	# Get Task ID
-	var response_text = body.get_string_from_utf8()
-	var id = response_text.to_int()
-	print("Task ID: " + str(id))
 
+
+func _send_handover():
+	# TODO: replace randi answer with real simulation metric
 	var answer = randi_range(0, 1000)
-	
-	# Handover
-	## The URL
 	var url_string = "http://127.0.0.1:7999/handover?answer=%s&id=%s"
-	var actualUrl_string = url_string % [answer, id]
-	
-	## New HTTPRequest for Handover
-	var http_request_2 = HTTPRequest.new()
-	http_request_2.request_completed.connect(http_request_2.queue_free.unbind(4))
-	add_child(http_request_2)
-	
-	var error = http_request_2.request(actualUrl_string)
+	var actual_url = url_string % [answer, current_task_id]
+
+	var http_request = HTTPRequest.new()
+	http_request.request_completed.connect(http_request.queue_free.unbind(4))
+	add_child(http_request)
+
+	var error = http_request.request(actual_url)
 	if error != OK:
-		push_error("An error occurred in the HTTP request.")
+		push_error("An error occurred in the handover HTTP request.")
+
 
 func _construction_timout():
 	print("!!construction took too long!! - Freeing simulation")
-	timer.start()
+	_send_handover()
 	simulation_instance.queue_free()
+	timer.start()
 
 func _construction_finished():
 	print("construction finished - Freeing simulation")
+	_send_handover()
+	simulation_instance.queue_free()
 	timer.start()
-	simulation_instance.queue_free() 

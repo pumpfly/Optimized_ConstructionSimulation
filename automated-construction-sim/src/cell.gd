@@ -16,7 +16,7 @@ var is_occupied: bool = false
 var assigned_agent: CharacterBody3D = null  # Reference to agent working here
 var obstacle_node: Node3D = null # Refrence to node that holds NavigationObstacles
 
-enum WorkState{EMPTY, ASSIGNED, UNDER_CONSTRUCTION, COMPLETED}
+enum WorkState{EMPTY, ASSIGNED, RESERVED, UNDER_CONSTRUCTION, COMPLETED}
 enum OccupyingAgentType{NONE, BAGGER, DIRT_TRUCK, MATERIAL_TRUCK, CRANE} # What kind of Agent is sitting on this cell right now
 var current_state: WorkState = WorkState.EMPTY
 var current_occupying_agent_type = OccupyingAgentType.NONE
@@ -43,3 +43,6 @@ func assign_agent(agent: CharacterBody3D) -> bool:
 func release_agent() -> void:
 	assigned_agent = null
 	is_occupied = false
+
+func is_available() -> bool:
+	return not is_occupied

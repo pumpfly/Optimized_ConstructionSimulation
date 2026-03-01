@@ -10,7 +10,7 @@ var construction_zone: Array[Cell] = []
 
 # Track construction zone completion efficiently
 var completed_construction_cells: int = 0
-var is_construction_complete: bool = false
+var is_construction_zone_excavated: bool = false
 
 # Constructor - creates the grid from heightmap data -> amount of cells allign with pixel count
 func _init(heightmap: Image):
@@ -30,7 +30,7 @@ func _init(heightmap: Image):
 		
 			# Calculate world position (centered grid)
 			@warning_ignore("integer_division")
-			var world_pos = Vector3(x - grid_width/2, height, y - grid_height/2)
+			var world_pos = Vector3(x - grid_width/2, 0, y - grid_height/2)
 		
 			# Create cell using _init()
 			grid[x][y] = Cell.new(x, y, world_pos, height)
@@ -46,10 +46,13 @@ func get_cell(x: int, y: int) -> Cell:
 
 
 func get_cell_neighbors(cell: Cell) -> Array[Cell]:
-	#   __ __ __
-	#  |__|__|__|
-	#  |__|CL|__|
-	#  |__|__|__|
+	#__ __ __ __ __
+	#|__|__|__|__|__|
+	#|__|__|__|__|__|
+	#|__|__|CL|__|__|
+	#|__|__|__|__|__|
+	#|__|__|__|__|__|
+  
 	var neighbors: Array[Cell] = []
 	
 	var offset: Array[Vector2i] = [
@@ -67,12 +70,11 @@ func get_cell_neighbors(cell: Cell) -> Array[Cell]:
 		var neighbor: Cell
 		var neighborIndex: Vector2i = Vector2i(cell.grid_x + o.x, cell.grid_y + o.y)
 		# Check if out of bounds
-		if neighborIndex.x >= grid_width || neighborIndex.y >= grid_width || neighborIndex.x < 0 || neighborIndex.y < 0:
+		if neighborIndex.x >= grid_width || neighborIndex.y >= grid_height || neighborIndex.x < 0 || neighborIndex.y < 0:
 			continue
 		else:
 			neighbor = grid[neighborIndex.x][neighborIndex.y]
 			neighbors.append(neighbor)
-	
 	return neighbors
 
 
@@ -145,11 +147,8 @@ func on_construction_cell_completed() -> void:
 	
 	# Check if all construction zone cells are now completed
 	if completed_construction_cells >= construction_zone.size():
-		is_construction_complete = true
+		is_construction_zone_excavated = true
 
-# Check if construction zone is fully excavated
-func is_construction_zone_complete() -> bool:
-	return is_construction_complete
 
 # DEBUGING: Get statistics about grid state
 #func get_grid_stats() -> Dictionary:

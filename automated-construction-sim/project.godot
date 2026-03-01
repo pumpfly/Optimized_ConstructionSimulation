@@ -25,7 +25,7 @@ window/vsync/vsync_mode=0
 
 [editor]
 
-run/main_run_args="--heightmap /home/sisa/Studium/Bachelorarbeit/ba_optimizedconstructionsimulation/Heightmaps/HEAVYCONSTRUCTION_heightmap.png --speed 20"
+run/main_run_args="--heightmap /home/sisa/Studium/Bachelorarbeit/ba_optimizedconstructionsimulation/Heightmaps/HEAVYCONSTRUCTION_heightmap.png --speed 150"
 
 [input]
 

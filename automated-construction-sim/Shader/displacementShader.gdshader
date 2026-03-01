@@ -12,5 +12,5 @@ void vertex() {
 }
 
 void fragment(){
-	ALBEDO = vec3(texture(heightmap, UV).r);
+	ALBEDO = texture(heightmap, UV).rgb;
 }

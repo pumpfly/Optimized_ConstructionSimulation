@@ -28,7 +28,6 @@ script = ExtResource("1_m3l0r")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1481596799]
 transform = Transform3D(0.2973748, 0.80702287, -0.51017874, 0, 0.5343524, 0.8452618, 0.95476085, -0.25135958, 0.15890294, 0, 12.120247, 0)
-visible = false
 shadow_enabled = true
 directional_shadow_max_distance = 165.0
 

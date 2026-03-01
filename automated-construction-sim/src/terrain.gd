@@ -31,6 +31,7 @@ func build_terrain_with_heightmap(img: Image, heightmap_img_width: int, heightma
 		printerr("⚠ MeshInstance3D not found!")
 		
 	# Apply heightmap to collision shape
+	# Declared here so it is accessible after the bake for the disable step
 	var collision_shape: CollisionShape3D = $NavigationRegion3D/StaticBody3D/CollisionShape3D
 	if collision_shape and collision_shape.shape is HeightMapShape3D:
 		# Convert image to proper format for HeightMapShape3D
@@ -39,13 +40,25 @@ func build_terrain_with_heightmap(img: Image, heightmap_img_width: int, heightma
 		# Update the heightmap shape
 		collision_shape.shape.update_map_data_from_image(hm_image, 0.0, 255.0)
 		collision_shape.scale = Vector3(1.01, 1.01, 1.01)
-		collision_shape.position = Vector3(0.2, -19, -0.2) 
+		collision_shape.position = Vector3(0.2, -19.9, -0.2)
+		# Leave enabled here — the navmesh bake below needs it as source geometry
 	else:
 		printerr("⚠ CollisionShape3D not found or shape is not HeightMapShape3D")
-		
+
 	var navigation_region: NavigationRegion3D = $NavigationRegion3D
 	if navigation_region:
-		navigation_region.bake_navigation_mesh()
-		navigation_region.navigation_mesh.cell_size = 2.0
+		# Settings must be applied BEFORE baking — changes after the bake have no effect
+		navigation_region.navigation_mesh.cell_size = 0.3
+		navigation_region.navigation_mesh.agent_max_slope = 50.0
+		navigation_region.navigation_mesh.agent_max_climb = 50.0
 		navigation_region.navigation_mesh.set_collision_mask_value(1, true)
-		collision_shape.disabled = true
+		NavigationServer3D.map_set_cell_size(navigation_region.get_navigation_map(), 0.3)
+		# Re-enable before baking: on subsequent calls (e.g. after cell excavation) the shape
+		# was left disabled from the previous bake, so baking would find no source geometry.
+		if collision_shape:
+			collision_shape.disabled = false
+		# Bake synchronously (false) so the navmesh is ready before any agent tries to navigate
+		navigation_region.bake_navigation_mesh(false)
+		# Disable only after baking — the bake uses the collision shape as source geometry
+		if collision_shape:
+			collision_shape.disabled = true
