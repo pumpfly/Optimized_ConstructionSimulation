@@ -77,7 +77,14 @@ if __name__ == "__main__":
                                   "121": ["Bagger"],
                                   "181": ["DirtTruck"],
                                   "241": ["Bagger"],
-                                  "301": ["DirtTruck"]
+                                  "301": ["DirtTruck"],
+                                  "361": ["Bagger"],
+                                  "421": ["DirtTruck"],
+                                  "481": ["Bagger"],
+                                  "541": ["DirtTruck"],
+                                  "3600": ["Crane"],
+                                  "4000": ["MaterialTruck"],
+                                  "4001": ["MaterialTruck"]
                                   }})
 
         #if len(task_queue) == 0:

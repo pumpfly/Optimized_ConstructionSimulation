@@ -6,9 +6,13 @@ var spawnpoint: Vector3
 var movement_speed: float = 5.0
 var movement_target_position: Vector3 = Vector3.ZERO
 var has_reached_goal: bool = false
+# Guards against is_navigation_finished() returning a stale true immediately after
+# set_movement_target() is called, before the NavigationServer has computed the new path.
+var _path_cooldown: int = 0
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var main: SimulationMain = self.get_parent().get_parent().get_parent()
+@onready var simulation_main: SimulationMain = self.get_parent().get_parent().get_parent()
+var obstacle_container: Node3D
 
 ## "Virtual" methods - agents should override them
 func get_target() -> Vector3:
@@ -31,6 +35,8 @@ func _ready():
 	# Avoidance in Godot 4 requires feeding desired velocity into the agent so the
 	# NavigationServer can negotiate between all agents and return a safe velocity.
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
+	
+	obstacle_container = simulation_main.get_node("ObstacleContainer")
 
 	# If is_navigation_finished() returns true at startup (which it does when there's no target set yet),
 	# then actor_setup() never gets called, which means set_movement_target() never gets called
@@ -38,7 +44,7 @@ func _ready():
 	actor_setup.call_deferred()
 
 	# so that return trips target the correct height instead of the grid cell's Y=0.
-	var spawn_xz = main.grid.get_spawn_cell().world_pos
+	var spawn_xz = simulation_main.grid.get_spawn_cell().world_pos
 	spawnpoint = Vector3(spawn_xz.x, 0, spawn_xz.z)
 
 
@@ -64,24 +70,30 @@ func actor_setup():
 func set_movement_target(movement_target: Vector3):
 	movement_target.y = position.y
 	navigation_agent.set_target_position(movement_target)
-	#var nav_map = navigation_agent.get_navigation_map()
+	movement_target_position = movement_target
 	# NOTE: do NOT call is_navigation_finished() here — it calls _update_navigation() which has
 	# side effects (can set target_position_submitted=false, navigation_finished=true immediately).
-	#print("[NAV] set_movement_target → target=%s | map_iteration_id=%s" % [
-		#movement_target,
-		#NavigationServer3D.map_get_iteration_id(nav_map),
-	#])
-
 	has_reached_goal = false
+	_path_cooldown = 2
 
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
 	move_and_slide()
 
 func _physics_process(_delta):
+	if _path_cooldown > 0:
+		_path_cooldown -= 1
+		DebugLog.log("[NAV cooldown] %s | cooldown=%d | pos=%s | target=%s" % [
+			name, _path_cooldown + 1, global_position, movement_target_position])
+		return
 	if navigation_agent.is_navigation_finished():
 		if !has_reached_goal:
 			has_reached_goal = true
+			DebugLog.log("[NAV finished→perform_work] %s | pos=%s | target=%s | dist=%.2f" % [
+				name,
+				global_position,
+				movement_target_position,
+				global_position.distance_to(movement_target_position)])
 			on_destination_reached()
 		return
 	var current_agent_position: Vector3 = global_position
@@ -103,3 +115,24 @@ func _physics_process(_delta):
 	var look_target = Vector3(next_path_position.x, current_agent_position.y, next_path_position.z)
 	if current_agent_position.distance_to(look_target) > 0.01:
 		look_at(look_target)
+
+func add_construction_obstacle(cells: Array[Cell]) -> void:
+	for c in cells:
+		if c.obstacle_node:
+			return  # already exists — perform_work() was called twice
+		var obstacle = NavigationObstacle3D.new()
+		#var obstacle_mesh:MeshInstance3D = MeshInstance3D.new() #DEBUG
+		obstacle.avoidance_enabled = true
+		obstacle.radius = 0.5 # Cell width
+		obstacle.position = c.world_pos
+		#obstacle_mesh.mesh = BoxMesh.new() #DEBUG
+		obstacle_container.add_child(obstacle) #DEBUG
+		#obstacle.add_child(obstacle_mesh)
+		c.obstacle_node = obstacle
+
+func remove_construction_obstacle(cells: Array[Cell]) -> void:
+	for c in cells:
+		if c.obstacle_node:
+			obstacle_container.remove_child(c.obstacle_node)
+			c.obstacle_node.queue_free()
+			c.obstacle_node = null

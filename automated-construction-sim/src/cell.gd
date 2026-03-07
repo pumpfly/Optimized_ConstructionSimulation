@@ -20,7 +20,10 @@ enum WorkState{EMPTY, ASSIGNED, RESERVED, UNDER_CONSTRUCTION, COMPLETED}
 enum OccupyingAgentType{NONE, BAGGER, DIRT_TRUCK, MATERIAL_TRUCK, CRANE} # What kind of Agent is sitting on this cell right now
 var current_state: WorkState = WorkState.EMPTY
 var current_occupying_agent_type = OccupyingAgentType.NONE
+
 var is_construction_zone_cell = false
+var is_pipe_placement_cell = false
+var is_pipe_placed = false
 
 # Constructor - called when Cell.new() is used
 func _init(x: int, y: int, world_position: Vector3, height: int = 0):

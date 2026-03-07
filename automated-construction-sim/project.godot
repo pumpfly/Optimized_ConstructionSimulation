@@ -19,13 +19,17 @@ run/main_scene="uid://idhwo66ny3rv"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DebugLog="*res://DebugLog.gd"
+
 [display]
 
 window/vsync/vsync_mode=0
 
 [editor]
 
-run/main_run_args="--heightmap /home/sisa/Studium/Bachelorarbeit/ba_optimizedconstructionsimulation/Heightmaps/HEAVYCONSTRUCTION_heightmap.png --speed 150"
+run/main_run_args="--heightmap /home/sisa/Studium/Bachelorarbeit/ba_optimizedconstructionsimulation/Heightmaps/HEAVYCONSTRUCTION_heightmap.png --speed 1000"
 
 [input]
 

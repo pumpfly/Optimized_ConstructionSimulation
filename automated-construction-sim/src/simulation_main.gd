@@ -11,7 +11,6 @@ var grid: Grid = null
 var agent_schedule: Dictionary = {}
 
 signal construction_finished
-var _construction_finished_emitted: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,12 +33,6 @@ func _ready() -> void:
 		Engine.physics_ticks_per_second = 60 * speed
 	else:
 		print("No speed argument found")
-
-
-#func _process(_delta: float) -> void:
-	#if grid and grid.is_construction_zone_excavated and not _construction_finished_emitted:
-		#_construction_finished_emitted = true
-		#construction_finished.emit()
 
 
 func _get_heightmap_image(heightmap_path: String) -> Image:

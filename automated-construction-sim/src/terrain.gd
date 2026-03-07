@@ -49,6 +49,7 @@ func build_terrain_with_heightmap(img: Image, heightmap_img_width: int, heightma
 	if navigation_region:
 		# Settings must be applied BEFORE baking — changes after the bake have no effect
 		navigation_region.navigation_mesh.cell_size = 0.3
+		navigation_region.navigation_mesh.agent_radius = 0.6  # must be a multiple of cell_size (2 * 0.3)
 		navigation_region.navigation_mesh.agent_max_slope = 50.0
 		navigation_region.navigation_mesh.agent_max_climb = 50.0
 		navigation_region.navigation_mesh.set_collision_mask_value(1, true)

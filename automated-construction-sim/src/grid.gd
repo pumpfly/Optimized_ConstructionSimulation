@@ -7,9 +7,10 @@ var grid_height: int = 0
 
 var spawn_cell: Cell = null
 var construction_zone: Array[Cell] = []
+var pipe_placement_cells: Array[Cell] = []
 
 # Track construction zone completion efficiently
-var completed_construction_cells: int = 0
+var completed_cc_zone: int = 0
 var is_construction_zone_excavated: bool = false
 
 # Constructor - creates the grid from heightmap data -> amount of cells allign with pixel count
@@ -35,8 +36,9 @@ func _init(heightmap: Image):
 			# Create cell using _init()
 			grid[x][y] = Cell.new(x, y, world_pos, height)
 			
-	construction_zone = find_construction_cells(heightmap)
+	construction_zone = find_cc_zone(heightmap)
 	spawn_cell = find_spawn_cell(heightmap)
+	pipe_placement_cells = find_pipe_placement_cells(heightmap)
 
 
 func get_cell(x: int, y: int) -> Cell:
@@ -110,19 +112,17 @@ func find_nearest_available_cell(world_position: Vector3) -> Cell:
 
 # find and return all cells on the construction zone
 # The construction zone can be seen on the heightmap as the pure blue area
-func find_construction_cells(heightmap: Image) -> Array[Cell]:
-	var construction_cells: Array[Cell] = []
+func find_cc_zone(heightmap: Image) -> Array[Cell]:
+	var cc_zone: Array[Cell] = []
 	var cell: Cell
 
 	for x in range(grid_width):
 		for y in range(grid_height):
-			var pixel_color = heightmap.get_pixel(x, y)
-			if pixel_color.b >= 0.9:
+			if heightmap.get_pixel(x, y).b > 0.9:
 				cell = grid[x][y]
 				cell.is_construction_zone_cell = true
-				construction_cells.append(cell)
-
-	return construction_cells
+				cc_zone.append(cell)
+	return cc_zone
 	
 func get_construction_zone() -> Array[Cell]:
 	return construction_zone
@@ -136,17 +136,32 @@ func find_spawn_cell(heightmap: Image) -> Cell:
 				return grid[x][y]
 	return null
 
+func find_pipe_placement_cells(heightmap: Image) -> Array[Cell]:
+	var pp_cells: Array[Cell] = []
+	var cell: Cell
+	for x in range(grid_width):
+		for y in range(grid_height):
+			if heightmap.get_pixel(x, y).b > 0.9 && heightmap.get_pixel(x, y).g >= 100.0/255.0:
+				cell = grid[x][y]
+				cell.is_pipe_placement_cell = true
+				pp_cells.append(cell)
+	return pp_cells
 
 func get_spawn_cell() -> Cell:
 	return spawn_cell
 
+
+func get_pipe_placements() -> Array[Cell]:
+	return pipe_placement_cells
+
+
 # Called when a construction zone cell's state is changed to COMPLETED
 # Updates the counter and checks if all construction is done
 func on_construction_cell_completed() -> void:
-	completed_construction_cells += 1
+	completed_cc_zone += 1
 	
 	# Check if all construction zone cells are now completed
-	if completed_construction_cells >= construction_zone.size():
+	if completed_cc_zone >= construction_zone.size():
 		is_construction_zone_excavated = true
 
 

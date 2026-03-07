@@ -45,15 +45,16 @@ func perform_work():
 		# Now that the truck is here, trigger it to start digging.
 		current_bagger.perform_work()
 	elif current_state == WorkState.EXITING:
-		if !main.grid.is_construction_zone_excavated:
+		if !simulation_main.grid.is_construction_zone_excavated:
 			# Arrived back at spawn — unload and go find another bagger
 			current_load_level = 0
 			is_full = false
 			is_being_loaded = false
 			current_state = WorkState.WORKING
-		set_movement_target(get_target())
+		else:
+			self.queue_free()
 		has_reached_goal = false
-
+		set_movement_target(get_target())
 
 func load_truck():
 	current_load_level += 1

@@ -79,3 +79,5 @@ unique_name_in_owner = true
 [node name="StopWatch" type="Node" parent="." unique_id=577662678]
 unique_name_in_owner = true
 script = ExtResource("5_m3l0r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1653739707]
