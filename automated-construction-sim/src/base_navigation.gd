@@ -14,6 +14,18 @@ var _path_cooldown: int = 0
 @onready var simulation_main: SimulationMain = self.get_parent().get_parent().get_parent()
 var obstacle_container: Node3D
 
+# --- Travel timing ---
+var _travel_start_sim_t:  float = 0.0
+var _travel_start_wall_us: int  = 0
+var _travel_start_pos:    Vector3 = Vector3.ZERO
+var _travel_trip_index:   int    = 0  # counts how many trips this agent has made
+
+# --- Idle timing (time between arriving and starting next movement) ---
+var _idle_start_wall_us: int = 0
+
+var _ptick_count: int = 0
+var _ptick_window_us: int = 0
+
 ## "Virtual" methods - agents should override them
 func get_target() -> Vector3:
 	# Default implementation
@@ -68,6 +80,21 @@ func actor_setup():
 	has_reached_goal = false
 
 func set_movement_target(movement_target: Vector3):
+	# Log idle time (gap between arriving and starting next movement)
+	if _idle_start_wall_us > 0:
+		var idle_ms := (Time.get_ticks_usec() - _idle_start_wall_us) / 1000.0
+		DebugLog.log_printer("[IDLE] %s | waited %.2fms wall before next move" % [name, idle_ms])
+		_idle_start_wall_us = 0
+
+	# Start travel timer
+	_travel_start_sim_t   = simulation_main.stop_watch.get_time()
+	_travel_start_wall_us = Time.get_ticks_usec()
+	_travel_start_pos     = global_position
+	_travel_trip_index   += 1
+	var dist := global_position.distance_to(movement_target)
+	DebugLog.log_printer("[TRAVEL_START] %s trip#%d | from=%s to=%s | straight_dist=%.1f | speed=%.1f" % [
+		name, _travel_trip_index, global_position, movement_target, dist, movement_speed])
+
 	movement_target.y = position.y
 	navigation_agent.set_target_position(movement_target)
 	movement_target_position = movement_target
@@ -81,19 +108,33 @@ func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	move_and_slide()
 
 func _physics_process(_delta):
+	# Tick sampler
+	_ptick_count += 1
+	if _ptick_count == 1:
+		_ptick_window_us = Time.get_ticks_usec()
+	elif _ptick_count > 300:
+		var avg := float(Time.get_ticks_usec() - _ptick_window_us) / 300.0
+		DebugLog.log_printer("[PERF_PTICK] %s | avg=%.1fµs/tick over 300 ticks" % [name, avg])
+		_ptick_count = 1
+		_ptick_window_us = Time.get_ticks_usec()
+
 	if _path_cooldown > 0:
 		_path_cooldown -= 1
-		DebugLog.log("[NAV cooldown] %s | cooldown=%d | pos=%s | target=%s" % [
-			name, _path_cooldown + 1, global_position, movement_target_position])
 		return
 	if navigation_agent.is_navigation_finished():
 		if !has_reached_goal:
 			has_reached_goal = true
-			DebugLog.log("[NAV finished→perform_work] %s | pos=%s | target=%s | dist=%.2f" % [
-				name,
-				global_position,
-				movement_target_position,
-				global_position.distance_to(movement_target_position)])
+
+			# Log travel completion
+			var elapsed_sim: float  = simulation_main.stop_watch.get_time() - _travel_start_sim_t
+			var elapsed_wall_ms := (Time.get_ticks_usec() - _travel_start_wall_us) / 1000.0
+			var dist_actual  := _travel_start_pos.distance_to(global_position)
+			DebugLog.log_printer("[TRAVEL_END] %s trip#%d | pos=%s | dist_actual=%.1f | sim_elapsed=%.2fs | wall=%.2fms" % [
+				name, _travel_trip_index, global_position, dist_actual, elapsed_sim, elapsed_wall_ms])
+
+			# Start idle timer — measures how long until next set_movement_target()
+			_idle_start_wall_us = Time.get_ticks_usec()
+
 			on_destination_reached()
 		return
 	var current_agent_position: Vector3 = global_position
@@ -129,6 +170,7 @@ func add_construction_obstacle(cells: Array[Cell]) -> void:
 		obstacle_container.add_child(obstacle) #DEBUG
 		#obstacle.add_child(obstacle_mesh)
 		c.obstacle_node = obstacle
+	
 
 func remove_construction_obstacle(cells: Array[Cell]) -> void:
 	for c in cells:

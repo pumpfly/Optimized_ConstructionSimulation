@@ -3,7 +3,9 @@ extends Node
 @onready var simulation_scene: PackedScene = preload("res://Constructionsim.tscn")
 var simulation_instance: Node = null  # Store the instantiated scene
 var timer: Timer
+var stop_watch: Node = null
 var current_task_id: int = -1
+var _run_wall_start_ms: int = 0
 
 # Checks if the simulation scene is currently running
 func is_simulation_running() -> bool:
@@ -68,6 +70,12 @@ func _http_request_completed(result, _response_code, _headers, body):
 	simulation_instance.agent_schedule = int_schedule
 	add_child(simulation_instance)
 	print("Simulation added to tree")
+	stop_watch = simulation_instance.get_node("StopWatch")
+
+	# Connect DebugLog to the new stopwatch so all log lines carry sim-time
+	_run_wall_start_ms = Time.get_ticks_msec()
+	DebugLog.begin_run(stop_watch)
+	DebugLog.log_printer("[MAIN] Task id=%d | schedule=%s" % [current_task_id, str(int_schedule)])
 
 	# Connect finish/timeout signals — handover is sent from those callbacks
 	simulation_instance.construction_finished.connect(_construction_finished)
@@ -90,12 +98,20 @@ func _send_handover():
 
 
 func _construction_timout():
+	var wall_elapsed = Time.get_ticks_msec() - _run_wall_start_ms
+	DebugLog.log_printer("[MAIN] TIMEOUT | sim_time=%.2fs | wall_elapsed=%dms" % [stop_watch.get_time(), wall_elapsed])
+	DebugLog.end_run("timeout")
 	print("!!construction took too long!! - Freeing simulation")
 	_send_handover()
 	simulation_instance.queue_free()
 	timer.start()
 
 func _construction_finished():
+	var wall_elapsed = Time.get_ticks_msec() - _run_wall_start_ms
+	DebugLog.log_printer("[MAIN] FINISHED | sim_time=%.2fs | wall_elapsed=%dms | speedup=%.1fx" % [
+		stop_watch.get_time(), wall_elapsed,
+		stop_watch.get_time() / (wall_elapsed / 1000.0) if wall_elapsed > 0 else 0.0])
+	DebugLog.end_run("finished")
 	print("construction finished - Freeing simulation")
 	_send_handover()
 	simulation_instance.queue_free()

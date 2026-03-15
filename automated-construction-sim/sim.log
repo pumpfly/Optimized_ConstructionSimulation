@@ -1,0 +1,50 @@
+Godot Engine v4.6.1.stable.arch_linux.14d19694e - https://godotengine.org
+
+[DebugLog] Logging to: /home/sisa/.local/share/godot/app_userdata/AutomatedConstructionSim/sim_log_pid34921_1773587900.txt
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+asking for work
+Task ID: 0
+Creating simulation instance...
+Worker is ready
+[sim=-1.00 wall=82219] [PERF] Image.load(/path/to/heightmap.png) | 238.0µs (0.238ms)
+Simulation added to tree
+[sim=0.00 wall=82220] [MAIN] Task id=0 | schedule={ 924: ["Bagger"], 1145: ["Bagger"], 1980: ["Bagger"], 2724: ["Bagger"], 2773: ["Bagger"], 3889: ["Bagger"], 4174: ["Bagger"], 8778: ["Bagger"], 248: ["DirtTruck"], 2317: ["DirtTruck"], 4906: ["DirtTruck"], 7525: ["DirtTruck"], 7675: ["DirtTruck"], 7853: ["DirtTruck"], 7696: ["MaterialTruck"], 8180: ["MaterialTruck"], 645: ["Crane"] }
