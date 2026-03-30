@@ -23,15 +23,11 @@ var _pipes_placed: int = 0
 func _ready():
 	super._ready()
 	pipe_placement_cells = simulation_main.grid.get_pipe_placements()
-	navigation_agent.radius = 5
-	# The target is the furthest pipe cell, which is inside the construction zone.
-	# Avoidance obstacles on the zone keep the crane ~7.5 units from the zone boundary,
-	# and the target may be 15-20 units deeper inside. target_desired_distance must
-	# cover that full depth so is_navigation_finished() can fire at the zone edge.
-	navigation_agent.target_desired_distance = 25.0
+	navigation_agent.radius = 7
+	navigation_agent.target_desired_distance = 25
 
 	timer_placement = Timer.new()
-	timer_placement.wait_time = 300 #  5 minutes
+	timer_placement.wait_time = 1.0 #  300s / 300 — scaled down by constant factor
 	timer_placement.one_shot = true
 	timer_placement.timeout.connect(_on_placement_timer_timeout)
 	add_child(timer_placement)
@@ -42,7 +38,7 @@ func _ready():
 
 func get_target() -> Vector3:
 	if curr_work_state == WorkState.IDLE:
-		return spawnpoint/1.25
+		return Vector3(spawnpoint.x+20, 0, spawnpoint.z + 30)
 	elif curr_work_state == WorkState.WORKING:
 		return furthest_pipe_placement_cell().world_pos
 	elif curr_work_state == WorkState.EXITING:

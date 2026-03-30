@@ -1,0 +1,1933 @@
+INFO: Initializing raylib 5.5
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+WARNING: GLFW: Error: 65548 Description: Wayland: The platform does not provide the window position
+INFO: DISPLAY: Device initialized successfully
+INFO:     > Display size: 2560 x 1440
+INFO:     > Screen size:  1280 x 720
+INFO:     > Render size:  1280 x 720
+INFO:     > Viewport offsets: 0, 0
+WARNING: GLFW: Error: 65548 Description: Wayland: The platform does not support setting the window position
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 232
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   Intel
+INFO:     > Renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:     > Version:  4.6 (Core Profile) Mesa 25.2.6
+INFO:     > GLSL:     4.60
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - Wayland): Initialized successfully
+INFO: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: /home/winterveil/lab/constructionsim
+INFO: TIMER: Target time per frame: 16.667 milliseconds
+INFO: VAO: [ID 2] Mesh uploaded successfully to VRAM (GPU)
+2026/03/22 21:00:31 [t=0.1] SPAWN id=1 type=excavator pos=(5.5,50.5)
+2026/03/22 21:00:31 [t=0.1] SPAWN id=2 type=dirt_truck pos=(5.5,50.5)
+2026/03/22 21:00:31 [t=0.1] SPAWN id=3 type=dirt_truck pos=(5.5,50.5)
+2026/03/22 21:00:31 [DT#2] assigned to EX#1 (priority=1) path_len=1
+2026/03/22 21:00:31 [DT#3] assigned to EX#1 (priority=2) path_len=1
+2026/03/22 21:00:31 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:31 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:31 [EX#1] reserved cell (35,40) path_len=26
+2026/03/22 21:00:31 [EX#1] arrived at cell (35,40) pos=(34.4,41.4) assigned_trucks=2
+2026/03/22 21:00:31 [t=30.0] SPAWN id=4 type=excavator pos=(5.5,50.5)
+2026/03/22 21:00:31 [t=30.0] SPAWN id=5 type=dirt_truck pos=(5.5,50.5)
+2026/03/22 21:00:31 [DT#5] assigned to EX#4 (priority=1) path_len=1
+2026/03/22 21:00:31 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:31 [EX#4] reserved cell (36,40) path_len=32
+2026/03/22 21:00:31 [EX#1] START excavating (35,40) with truck#3
+2026/03/22 21:00:32 [t=60.0] STATUS excav=0/191 constr=0/5 vehicles=5 pending_spawns=3
+2026/03/22 21:00:32 [EX#4] arrived at cell (36,40) pos=(36.0,39.1) assigned_trucks=1
+2026/03/22 21:00:32 [EX#4] START excavating (36,40) with truck#5
+2026/03/22 21:00:32 [EX#1] DONE cell (35,40) total_excav=1/191
+2026/03/22 21:00:32 [EX#1] reserved cell (37,40) path_len=5
+2026/03/22 21:00:32 [EX#1] arrived at cell (37,40) pos=(36.4,41.5) assigned_trucks=2
+2026/03/22 21:00:32 [EX#1] START excavating (37,40) with truck#3
+2026/03/22 21:00:32 [EX#4] DONE cell (36,40) total_excav=2/191
+2026/03/22 21:00:32 [EX#4] reserved cell (38,40) path_len=5
+2026/03/22 21:00:32 [EX#4] arrived at cell (38,40) pos=(38.0,39.1) assigned_trucks=1
+2026/03/22 21:00:32 [EX#4] START excavating (38,40) with truck#5
+2026/03/22 21:00:32 [EX#1] DONE cell (37,40) total_excav=3/191
+2026/03/22 21:00:32 [EX#1] reserved cell (39,40) path_len=5
+2026/03/22 21:00:32 [EX#1] arrived at cell (39,40) pos=(38.4,41.5) assigned_trucks=2
+2026/03/22 21:00:32 [EX#1] START excavating (39,40) with truck#2
+2026/03/22 21:00:32 [t=120.0] SPAWN id=6 type=crane pos=(5.5,50.5)
+2026/03/22 21:00:32 [t=120.0] SPAWN id=7 type=material_truck pos=(5.5,50.5)
+2026/03/22 21:00:32 [t=120.0] SPAWN id=8 type=material_truck pos=(5.5,50.5)
+2026/03/22 21:00:32 [t=120.1] STATUS excav=3/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:32 [EX#4] DONE cell (38,40) total_excav=4/191
+2026/03/22 21:00:32 [EX#4] reserved cell (40,40) path_len=3
+2026/03/22 21:00:32 [EX#4] arrived at cell (40,40) pos=(39.3,39.6) assigned_trucks=1
+2026/03/22 21:00:32 [EX#4] START excavating (40,40) with truck#5
+2026/03/22 21:00:32 [EX#1] DONE cell (39,40) total_excav=5/191
+2026/03/22 21:00:32 [EX#1] reserved cell (41,40) path_len=5
+2026/03/22 21:00:32 [EX#1] arrived at cell (41,40) pos=(41.0,41.9) assigned_trucks=2
+2026/03/22 21:00:32 [EX#1] START excavating (41,40) with truck#3
+2026/03/22 21:00:32 [EX#4] DONE cell (40,40) total_excav=6/191
+2026/03/22 21:00:32 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:32 [EX#4] reserved cell (42,40) path_len=5
+2026/03/22 21:00:32 [EX#4] arrived at cell (42,40) pos=(41.4,39.5) assigned_trucks=0
+2026/03/22 21:00:33 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:33 [EX#1] DONE cell (41,40) total_excav=7/191
+2026/03/22 21:00:33 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:33 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:33 [EX#1] reserved cell (43,40) path_len=3
+2026/03/22 21:00:33 [EX#1] arrived at cell (43,40) pos=(42.4,41.4) assigned_trucks=1
+2026/03/22 21:00:33 [EX#1] START excavating (43,40) with truck#2
+2026/03/22 21:00:33 [t=180.1] STATUS excav=7/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:33 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:33 [DT#5] assigned to EX#4 (priority=0) path_len=34
+2026/03/22 21:00:33 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:33 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:33 [EX#4] START excavating (42,40) with truck#5
+2026/03/22 21:00:33 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:33 [DT#3] assigned to EX#1 (priority=2) path_len=39
+2026/03/22 21:00:33 [EX#1] DONE cell (43,40) total_excav=8/191
+2026/03/22 21:00:33 [EX#1] reserved cell (44,40) path_len=3
+2026/03/22 21:00:33 [EX#1] arrived at cell (44,40) pos=(43.4,41.4) assigned_trucks=2
+2026/03/22 21:00:33 [EX#1] START excavating (44,40) with truck#2
+2026/03/22 21:00:33 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:33 [EX#4] DONE cell (42,40) total_excav=9/191
+2026/03/22 21:00:33 [EX#4] reserved cell (45,40) path_len=6
+2026/03/22 21:00:33 [EX#4] arrived at cell (45,40) pos=(45.0,39.1) assigned_trucks=1
+2026/03/22 21:00:33 [EX#4] START excavating (45,40) with truck#5
+2026/03/22 21:00:33 [EX#1] DONE cell (44,40) total_excav=10/191
+2026/03/22 21:00:33 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:33 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:33 [EX#1] reserved cell (46,40) path_len=5
+2026/03/22 21:00:33 [EX#1] arrived at cell (46,40) pos=(45.4,41.5) assigned_trucks=1
+2026/03/22 21:00:33 [EX#1] START excavating (46,40) with truck#3
+2026/03/22 21:00:33 [t=240.1] STATUS excav=10/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:33 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:33 [EX#4] DONE cell (45,40) total_excav=11/191
+2026/03/22 21:00:33 [EX#4] reserved cell (47,40) path_len=5
+2026/03/22 21:00:33 [EX#4] arrived at cell (47,40) pos=(47.0,39.1) assigned_trucks=1
+2026/03/22 21:00:33 [EX#4] START excavating (47,40) with truck#5
+2026/03/22 21:00:34 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:34 [DT#2] assigned to EX#1 (priority=2) path_len=41
+2026/03/22 21:00:34 [EX#1] DONE cell (46,40) total_excav=12/191
+2026/03/22 21:00:34 [EX#1] reserved cell (48,40) path_len=5
+2026/03/22 21:00:34 [EX#1] arrived at cell (48,40) pos=(47.4,41.5) assigned_trucks=2
+2026/03/22 21:00:34 [EX#1] START excavating (48,40) with truck#3
+2026/03/22 21:00:34 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:34 [EX#4] DONE cell (47,40) total_excav=13/191
+2026/03/22 21:00:34 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:34 [EX#4] reserved cell (35,41) path_len=14
+2026/03/22 21:00:34 [EX#4] arrived at cell (35,41) pos=(36.6,40.6) assigned_trucks=0
+2026/03/22 21:00:34 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:34 [t=300.1] STATUS excav=13/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:34 [EX#1] DONE cell (48,40) total_excav=14/191
+2026/03/22 21:00:34 [EX#1] reserved cell (36,41) path_len=15
+2026/03/22 21:00:34 [EX#1] arrived at cell (36,41) pos=(36.6,43.0) assigned_trucks=2
+2026/03/22 21:00:34 [EX#1] START excavating (36,41) with truck#2
+2026/03/22 21:00:34 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:34 [DT#5] assigned to EX#4 (priority=0) path_len=29
+2026/03/22 21:00:34 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:34 [EX#4] START excavating (35,41) with truck#5
+2026/03/22 21:00:34 [EX#1] DONE cell (36,41) total_excav=15/191
+2026/03/22 21:00:34 [EX#1] reserved cell (37,41) path_len=2
+2026/03/22 21:00:34 [EX#1] arrived at cell (37,41) pos=(36.6,42.7) assigned_trucks=2
+2026/03/22 21:00:34 [EX#1] START excavating (37,41) with truck#3
+2026/03/22 21:00:34 [EX#4] DONE cell (35,41) total_excav=16/191
+2026/03/22 21:00:34 [EX#4] reserved cell (38,41) path_len=3
+2026/03/22 21:00:34 [EX#4] arrived at cell (38,41) pos=(37.4,40.6) assigned_trucks=1
+2026/03/22 21:00:34 [EX#4] START excavating (38,41) with truck#5
+2026/03/22 21:00:35 [t=360.1] STATUS excav=16/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:35 [EX#1] DONE cell (37,41) total_excav=17/191
+2026/03/22 21:00:35 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:35 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:35 [EX#1] reserved cell (39,41) path_len=7
+2026/03/22 21:00:35 [EX#4] DONE cell (38,41) total_excav=18/191
+2026/03/22 21:00:35 [EX#4] reserved cell (40,41) path_len=5
+2026/03/22 21:00:35 [EX#1] arrived at cell (39,41) pos=(39.6,43.0) assigned_trucks=1
+2026/03/22 21:00:35 [EX#1] START excavating (39,41) with truck#2
+2026/03/22 21:00:35 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:35 [EX#4] arrived at cell (40,41) pos=(39.4,40.5) assigned_trucks=1
+2026/03/22 21:00:35 [EX#4] START excavating (40,41) with truck#5
+2026/03/22 21:00:35 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:35 [DT#3] assigned to EX#1 (priority=2) path_len=32
+2026/03/22 21:00:35 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:35 [EX#1] DONE cell (39,41) total_excav=19/191
+2026/03/22 21:00:35 [EX#1] reserved cell (41,41) path_len=3
+2026/03/22 21:00:35 [EX#1] arrived at cell (41,41) pos=(40.4,42.5) assigned_trucks=2
+2026/03/22 21:00:35 [EX#1] START excavating (41,41) with truck#2
+2026/03/22 21:00:35 [EX#4] DONE cell (40,41) total_excav=20/191
+2026/03/22 21:00:35 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:35 [EX#4] reserved cell (42,41) path_len=5
+2026/03/22 21:00:35 [EX#4] arrived at cell (42,41) pos=(42.0,40.1) assigned_trucks=0
+2026/03/22 21:00:35 [t=420.2] STATUS excav=20/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:35 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:35 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:35 [DT#5] assigned to EX#4 (priority=0) path_len=39
+2026/03/22 21:00:35 [EX#1] DONE cell (41,41) total_excav=21/191
+2026/03/22 21:00:35 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:35 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:35 [EX#1] reserved cell (43,41) path_len=5
+2026/03/22 21:00:35 [EX#1] arrived at cell (43,41) pos=(42.4,42.5) assigned_trucks=1
+2026/03/22 21:00:35 [EX#1] START excavating (43,41) with truck#3
+2026/03/22 21:00:35 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:35 [EX#4] START excavating (42,41) with truck#5
+2026/03/22 21:00:35 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:36 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:36 [DT#2] assigned to EX#1 (priority=2) path_len=38
+2026/03/22 21:00:36 [EX#1] DONE cell (43,41) total_excav=22/191
+2026/03/22 21:00:36 [EX#1] reserved cell (44,41) path_len=3
+2026/03/22 21:00:36 [EX#1] arrived at cell (44,41) pos=(43.3,42.4) assigned_trucks=2
+2026/03/22 21:00:36 [EX#1] START excavating (44,41) with truck#3
+2026/03/22 21:00:36 [t=480.2] STATUS excav=22/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:36 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:36 [EX#4] DONE cell (42,41) total_excav=23/191
+2026/03/22 21:00:36 [EX#4] reserved cell (45,41) path_len=5
+2026/03/22 21:00:36 [EX#4] arrived at cell (45,41) pos=(45.0,40.1) assigned_trucks=1
+2026/03/22 21:00:36 [EX#4] START excavating (45,41) with truck#5
+2026/03/22 21:00:36 [EX#1] DONE cell (44,41) total_excav=24/191
+2026/03/22 21:00:36 [EX#1] reserved cell (46,41) path_len=5
+2026/03/22 21:00:36 [EX#1] arrived at cell (46,41) pos=(45.4,42.5) assigned_trucks=2
+2026/03/22 21:00:36 [EX#1] START excavating (46,41) with truck#2
+2026/03/22 21:00:36 [EX#4] DONE cell (45,41) total_excav=25/191
+2026/03/22 21:00:36 [EX#4] reserved cell (47,41) path_len=5
+2026/03/22 21:00:36 [EX#4] arrived at cell (47,41) pos=(47.0,40.1) assigned_trucks=1
+2026/03/22 21:00:36 [EX#4] START excavating (47,41) with truck#5
+2026/03/22 21:00:36 [EX#1] DONE cell (46,41) total_excav=26/191
+2026/03/22 21:00:36 [EX#1] reserved cell (48,41) path_len=5
+2026/03/22 21:00:36 [t=540.2] STATUS excav=26/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:36 [EX#1] arrived at cell (48,41) pos=(47.4,42.5) assigned_trucks=2
+2026/03/22 21:00:36 [EX#1] START excavating (48,41) with truck#3
+2026/03/22 21:00:36 [EX#4] DONE cell (47,41) total_excav=27/191
+2026/03/22 21:00:36 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:36 [EX#4] reserved cell (35,42) path_len=14
+2026/03/22 21:00:37 [EX#4] arrived at cell (35,42) pos=(36.6,41.6) assigned_trucks=0
+2026/03/22 21:00:37 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:37 [EX#1] DONE cell (48,41) total_excav=28/191
+2026/03/22 21:00:37 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:37 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:37 [EX#1] reserved cell (36,42) path_len=15
+2026/03/22 21:00:37 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:37 [DT#5] assigned to EX#4 (priority=0) path_len=29
+2026/03/22 21:00:37 [EX#1] arrived at cell (36,42) pos=(36.6,44.0) assigned_trucks=1
+2026/03/22 21:00:37 [EX#1] START excavating (36,42) with truck#2
+2026/03/22 21:00:37 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:37 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:37 [EX#4] START excavating (35,42) with truck#5
+2026/03/22 21:00:37 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:37 [DT#3] assigned to EX#1 (priority=2) path_len=30
+2026/03/22 21:00:37 [t=600.3] STATUS excav=28/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:37 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:37 [EX#1] DONE cell (36,42) total_excav=29/191
+2026/03/22 21:00:37 [EX#1] reserved cell (37,42) path_len=2
+2026/03/22 21:00:37 [EX#1] arrived at cell (37,42) pos=(36.6,43.7) assigned_trucks=2
+2026/03/22 21:00:37 [EX#1] START excavating (37,42) with truck#2
+2026/03/22 21:00:37 [EX#4] DONE cell (35,42) total_excav=30/191
+2026/03/22 21:00:37 [EX#4] reserved cell (38,42) path_len=3
+2026/03/22 21:00:37 [EX#4] arrived at cell (38,42) pos=(37.4,41.6) assigned_trucks=1
+2026/03/22 21:00:37 [EX#4] START excavating (38,42) with truck#5
+2026/03/22 21:00:37 [EX#1] DONE cell (37,42) total_excav=31/191
+2026/03/22 21:00:37 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:37 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:37 [EX#1] reserved cell (39,42) path_len=9
+2026/03/22 21:00:37 [EX#4] DONE cell (38,42) total_excav=32/191
+2026/03/22 21:00:37 [EX#4] reserved cell (40,42) path_len=4
+2026/03/22 21:00:37 [EX#1] arrived at cell (39,42) pos=(39.5,44.0) assigned_trucks=1
+2026/03/22 21:00:37 [EX#1] START excavating (39,42) with truck#3
+2026/03/22 21:00:37 [EX#4] arrived at cell (40,42) pos=(39.3,41.6) assigned_trucks=1
+2026/03/22 21:00:37 [EX#4] START excavating (40,42) with truck#5
+2026/03/22 21:00:37 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:38 [t=660.3] STATUS excav=32/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:38 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:38 [DT#2] assigned to EX#1 (priority=2) path_len=32
+2026/03/22 21:00:38 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:38 [EX#1] DONE cell (39,42) total_excav=33/191
+2026/03/22 21:00:38 [EX#1] reserved cell (41,42) path_len=3
+2026/03/22 21:00:38 [EX#4] DONE cell (40,42) total_excav=34/191
+2026/03/22 21:00:38 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:38 [EX#4] reserved cell (42,42) path_len=4
+2026/03/22 21:00:38 [EX#1] arrived at cell (41,42) pos=(40.4,43.5) assigned_trucks=2
+2026/03/22 21:00:38 [EX#1] START excavating (41,42) with truck#3
+2026/03/22 21:00:38 [EX#4] arrived at cell (42,42) pos=(41.4,41.5) assigned_trucks=0
+2026/03/22 21:00:38 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:38 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:38 [DT#5] assigned to EX#4 (priority=0) path_len=34
+2026/03/22 21:00:38 [EX#1] DONE cell (41,42) total_excav=35/191
+2026/03/22 21:00:38 [EX#1] reserved cell (43,42) path_len=5
+2026/03/22 21:00:38 [EX#1] arrived at cell (43,42) pos=(43.0,43.9) assigned_trucks=2
+2026/03/22 21:00:38 [EX#1] START excavating (43,42) with truck#3
+2026/03/22 21:00:38 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:38 [EX#4] START excavating (42,42) with truck#5
+2026/03/22 21:00:38 [t=720.3] STATUS excav=35/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:38 [EX#1] DONE cell (43,42) total_excav=36/191
+2026/03/22 21:00:38 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:38 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:38 [EX#1] reserved cell (44,42) path_len=2
+2026/03/22 21:00:38 [EX#1] arrived at cell (44,42) pos=(43.5,43.5) assigned_trucks=1
+2026/03/22 21:00:38 [EX#1] START excavating (44,42) with truck#2
+2026/03/22 21:00:38 [EX#4] DONE cell (42,42) total_excav=37/191
+2026/03/22 21:00:38 [EX#4] reserved cell (45,42) path_len=6
+2026/03/22 21:00:38 [EX#4] arrived at cell (45,42) pos=(45.0,41.1) assigned_trucks=1
+2026/03/22 21:00:38 [EX#4] START excavating (45,42) with truck#5
+2026/03/22 21:00:38 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:39 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:39 [DT#3] assigned to EX#1 (priority=2) path_len=39
+2026/03/22 21:00:39 [EX#1] DONE cell (44,42) total_excav=38/191
+2026/03/22 21:00:39 [EX#1] reserved cell (46,42) path_len=5
+2026/03/22 21:00:39 [EX#1] arrived at cell (46,42) pos=(45.5,43.5) assigned_trucks=2
+2026/03/22 21:00:39 [EX#1] START excavating (46,42) with truck#2
+2026/03/22 21:00:39 [EX#4] DONE cell (45,42) total_excav=39/191
+2026/03/22 21:00:39 [EX#4] reserved cell (47,42) path_len=5
+2026/03/22 21:00:39 [t=780.4] STATUS excav=39/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:39 [EX#4] arrived at cell (47,42) pos=(47.0,41.1) assigned_trucks=1
+2026/03/22 21:00:39 [EX#4] START excavating (47,42) with truck#5
+2026/03/22 21:00:39 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:39 [EX#1] DONE cell (46,42) total_excav=40/191
+2026/03/22 21:00:39 [EX#1] reserved cell (48,42) path_len=5
+2026/03/22 21:00:39 [EX#1] arrived at cell (48,42) pos=(47.4,43.5) assigned_trucks=2
+2026/03/22 21:00:39 [EX#1] START excavating (48,42) with truck#2
+2026/03/22 21:00:39 [EX#4] DONE cell (47,42) total_excav=41/191
+2026/03/22 21:00:39 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:39 [EX#4] reserved cell (35,43) path_len=14
+2026/03/22 21:00:39 [EX#4] arrived at cell (35,43) pos=(36.6,42.6) assigned_trucks=0
+2026/03/22 21:00:39 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:39 [EX#1] DONE cell (48,42) total_excav=42/191
+2026/03/22 21:00:39 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:39 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:39 [EX#1] reserved cell (36,43) path_len=15
+2026/03/22 21:00:39 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:39 [DT#5] assigned to EX#4 (priority=0) path_len=29
+2026/03/22 21:00:39 [t=840.4] STATUS excav=42/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:39 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:39 [EX#4] START excavating (35,43) with truck#5
+2026/03/22 21:00:39 [EX#1] arrived at cell (36,43) pos=(36.6,45.0) assigned_trucks=1
+2026/03/22 21:00:39 [EX#1] START excavating (36,43) with truck#3
+2026/03/22 21:00:39 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:40 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:40 [DT#2] assigned to EX#1 (priority=2) path_len=30
+2026/03/22 21:00:40 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:40 [EX#4] DONE cell (35,43) total_excav=43/191
+2026/03/22 21:00:40 [EX#4] reserved cell (37,43) path_len=3
+2026/03/22 21:00:40 [EX#4] arrived at cell (37,43) pos=(36.6,42.6) assigned_trucks=1
+2026/03/22 21:00:40 [EX#1] DONE cell (36,43) total_excav=44/191
+2026/03/22 21:00:40 [EX#1] reserved cell (38,43) path_len=3
+2026/03/22 21:00:40 [EX#4] START excavating (37,43) with truck#5
+2026/03/22 21:00:40 [EX#1] arrived at cell (38,43) pos=(37.4,44.5) assigned_trucks=2
+2026/03/22 21:00:40 [EX#1] START excavating (38,43) with truck#3
+2026/03/22 21:00:40 [t=900.5] STATUS excav=44/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:40 [EX#4] DONE cell (37,43) total_excav=45/191
+2026/03/22 21:00:40 [EX#4] reserved cell (39,43) path_len=5
+2026/03/22 21:00:40 [EX#1] DONE cell (38,43) total_excav=46/191
+2026/03/22 21:00:40 [EX#1] reserved cell (40,43) path_len=4
+2026/03/22 21:00:40 [EX#4] arrived at cell (39,43) pos=(39.0,42.1) assigned_trucks=1
+2026/03/22 21:00:40 [EX#4] START excavating (39,43) with truck#5
+2026/03/22 21:00:40 [EX#1] arrived at cell (40,43) pos=(39.3,44.4) assigned_trucks=2
+2026/03/22 21:00:40 [EX#1] START excavating (40,43) with truck#3
+2026/03/22 21:00:40 [EX#4] DONE cell (39,43) total_excav=47/191
+2026/03/22 21:00:40 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:40 [EX#4] reserved cell (41,43) path_len=5
+2026/03/22 21:00:40 [EX#1] DONE cell (40,43) total_excav=48/191
+2026/03/22 21:00:40 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:40 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:40 [EX#1] reserved cell (42,43) path_len=4
+2026/03/22 21:00:40 [EX#4] arrived at cell (41,43) pos=(41.0,42.1) assigned_trucks=0
+2026/03/22 21:00:40 [EX#1] arrived at cell (42,43) pos=(41.4,44.4) assigned_trucks=1
+2026/03/22 21:00:40 [EX#1] START excavating (42,43) with truck#2
+2026/03/22 21:00:40 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:40 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:41 [t=960.5] STATUS excav=48/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:41 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:41 [DT#5] assigned to EX#4 (priority=0) path_len=33
+2026/03/22 21:00:41 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:41 [DT#3] assigned to EX#1 (priority=2) path_len=39
+2026/03/22 21:00:41 [EX#1] DONE cell (42,43) total_excav=49/191
+2026/03/22 21:00:41 [EX#1] reserved cell (43,43) path_len=3
+2026/03/22 21:00:41 [EX#1] arrived at cell (43,43) pos=(42.4,44.4) assigned_trucks=2
+2026/03/22 21:00:41 [EX#1] START excavating (43,43) with truck#2
+2026/03/22 21:00:41 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:41 [EX#4] START excavating (41,43) with truck#5
+2026/03/22 21:00:41 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:41 [EX#1] DONE cell (43,43) total_excav=50/191
+2026/03/22 21:00:41 [EX#1] reserved cell (44,43) path_len=3
+2026/03/22 21:00:41 [EX#4] DONE cell (41,43) total_excav=51/191
+2026/03/22 21:00:41 [EX#4] reserved cell (45,43) path_len=6
+2026/03/22 21:00:41 [EX#1] arrived at cell (44,43) pos=(43.4,44.4) assigned_trucks=2
+2026/03/22 21:00:41 [EX#1] START excavating (44,43) with truck#2
+2026/03/22 21:00:41 [EX#4] arrived at cell (45,43) pos=(44.5,42.5) assigned_trucks=1
+2026/03/22 21:00:41 [EX#4] START excavating (45,43) with truck#5
+2026/03/22 21:00:41 [t=1020.5] STATUS excav=51/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:41 [EX#1] DONE cell (44,43) total_excav=52/191
+2026/03/22 21:00:41 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:41 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:41 [EX#1] reserved cell (46,43) path_len=5
+2026/03/22 21:00:41 [EX#1] arrived at cell (46,43) pos=(46.0,44.9) assigned_trucks=1
+2026/03/22 21:00:41 [EX#1] START excavating (46,43) with truck#3
+2026/03/22 21:00:41 [EX#4] DONE cell (45,43) total_excav=53/191
+2026/03/22 21:00:41 [EX#4] reserved cell (47,43) path_len=5
+2026/03/22 21:00:41 [EX#4] arrived at cell (47,43) pos=(46.4,42.5) assigned_trucks=1
+2026/03/22 21:00:41 [EX#4] START excavating (47,43) with truck#5
+2026/03/22 21:00:41 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:42 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:42 [DT#2] assigned to EX#1 (priority=2) path_len=45
+2026/03/22 21:00:42 [EX#1] DONE cell (46,43) total_excav=54/191
+2026/03/22 21:00:42 [EX#1] reserved cell (48,43) path_len=3
+2026/03/22 21:00:42 [EX#1] arrived at cell (48,43) pos=(47.4,44.4) assigned_trucks=2
+2026/03/22 21:00:42 [EX#1] START excavating (48,43) with truck#3
+2026/03/22 21:00:42 [EX#4] DONE cell (47,43) total_excav=55/191
+2026/03/22 21:00:42 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:42 [EX#4] reserved cell (35,44) path_len=13
+2026/03/22 21:00:42 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:42 [EX#4] arrived at cell (35,44) pos=(36.7,43.6) assigned_trucks=0
+2026/03/22 21:00:42 [t=1080.5] STATUS excav=55/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:42 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:42 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:42 [DT#5] assigned to EX#4 (priority=0) path_len=29
+2026/03/22 21:00:42 [EX#1] DONE cell (48,43) total_excav=56/191
+2026/03/22 21:00:42 [EX#1] reserved cell (36,44) path_len=12
+2026/03/22 21:00:42 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:42 [EX#4] START excavating (35,44) with truck#5
+2026/03/22 21:00:42 [EX#1] arrived at cell (36,44) pos=(37.7,45.4) assigned_trucks=2
+2026/03/22 21:00:42 [EX#1] START excavating (36,44) with truck#2
+2026/03/22 21:00:42 [EX#4] DONE cell (35,44) total_excav=57/191
+2026/03/22 21:00:42 [EX#4] reserved cell (37,44) path_len=2
+2026/03/22 21:00:42 [EX#4] arrived at cell (37,44) pos=(36.7,43.6) assigned_trucks=1
+2026/03/22 21:00:42 [EX#4] START excavating (37,44) with truck#5
+2026/03/22 21:00:42 [EX#1] DONE cell (36,44) total_excav=58/191
+2026/03/22 21:00:42 [EX#1] reserved cell (38,44) path_len=2
+2026/03/22 21:00:42 [EX#1] arrived at cell (38,44) pos=(37.7,45.4) assigned_trucks=2
+2026/03/22 21:00:42 [EX#1] START excavating (38,44) with truck#3
+2026/03/22 21:00:42 [t=1140.5] STATUS excav=58/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:43 [EX#4] DONE cell (37,44) total_excav=59/191
+2026/03/22 21:00:43 [EX#4] reserved cell (39,44) path_len=5
+2026/03/22 21:00:43 [EX#4] arrived at cell (39,44) pos=(39.0,43.1) assigned_trucks=1
+2026/03/22 21:00:43 [EX#4] START excavating (39,44) with truck#5
+2026/03/22 21:00:43 [EX#1] DONE cell (38,44) total_excav=60/191
+2026/03/22 21:00:43 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:43 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:43 [EX#1] reserved cell (40,44) path_len=5
+2026/03/22 21:00:43 [EX#1] arrived at cell (40,44) pos=(40.0,45.9) assigned_trucks=1
+2026/03/22 21:00:43 [EX#1] START excavating (40,44) with truck#2
+2026/03/22 21:00:43 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:43 [EX#4] DONE cell (39,44) total_excav=61/191
+2026/03/22 21:00:43 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:43 [EX#4] reserved cell (41,44) path_len=5
+2026/03/22 21:00:43 [EX#4] arrived at cell (41,44) pos=(40.5,43.5) assigned_trucks=0
+2026/03/22 21:00:43 [t=1200.5] STATUS excav=61/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:43 [EX#1] DONE cell (40,44) total_excav=62/191
+2026/03/22 21:00:43 [EX#1] reserved cell (42,44) path_len=5
+2026/03/22 21:00:43 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:43 [DT#3] assigned to EX#4 (priority=0) path_len=33
+2026/03/22 21:00:43 [EX#1] arrived at cell (42,44) pos=(42.0,45.9) assigned_trucks=1
+2026/03/22 21:00:43 [EX#1] START excavating (42,44) with truck#2
+2026/03/22 21:00:43 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:43 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:43 [EX#4] START excavating (41,44) with truck#3
+2026/03/22 21:00:43 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:43 [DT#5] assigned to EX#1 (priority=2) path_len=38
+2026/03/22 21:00:43 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:43 [EX#1] DONE cell (42,44) total_excav=63/191
+2026/03/22 21:00:43 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:43 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:43 [EX#1] reserved cell (43,44) path_len=3
+2026/03/22 21:00:43 [EX#1] arrived at cell (43,44) pos=(42.4,45.5) assigned_trucks=1
+2026/03/22 21:00:43 [EX#1] START excavating (43,44) with truck#5
+2026/03/22 21:00:43 [EX#4] DONE cell (41,44) total_excav=64/191
+2026/03/22 21:00:43 [EX#4] reserved cell (44,44) path_len=6
+2026/03/22 21:00:43 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:43 [EX#4] arrived at cell (44,44) pos=(44.0,43.1) assigned_trucks=1
+2026/03/22 21:00:43 [EX#4] START excavating (44,44) with truck#3
+2026/03/22 21:00:44 [t=1260.6] STATUS excav=64/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:44 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:44 [DT#2] assigned to EX#1 (priority=2) path_len=35
+2026/03/22 21:00:44 [EX#1] DONE cell (43,44) total_excav=65/191
+2026/03/22 21:00:44 [EX#1] reserved cell (45,44) path_len=5
+2026/03/22 21:00:44 [EX#1] arrived at cell (45,44) pos=(44.4,45.5) assigned_trucks=2
+2026/03/22 21:00:44 [EX#1] START excavating (45,44) with truck#5
+2026/03/22 21:00:44 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:44 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:44 [EX#4] DONE cell (44,44) total_excav=66/191
+2026/03/22 21:00:44 [EX#4] reserved cell (46,44) path_len=3
+2026/03/22 21:00:44 [EX#4] arrived at cell (46,44) pos=(45.3,43.6) assigned_trucks=1
+2026/03/22 21:00:44 [EX#4] START excavating (46,44) with truck#3
+2026/03/22 21:00:44 [EX#1] DONE cell (45,44) total_excav=67/191
+2026/03/22 21:00:44 [EX#1] reserved cell (47,44) path_len=5
+2026/03/22 21:00:44 [EX#1] arrived at cell (47,44) pos=(47.0,45.9) assigned_trucks=2
+2026/03/22 21:00:44 [EX#1] START excavating (47,44) with truck#5
+2026/03/22 21:00:44 [EX#4] DONE cell (46,44) total_excav=68/191
+2026/03/22 21:00:44 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:44 [EX#4] reserved cell (48,44) path_len=5
+2026/03/22 21:00:44 [EX#4] arrived at cell (48,44) pos=(47.4,43.5) assigned_trucks=0
+2026/03/22 21:00:44 [t=1320.6] STATUS excav=68/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:44 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:44 [EX#1] DONE cell (47,44) total_excav=69/191
+2026/03/22 21:00:44 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:44 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:44 [EX#1] reserved cell (35,45) path_len=14
+2026/03/22 21:00:44 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:44 [DT#3] assigned to EX#4 (priority=0) path_len=40
+2026/03/22 21:00:44 [EX#1] arrived at cell (35,45) pos=(36.7,44.6) assigned_trucks=1
+2026/03/22 21:00:44 [EX#1] START excavating (35,45) with truck#2
+2026/03/22 21:00:44 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:44 [EX#4] START excavating (48,44) with truck#3
+2026/03/22 21:00:44 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:45 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:45 [DT#5] assigned to EX#1 (priority=2) path_len=30
+2026/03/22 21:00:45 [EX#1] DONE cell (35,45) total_excav=70/191
+2026/03/22 21:00:45 [EX#1] reserved cell (36,45) path_len=2
+2026/03/22 21:00:45 [EX#1] arrived at cell (36,45) pos=(36.7,44.6) assigned_trucks=2
+2026/03/22 21:00:45 [EX#1] START excavating (36,45) with truck#2
+2026/03/22 21:00:45 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:45 [t=1380.6] STATUS excav=70/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:45 [EX#4] DONE cell (48,44) total_excav=71/191
+2026/03/22 21:00:45 [EX#4] reserved cell (37,45) path_len=14
+2026/03/22 21:00:45 [EX#4] arrived at cell (37,45) pos=(37.6,47.0) assigned_trucks=1
+2026/03/22 21:00:45 [EX#4] START excavating (37,45) with truck#3
+2026/03/22 21:00:45 [EX#1] DONE cell (36,45) total_excav=72/191
+2026/03/22 21:00:45 [EX#1] reserved cell (38,45) path_len=6
+2026/03/22 21:00:45 [EX#1] arrived at cell (38,45) pos=(38.9,44.1) assigned_trucks=2
+2026/03/22 21:00:45 [EX#1] START excavating (38,45) with truck#2
+2026/03/22 21:00:45 [EX#4] DONE cell (37,45) total_excav=73/191
+2026/03/22 21:00:45 [EX#4] reserved cell (39,45) path_len=7
+2026/03/22 21:00:45 [EX#4] arrived at cell (39,45) pos=(40.4,46.6) assigned_trucks=1
+2026/03/22 21:00:45 [EX#4] START excavating (39,45) with truck#3
+2026/03/22 21:00:45 [EX#1] DONE cell (38,45) total_excav=74/191
+2026/03/22 21:00:45 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:45 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:45 [EX#1] reserved cell (40,45) path_len=4
+2026/03/22 21:00:45 [EX#1] arrived at cell (40,45) pos=(39.5,44.4) assigned_trucks=1
+2026/03/22 21:00:45 [EX#1] START excavating (40,45) with truck#5
+2026/03/22 21:00:45 [t=1440.6] STATUS excav=74/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:45 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:45 [EX#4] DONE cell (39,45) total_excav=75/191
+2026/03/22 21:00:45 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:45 [EX#4] reserved cell (41,45) path_len=2
+2026/03/22 21:00:45 [EX#4] arrived at cell (41,45) pos=(40.5,46.5) assigned_trucks=0
+2026/03/22 21:00:46 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:46 [DT#2] assigned to EX#4 (priority=0) path_len=36
+2026/03/22 21:00:46 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:46 [EX#1] DONE cell (40,45) total_excav=76/191
+2026/03/22 21:00:46 [EX#1] reserved cell (42,45) path_len=5
+2026/03/22 21:00:46 [EX#1] arrived at cell (42,45) pos=(42.0,44.1) assigned_trucks=1
+2026/03/22 21:00:46 [EX#1] START excavating (42,45) with truck#5
+2026/03/22 21:00:46 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:46 [EX#4] START excavating (41,45) with truck#2
+2026/03/22 21:00:46 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:46 [DT#3] assigned to EX#1 (priority=2) path_len=40
+2026/03/22 21:00:46 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:46 [t=1500.6] STATUS excav=76/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:46 [EX#1] DONE cell (42,45) total_excav=77/191
+2026/03/22 21:00:46 [EX#1] reserved cell (43,45) path_len=2
+2026/03/22 21:00:46 [EX#1] arrived at cell (43,45) pos=(42.4,44.5) assigned_trucks=2
+2026/03/22 21:00:46 [EX#1] START excavating (43,45) with truck#5
+2026/03/22 21:00:46 [EX#4] DONE cell (41,45) total_excav=78/191
+2026/03/22 21:00:46 [EX#4] reserved cell (44,45) path_len=6
+2026/03/22 21:00:46 [EX#4] arrived at cell (44,45) pos=(44.0,46.9) assigned_trucks=1
+2026/03/22 21:00:46 [EX#4] START excavating (44,45) with truck#2
+2026/03/22 21:00:46 [EX#1] DONE cell (43,45) total_excav=79/191
+2026/03/22 21:00:46 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:46 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:46 [EX#1] reserved cell (45,45) path_len=5
+2026/03/22 21:00:46 [EX#1] arrived at cell (45,45) pos=(45.0,44.1) assigned_trucks=1
+2026/03/22 21:00:46 [EX#1] START excavating (45,45) with truck#3
+2026/03/22 21:00:46 [EX#4] DONE cell (44,45) total_excav=80/191
+2026/03/22 21:00:46 [EX#4] reserved cell (46,45) path_len=4
+2026/03/22 21:00:46 [EX#4] arrived at cell (46,45) pos=(45.5,46.5) assigned_trucks=1
+2026/03/22 21:00:46 [EX#4] START excavating (46,45) with truck#2
+2026/03/22 21:00:46 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:46 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:46 [DT#5] assigned to EX#1 (priority=2) path_len=37
+2026/03/22 21:00:47 [t=1560.6] STATUS excav=80/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:47 [EX#1] DONE cell (45,45) total_excav=81/191
+2026/03/22 21:00:47 [EX#1] reserved cell (47,45) path_len=5
+2026/03/22 21:00:47 [EX#4] DONE cell (46,45) total_excav=82/191
+2026/03/22 21:00:47 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:47 [EX#4] reserved cell (48,45) path_len=4
+2026/03/22 21:00:47 [EX#1] arrived at cell (47,45) pos=(47.0,44.1) assigned_trucks=2
+2026/03/22 21:00:47 [EX#1] START excavating (47,45) with truck#3
+2026/03/22 21:00:47 [EX#4] arrived at cell (48,45) pos=(47.4,46.4) assigned_trucks=0
+2026/03/22 21:00:47 [DT#5] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:47 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:47 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:47 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:47 [DT#2] assigned to EX#4 (priority=0) path_len=43
+2026/03/22 21:00:47 [EX#1] DONE cell (47,45) total_excav=83/191
+2026/03/22 21:00:47 [EX#1] reserved cell (35,46) path_len=14
+2026/03/22 21:00:47 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:47 [EX#4] START excavating (48,45) with truck#2
+2026/03/22 21:00:47 [EX#1] arrived at cell (35,46) pos=(36.6,45.6) assigned_trucks=2
+2026/03/22 21:00:47 [EX#1] START excavating (35,46) with truck#3
+2026/03/22 21:00:47 [t=1620.6] STATUS excav=83/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:47 [EX#4] DONE cell (48,45) total_excav=84/191
+2026/03/22 21:00:47 [EX#4] reserved cell (36,46) path_len=12
+2026/03/22 21:00:47 [EX#4] arrived at cell (36,46) pos=(37.7,47.4) assigned_trucks=1
+2026/03/22 21:00:47 [EX#1] DONE cell (35,46) total_excav=85/191
+2026/03/22 21:00:47 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:47 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:47 [EX#1] reserved cell (37,46) path_len=2
+2026/03/22 21:00:47 [EX#4] START excavating (36,46) with truck#2
+2026/03/22 21:00:47 [EX#1] arrived at cell (37,46) pos=(36.6,45.6) assigned_trucks=1
+2026/03/22 21:00:47 [EX#1] START excavating (37,46) with truck#5
+2026/03/22 21:00:47 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:48 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:48 [DT#3] assigned to EX#1 (priority=2) path_len=29
+2026/03/22 21:00:48 [EX#4] DONE cell (36,46) total_excav=86/191
+2026/03/22 21:00:48 [EX#4] reserved cell (38,46) path_len=2
+2026/03/22 21:00:48 [EX#4] arrived at cell (38,46) pos=(37.7,47.4) assigned_trucks=1
+2026/03/22 21:00:48 [EX#1] DONE cell (37,46) total_excav=87/191
+2026/03/22 21:00:48 [EX#1] reserved cell (39,46) path_len=7
+2026/03/22 21:00:48 [EX#4] START excavating (38,46) with truck#2
+2026/03/22 21:00:48 [EX#1] arrived at cell (39,46) pos=(39.4,45.1) assigned_trucks=2
+2026/03/22 21:00:48 [EX#1] START excavating (39,46) with truck#5
+2026/03/22 21:00:48 [t=1680.6] STATUS excav=87/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:48 [DT#3] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:48 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:48 [EX#4] DONE cell (38,46) total_excav=88/191
+2026/03/22 21:00:48 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:48 [EX#4] reserved cell (40,46) path_len=5
+2026/03/22 21:00:48 [EX#4] arrived at cell (40,46) pos=(39.5,47.6) assigned_trucks=0
+2026/03/22 21:00:48 [EX#1] DONE cell (39,46) total_excav=89/191
+2026/03/22 21:00:48 [EX#1] reserved cell (41,46) path_len=8
+2026/03/22 21:00:48 [EX#1] arrived at cell (41,46) pos=(42.5,45.4) assigned_trucks=2
+2026/03/22 21:00:48 [EX#1] START excavating (41,46) with truck#3
+2026/03/22 21:00:48 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:48 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:48 [DT#2] assigned to EX#4 (priority=0) path_len=32
+2026/03/22 21:00:48 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:48 [EX#4] START excavating (40,46) with truck#2
+2026/03/22 21:00:48 [t=1740.6] STATUS excav=89/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:48 [EX#1] DONE cell (41,46) total_excav=90/191
+2026/03/22 21:00:48 [EX#1] reserved cell (42,46) path_len=2
+2026/03/22 21:00:48 [EX#1] arrived at cell (42,46) pos=(42.5,45.4) assigned_trucks=2
+2026/03/22 21:00:48 [EX#1] START excavating (42,46) with truck#5
+2026/03/22 21:00:49 [EX#4] DONE cell (40,46) total_excav=91/191
+2026/03/22 21:00:49 [EX#4] reserved cell (43,46) path_len=6
+2026/03/22 21:00:49 [EX#4] arrived at cell (43,46) pos=(43.0,47.9) assigned_trucks=1
+2026/03/22 21:00:49 [EX#4] START excavating (43,46) with truck#2
+2026/03/22 21:00:49 [EX#1] DONE cell (42,46) total_excav=92/191
+2026/03/22 21:00:49 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:49 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:49 [EX#1] reserved cell (44,46) path_len=4
+2026/03/22 21:00:49 [EX#1] arrived at cell (44,46) pos=(43.4,45.5) assigned_trucks=1
+2026/03/22 21:00:49 [EX#1] START excavating (44,46) with truck#3
+2026/03/22 21:00:49 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:49 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:49 [DT#5] assigned to EX#1 (priority=2) path_len=37
+2026/03/22 21:00:49 [t=1800.6] STATUS excav=92/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:49 [EX#4] DONE cell (43,46) total_excav=93/191
+2026/03/22 21:00:49 [EX#4] reserved cell (45,46) path_len=3
+2026/03/22 21:00:49 [EX#1] DONE cell (44,46) total_excav=94/191
+2026/03/22 21:00:49 [EX#1] reserved cell (46,46) path_len=4
+2026/03/22 21:00:49 [EX#4] arrived at cell (45,46) pos=(44.4,47.4) assigned_trucks=1
+2026/03/22 21:00:49 [EX#4] START excavating (45,46) with truck#2
+2026/03/22 21:00:49 [EX#1] arrived at cell (46,46) pos=(45.4,45.5) assigned_trucks=2
+2026/03/22 21:00:49 [EX#1] START excavating (46,46) with truck#3
+2026/03/22 21:00:49 [DT#5] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:49 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:49 [EX#4] DONE cell (45,46) total_excav=95/191
+2026/03/22 21:00:49 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:49 [EX#4] reserved cell (47,46) path_len=5
+2026/03/22 21:00:49 [EX#1] DONE cell (46,46) total_excav=96/191
+2026/03/22 21:00:49 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:49 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:49 [EX#1] reserved cell (48,46) path_len=4
+2026/03/22 21:00:49 [EX#4] arrived at cell (47,46) pos=(47.0,47.9) assigned_trucks=0
+2026/03/22 21:00:49 [EX#1] arrived at cell (48,46) pos=(47.4,45.6) assigned_trucks=1
+2026/03/22 21:00:49 [EX#1] START excavating (48,46) with truck#5
+2026/03/22 21:00:49 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:49 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:49 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:49 [DT#2] assigned to EX#4 (priority=0) path_len=39
+2026/03/22 21:00:49 [t=1860.6] STATUS excav=96/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:50 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:50 [DT#3] assigned to EX#1 (priority=2) path_len=42
+2026/03/22 21:00:50 [EX#1] DONE cell (48,46) total_excav=97/191
+2026/03/22 21:00:50 [EX#1] reserved cell (35,47) path_len=14
+2026/03/22 21:00:50 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:50 [EX#4] START excavating (47,46) with truck#2
+2026/03/22 21:00:50 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:50 [EX#1] arrived at cell (35,47) pos=(36.7,46.6) assigned_trucks=2
+2026/03/22 21:00:50 [EX#1] START excavating (35,47) with truck#3
+2026/03/22 21:00:50 [EX#4] DONE cell (47,46) total_excav=98/191
+2026/03/22 21:00:50 [EX#4] reserved cell (36,47) path_len=14
+2026/03/22 21:00:50 [EX#4] arrived at cell (36,47) pos=(36.6,49.0) assigned_trucks=1
+2026/03/22 21:00:50 [EX#4] START excavating (36,47) with truck#2
+2026/03/22 21:00:50 [EX#1] DONE cell (35,47) total_excav=99/191
+2026/03/22 21:00:50 [EX#1] reserved cell (37,47) path_len=2
+2026/03/22 21:00:50 [EX#1] arrived at cell (37,47) pos=(36.7,46.6) assigned_trucks=2
+2026/03/22 21:00:50 [EX#1] START excavating (37,47) with truck#5
+2026/03/22 21:00:50 [t=1920.6] STATUS excav=99/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:50 [EX#4] DONE cell (36,47) total_excav=100/191
+2026/03/22 21:00:50 [EX#4] reserved cell (38,47) path_len=3
+2026/03/22 21:00:50 [EX#1] DONE cell (37,47) total_excav=101/191
+2026/03/22 21:00:50 [EX#1] reserved cell (39,47) path_len=7
+2026/03/22 21:00:50 [EX#4] arrived at cell (38,47) pos=(37.4,48.5) assigned_trucks=1
+2026/03/22 21:00:50 [EX#4] START excavating (38,47) with truck#2
+2026/03/22 21:00:50 [EX#1] arrived at cell (39,47) pos=(39.4,46.0) assigned_trucks=2
+2026/03/22 21:00:50 [EX#1] START excavating (39,47) with truck#5
+2026/03/22 21:00:51 [EX#4] DONE cell (38,47) total_excav=102/191
+2026/03/22 21:00:51 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:51 [EX#4] reserved cell (40,47) path_len=5
+2026/03/22 21:00:51 [EX#4] arrived at cell (40,47) pos=(39.4,48.5) assigned_trucks=0
+2026/03/22 21:00:51 [EX#1] DONE cell (39,47) total_excav=103/191
+2026/03/22 21:00:51 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:51 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:51 [EX#1] reserved cell (41,47) path_len=3
+2026/03/22 21:00:51 [EX#1] arrived at cell (41,47) pos=(40.4,46.6) assigned_trucks=1
+2026/03/22 21:00:51 [EX#1] START excavating (41,47) with truck#3
+2026/03/22 21:00:51 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:51 [t=1980.7] STATUS excav=103/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:51 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:51 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:51 [DT#2] assigned to EX#4 (priority=0) path_len=32
+2026/03/22 21:00:51 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:51 [DT#5] assigned to EX#1 (priority=2) path_len=35
+2026/03/22 21:00:51 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:51 [EX#4] START excavating (40,47) with truck#2
+2026/03/22 21:00:51 [EX#1] DONE cell (41,47) total_excav=104/191
+2026/03/22 21:00:51 [EX#1] reserved cell (42,47) path_len=3
+2026/03/22 21:00:51 [EX#1] arrived at cell (42,47) pos=(41.4,46.6) assigned_trucks=2
+2026/03/22 21:00:51 [EX#1] START excavating (42,47) with truck#3
+2026/03/22 21:00:51 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:51 [EX#4] DONE cell (40,47) total_excav=105/191
+2026/03/22 21:00:51 [EX#4] reserved cell (43,47) path_len=6
+2026/03/22 21:00:51 [EX#4] arrived at cell (43,47) pos=(43.0,48.9) assigned_trucks=1
+2026/03/22 21:00:51 [EX#4] START excavating (43,47) with truck#2
+2026/03/22 21:00:51 [t=2040.7] STATUS excav=105/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:51 [EX#1] DONE cell (42,47) total_excav=106/191
+2026/03/22 21:00:51 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:51 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:51 [EX#1] reserved cell (44,47) path_len=5
+2026/03/22 21:00:51 [EX#1] arrived at cell (44,47) pos=(43.4,46.5) assigned_trucks=1
+2026/03/22 21:00:51 [EX#1] START excavating (44,47) with truck#5
+2026/03/22 21:00:51 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:52 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:52 [DT#3] assigned to EX#1 (priority=2) path_len=37
+2026/03/22 21:00:52 [EX#4] DONE cell (43,47) total_excav=107/191
+2026/03/22 21:00:52 [EX#4] reserved cell (45,47) path_len=5
+2026/03/22 21:00:52 [EX#4] arrived at cell (45,47) pos=(45.0,48.9) assigned_trucks=1
+2026/03/22 21:00:52 [EX#4] START excavating (45,47) with truck#2
+2026/03/22 21:00:52 [EX#1] DONE cell (44,47) total_excav=108/191
+2026/03/22 21:00:52 [EX#1] reserved cell (46,47) path_len=5
+2026/03/22 21:00:52 [EX#1] arrived at cell (46,47) pos=(45.4,46.5) assigned_trucks=2
+2026/03/22 21:00:52 [EX#1] START excavating (46,47) with truck#5
+2026/03/22 21:00:52 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:52 [t=2100.7] STATUS excav=108/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:52 [EX#4] DONE cell (45,47) total_excav=109/191
+2026/03/22 21:00:52 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:52 [EX#4] reserved cell (47,47) path_len=3
+2026/03/22 21:00:52 [EX#4] arrived at cell (47,47) pos=(46.4,48.4) assigned_trucks=0
+2026/03/22 21:00:52 [EX#1] DONE cell (46,47) total_excav=110/191
+2026/03/22 21:00:52 [EX#1] reserved cell (48,47) path_len=5
+2026/03/22 21:00:52 [EX#1] arrived at cell (48,47) pos=(48.0,46.1) assigned_trucks=2
+2026/03/22 21:00:52 [EX#1] START excavating (48,47) with truck#5
+2026/03/22 21:00:52 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:52 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:52 [DT#2] assigned to EX#4 (priority=0) path_len=39
+2026/03/22 21:00:52 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:52 [EX#4] START excavating (47,47) with truck#2
+2026/03/22 21:00:52 [EX#1] DONE cell (48,47) total_excav=111/191
+2026/03/22 21:00:52 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:52 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:52 [EX#1] reserved cell (35,48) path_len=15
+2026/03/22 21:00:52 [EX#1] arrived at cell (35,48) pos=(36.9,48.1) assigned_trucks=1
+2026/03/22 21:00:52 [EX#1] START excavating (35,48) with truck#3
+2026/03/22 21:00:52 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:53 [t=2160.7] STATUS excav=111/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:53 [EX#4] DONE cell (47,47) total_excav=112/191
+2026/03/22 21:00:53 [EX#4] reserved cell (36,48) path_len=14
+2026/03/22 21:00:53 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:53 [DT#5] assigned to EX#1 (priority=2) path_len=29
+2026/03/22 21:00:53 [EX#4] arrived at cell (36,48) pos=(36.6,49.9) assigned_trucks=1
+2026/03/22 21:00:53 [EX#4] START excavating (36,48) with truck#2
+2026/03/22 21:00:53 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:53 [EX#1] DONE cell (35,48) total_excav=113/191
+2026/03/22 21:00:53 [EX#1] reserved cell (37,48) path_len=2
+2026/03/22 21:00:53 [EX#1] arrived at cell (37,48) pos=(36.9,48.2) assigned_trucks=2
+2026/03/22 21:00:53 [EX#1] START excavating (37,48) with truck#3
+2026/03/22 21:00:53 [EX#4] DONE cell (36,48) total_excav=114/191
+2026/03/22 21:00:53 [EX#4] reserved cell (38,48) path_len=10
+2026/03/22 21:00:53 [EX#1] DONE cell (37,48) total_excav=115/191
+2026/03/22 21:00:53 [EX#1] reserved cell (39,48) path_len=4
+2026/03/22 21:00:53 [EX#4] arrived at cell (38,48) pos=(39.5,49.6) assigned_trucks=1
+2026/03/22 21:00:53 [EX#4] START excavating (38,48) with truck#2
+2026/03/22 21:00:53 [t=2220.7] STATUS excav=115/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:53 [EX#4] DONE cell (38,48) total_excav=116/191
+2026/03/22 21:00:53 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:53 [EX#4] reserved cell (40,48) path_len=2
+2026/03/22 21:00:53 [EX#4] arrived at cell (40,48) pos=(39.5,49.6) assigned_trucks=0
+2026/03/22 21:00:53 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:54 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:54 [DT#2] assigned to EX#4 (priority=0) path_len=35
+2026/03/22 21:00:54 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:54 [EX#4] START excavating (40,48) with truck#2
+2026/03/22 21:00:54 [EX#1] arrived at cell (39,48) pos=(38.3,49.4) assigned_trucks=2
+2026/03/22 21:00:54 [EX#1] START excavating (39,48) with truck#3
+2026/03/22 21:00:54 [t=2280.7] STATUS excav=116/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:54 [EX#4] DONE cell (40,48) total_excav=117/191
+2026/03/22 21:00:54 [EX#4] reserved cell (41,48) path_len=3
+2026/03/22 21:00:54 [EX#1] DONE cell (39,48) total_excav=118/191
+2026/03/22 21:00:54 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:54 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:54 [EX#1] reserved cell (42,48) path_len=9
+2026/03/22 21:00:54 [EX#4] arrived at cell (41,48) pos=(40.3,49.4) assigned_trucks=1
+2026/03/22 21:00:54 [EX#4] START excavating (41,48) with truck#2
+2026/03/22 21:00:54 [EX#1] arrived at cell (42,48) pos=(42.4,50.0) assigned_trucks=1
+2026/03/22 21:00:54 [EX#1] START excavating (42,48) with truck#5
+2026/03/22 21:00:54 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:54 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:54 [DT#3] assigned to EX#1 (priority=2) path_len=38
+2026/03/22 21:00:54 [t=2340.7] STATUS excav=118/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:54 [EX#4] DONE cell (41,48) total_excav=119/191
+2026/03/22 21:00:54 [EX#4] reserved cell (43,48) path_len=6
+2026/03/22 21:00:54 [EX#4] arrived at cell (43,48) pos=(42.4,47.5) assigned_trucks=1
+2026/03/22 21:00:54 [EX#4] START excavating (43,48) with truck#2
+2026/03/22 21:00:54 [EX#1] DONE cell (42,48) total_excav=120/191
+2026/03/22 21:00:54 [EX#1] reserved cell (44,48) path_len=3
+2026/03/22 21:00:54 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:54 [EX#1] arrived at cell (44,48) pos=(43.4,49.5) assigned_trucks=2
+2026/03/22 21:00:54 [EX#1] START excavating (44,48) with truck#5
+2026/03/22 21:00:55 [EX#4] DONE cell (43,48) total_excav=121/191
+2026/03/22 21:00:55 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:55 [EX#4] reserved cell (45,48) path_len=5
+2026/03/22 21:00:55 [EX#4] arrived at cell (45,48) pos=(45.0,47.1) assigned_trucks=0
+2026/03/22 21:00:55 [EX#1] DONE cell (44,48) total_excav=122/191
+2026/03/22 21:00:55 [EX#1] reserved cell (46,48) path_len=5
+2026/03/22 21:00:55 [EX#1] arrived at cell (46,48) pos=(45.4,49.5) assigned_trucks=2
+2026/03/22 21:00:55 [EX#1] START excavating (46,48) with truck#5
+2026/03/22 21:00:55 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:55 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:55 [DT#2] assigned to EX#4 (priority=0) path_len=37
+2026/03/22 21:00:55 [t=2400.7] STATUS excav=122/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:55 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:55 [EX#4] START excavating (45,48) with truck#2
+2026/03/22 21:00:55 [EX#1] DONE cell (46,48) total_excav=123/191
+2026/03/22 21:00:55 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:55 [EX#1] DT#3 is now active truck
+2026/03/22 21:00:55 [EX#1] reserved cell (47,48) path_len=3
+2026/03/22 21:00:55 [EX#1] arrived at cell (47,48) pos=(46.3,49.4) assigned_trucks=1
+2026/03/22 21:00:55 [EX#1] START excavating (47,48) with truck#3
+2026/03/22 21:00:55 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:55 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:55 [DT#5] assigned to EX#1 (priority=2) path_len=39
+2026/03/22 21:00:55 [EX#4] DONE cell (45,48) total_excav=124/191
+2026/03/22 21:00:55 [EX#4] reserved cell (48,48) path_len=6
+2026/03/22 21:00:55 [EX#1] DONE cell (47,48) total_excav=125/191
+2026/03/22 21:00:55 [EX#1] reserved cell (35,49) path_len=12
+2026/03/22 21:00:55 [EX#4] arrived at cell (48,48) pos=(48.0,47.1) assigned_trucks=1
+2026/03/22 21:00:55 [EX#4] START excavating (48,48) with truck#2
+2026/03/22 21:00:55 [EX#1] arrived at cell (35,49) pos=(36.6,50.4) assigned_trucks=2
+2026/03/22 21:00:55 [EX#1] START excavating (35,49) with truck#3
+2026/03/22 21:00:55 [DT#5] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:55 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:56 [t=2460.7] STATUS excav=125/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:56 [EX#4] DONE cell (48,48) total_excav=126/191
+2026/03/22 21:00:56 [EX#4] reserved cell (36,49) path_len=12
+2026/03/22 21:00:56 [EX#1] DONE cell (35,49) total_excav=127/191
+2026/03/22 21:00:56 [EX#1] reserved cell (37,49) path_len=3
+2026/03/22 21:00:56 [EX#1] arrived at cell (37,49) pos=(36.6,50.4) assigned_trucks=2
+2026/03/22 21:00:56 [EX#1] START excavating (37,49) with truck#3
+2026/03/22 21:00:56 [EX#4] arrived at cell (36,49) pos=(37.6,48.6) assigned_trucks=1
+2026/03/22 21:00:56 [EX#4] START excavating (36,49) with truck#2
+2026/03/22 21:00:56 [EX#1] DONE cell (37,49) total_excav=128/191
+2026/03/22 21:00:56 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:56 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:56 [EX#1] reserved cell (38,49) path_len=3
+2026/03/22 21:00:56 [EX#1] arrived at cell (38,49) pos=(37.1,49.9) assigned_trucks=1
+2026/03/22 21:00:56 [EX#1] START excavating (38,49) with truck#5
+2026/03/22 21:00:56 [EX#4] DONE cell (36,49) total_excav=129/191
+2026/03/22 21:00:56 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:56 [EX#4] reserved cell (39,49) path_len=8
+2026/03/22 21:00:56 [EX#4] arrived at cell (39,49) pos=(39.0,48.1) assigned_trucks=0
+2026/03/22 21:00:56 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:56 [t=2520.7] STATUS excav=129/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:56 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:56 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:56 [DT#3] assigned to EX#4 (priority=0) path_len=31
+2026/03/22 21:00:56 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:56 [DT#2] assigned to EX#1 (priority=2) path_len=31
+2026/03/22 21:00:56 [EX#1] DONE cell (38,49) total_excav=130/191
+2026/03/22 21:00:56 [EX#1] reserved cell (40,49) path_len=5
+2026/03/22 21:00:56 [EX#1] arrived at cell (40,49) pos=(39.4,50.5) assigned_trucks=2
+2026/03/22 21:00:56 [EX#1] START excavating (40,49) with truck#5
+2026/03/22 21:00:56 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:56 [EX#4] START excavating (39,49) with truck#3
+2026/03/22 21:00:56 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:56 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:57 [EX#1] DONE cell (40,49) total_excav=131/191
+2026/03/22 21:00:57 [EX#1] reserved cell (41,49) path_len=3
+2026/03/22 21:00:57 [EX#1] arrived at cell (41,49) pos=(40.4,50.4) assigned_trucks=2
+2026/03/22 21:00:57 [EX#1] START excavating (41,49) with truck#5
+2026/03/22 21:00:57 [EX#4] DONE cell (39,49) total_excav=132/191
+2026/03/22 21:00:57 [EX#4] reserved cell (42,49) path_len=6
+2026/03/22 21:00:57 [EX#4] arrived at cell (42,49) pos=(42.0,48.1) assigned_trucks=1
+2026/03/22 21:00:57 [EX#4] START excavating (42,49) with truck#3
+2026/03/22 21:00:57 [t=2580.7] STATUS excav=132/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:57 [EX#1] DONE cell (41,49) total_excav=133/191
+2026/03/22 21:00:57 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:57 [EX#1] DT#2 is now active truck
+2026/03/22 21:00:57 [EX#1] reserved cell (43,49) path_len=5
+2026/03/22 21:00:57 [EX#1] arrived at cell (43,49) pos=(42.4,50.5) assigned_trucks=1
+2026/03/22 21:00:57 [EX#1] START excavating (43,49) with truck#2
+2026/03/22 21:00:57 [EX#4] DONE cell (42,49) total_excav=134/191
+2026/03/22 21:00:57 [EX#4] reserved cell (44,49) path_len=5
+2026/03/22 21:00:57 [EX#4] arrived at cell (44,49) pos=(44.0,48.1) assigned_trucks=1
+2026/03/22 21:00:57 [EX#4] START excavating (44,49) with truck#3
+2026/03/22 21:00:57 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:57 [DT#5] unloaded → SEARCHING
+2026/03/22 21:00:57 [DT#5] assigned to EX#1 (priority=2) path_len=36
+2026/03/22 21:00:57 [EX#1] DONE cell (43,49) total_excav=135/191
+2026/03/22 21:00:57 [EX#1] reserved cell (45,49) path_len=5
+2026/03/22 21:00:57 [EX#1] arrived at cell (45,49) pos=(44.5,50.5) assigned_trucks=2
+2026/03/22 21:00:57 [EX#1] START excavating (45,49) with truck#2
+2026/03/22 21:00:57 [DT#5] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:57 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:57 [EX#4] DONE cell (44,49) total_excav=136/191
+2026/03/22 21:00:57 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:57 [EX#4] reserved cell (46,49) path_len=3
+2026/03/22 21:00:57 [t=2640.8] STATUS excav=136/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:57 [EX#4] arrived at cell (46,49) pos=(45.4,48.6) assigned_trucks=0
+2026/03/22 21:00:57 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:58 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:58 [DT#3] assigned to EX#4 (priority=0) path_len=38
+2026/03/22 21:00:58 [EX#1] DONE cell (45,49) total_excav=137/191
+2026/03/22 21:00:58 [EX#1] reserved cell (47,49) path_len=5
+2026/03/22 21:00:58 [EX#1] arrived at cell (47,49) pos=(47.0,50.9) assigned_trucks=2
+2026/03/22 21:00:58 [EX#1] START excavating (47,49) with truck#2
+2026/03/22 21:00:58 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:00:58 [EX#4] START excavating (46,49) with truck#3
+2026/03/22 21:00:58 [t=2700.8] STATUS excav=137/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:58 [EX#1] DONE cell (47,49) total_excav=138/191
+2026/03/22 21:00:58 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:00:58 [EX#1] DT#5 is now active truck
+2026/03/22 21:00:58 [EX#1] reserved cell (48,49) path_len=3
+2026/03/22 21:00:58 [EX#1] arrived at cell (48,49) pos=(47.4,50.5) assigned_trucks=1
+2026/03/22 21:00:58 [EX#1] START excavating (48,49) with truck#5
+2026/03/22 21:00:58 [EX#4] DONE cell (46,49) total_excav=139/191
+2026/03/22 21:00:58 [EX#4] reserved cell (93,66) path_len=49
+2026/03/22 21:00:58 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:58 [DT#2] unloaded → SEARCHING
+2026/03/22 21:00:58 [DT#2] assigned to EX#1 (priority=2) path_len=41
+2026/03/22 21:00:58 [EX#1] DONE cell (48,49) total_excav=140/191
+2026/03/22 21:00:58 [EX#1] reserved cell (94,66) path_len=48
+2026/03/22 21:00:58 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:58 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:00:58 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:00:58 [EX#4] arrived at cell (93,66) pos=(92.1,66.2) assigned_trucks=1
+2026/03/22 21:00:58 [EX#4] START excavating (93,66) with truck#3
+2026/03/22 21:00:58 [t=2760.8] STATUS excav=140/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:59 [EX#1] arrived at cell (94,66) pos=(93.5,65.4) assigned_trucks=2
+2026/03/22 21:00:59 [EX#1] START excavating (94,66) with truck#2
+2026/03/22 21:00:59 [EX#4] DONE cell (93,66) total_excav=141/191
+2026/03/22 21:00:59 [EX#4] reserved cell (95,66) path_len=6
+2026/03/22 21:00:59 [EX#4] arrived at cell (95,66) pos=(95.0,67.9) assigned_trucks=1
+2026/03/22 21:00:59 [EX#4] START excavating (95,66) with truck#3
+2026/03/22 21:00:59 [EX#1] DONE cell (94,66) total_excav=142/191
+2026/03/22 21:00:59 [EX#1] reserved cell (96,66) path_len=5
+2026/03/22 21:00:59 [EX#1] arrived at cell (96,66) pos=(95.5,65.5) assigned_trucks=2
+2026/03/22 21:00:59 [EX#1] START excavating (96,66) with truck#2
+2026/03/22 21:00:59 [EX#4] DONE cell (95,66) total_excav=143/191
+2026/03/22 21:00:59 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:00:59 [EX#4] reserved cell (97,66) path_len=5
+2026/03/22 21:00:59 [EX#4] arrived at cell (97,66) pos=(97.0,67.9) assigned_trucks=0
+2026/03/22 21:00:59 [t=2820.8] STATUS excav=143/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:00:59 [EX#1] DONE cell (96,66) total_excav=144/191
+2026/03/22 21:00:59 [EX#1] reserved cell (98,66) path_len=5
+2026/03/22 21:00:59 [EX#1] arrived at cell (98,66) pos=(97.4,65.5) assigned_trucks=2
+2026/03/22 21:00:59 [EX#1] START excavating (98,66) with truck#5
+2026/03/22 21:00:59 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:00:59 [DT#3] unloaded → SEARCHING
+2026/03/22 21:00:59 [DT#3] assigned to EX#4 (priority=0) path_len=89
+2026/03/22 21:01:00 [EX#1] DONE cell (98,66) total_excav=145/191
+2026/03/22 21:01:00 [EX#1] reserved cell (99,66) path_len=3
+2026/03/22 21:01:00 [EX#1] arrived at cell (99,66) pos=(98.4,65.6) assigned_trucks=2
+2026/03/22 21:01:00 [EX#1] START excavating (99,66) with truck#5
+2026/03/22 21:01:00 [t=2880.8] STATUS excav=145/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:00 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:00 [EX#4] START excavating (97,66) with truck#3
+2026/03/22 21:01:00 [EX#1] DONE cell (99,66) total_excav=146/191
+2026/03/22 21:01:00 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:00 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:00 [EX#1] reserved cell (100,66) path_len=3
+2026/03/22 21:01:00 [EX#1] arrived at cell (100,66) pos=(99.4,65.6) assigned_trucks=1
+2026/03/22 21:01:00 [EX#1] START excavating (100,66) with truck#2
+2026/03/22 21:01:00 [EX#4] DONE cell (97,66) total_excav=147/191
+2026/03/22 21:01:00 [EX#4] reserved cell (93,67) path_len=5
+2026/03/22 21:01:00 [EX#4] arrived at cell (93,67) pos=(94.5,66.5) assigned_trucks=1
+2026/03/22 21:01:00 [EX#4] START excavating (93,67) with truck#3
+2026/03/22 21:01:00 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:00 [EX#1] DONE cell (100,66) total_excav=148/191
+2026/03/22 21:01:00 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:00 [EX#1] reserved cell (94,67) path_len=9
+2026/03/22 21:01:00 [EX#1] arrived at cell (94,67) pos=(94.6,69.0) assigned_trucks=0
+2026/03/22 21:01:00 [t=2940.8] STATUS excav=148/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:00 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:00 [DT#5] assigned to EX#1 (priority=0) path_len=87
+2026/03/22 21:01:00 [EX#4] DONE cell (93,67) total_excav=149/191
+2026/03/22 21:01:00 [EX#4] reserved cell (95,67) path_len=2
+2026/03/22 21:01:00 [EX#4] arrived at cell (95,67) pos=(94.5,66.5) assigned_trucks=1
+2026/03/22 21:01:00 [EX#4] START excavating (95,67) with truck#3
+2026/03/22 21:01:00 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:01 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:01 [EX#1] START excavating (94,67) with truck#5
+2026/03/22 21:01:01 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:01 [DT#2] assigned to EX#1 (priority=2) path_len=90
+2026/03/22 21:01:01 [EX#4] DONE cell (95,67) total_excav=150/191
+2026/03/22 21:01:01 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:01 [EX#4] reserved cell (96,67) path_len=6
+2026/03/22 21:01:01 [EX#4] arrived at cell (96,67) pos=(95.7,66.3) assigned_trucks=0
+2026/03/22 21:01:01 [t=3000.8] STATUS excav=150/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:01 [EX#1] DONE cell (94,67) total_excav=151/191
+2026/03/22 21:01:01 [EX#1] reserved cell (97,67) path_len=5
+2026/03/22 21:01:01 [EX#1] arrived at cell (97,67) pos=(97.0,68.9) assigned_trucks=2
+2026/03/22 21:01:01 [EX#1] START excavating (97,67) with truck#5
+2026/03/22 21:01:01 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:01 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:01 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:01 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:01 [DT#3] assigned to EX#4 (priority=0) path_len=89
+2026/03/22 21:01:01 [EX#1] DONE cell (97,67) total_excav=152/191
+2026/03/22 21:01:01 [EX#1] reserved cell (98,67) path_len=2
+2026/03/22 21:01:01 [EX#1] arrived at cell (98,67) pos=(97.4,68.5) assigned_trucks=2
+2026/03/22 21:01:01 [EX#1] START excavating (98,67) with truck#5
+2026/03/22 21:01:01 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:01 [EX#4] START excavating (96,67) with truck#3
+2026/03/22 21:01:01 [t=3060.8] STATUS excav=152/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:02 [EX#1] DONE cell (98,67) total_excav=153/191
+2026/03/22 21:01:02 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:02 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:02 [EX#1] reserved cell (99,67) path_len=4
+2026/03/22 21:01:02 [EX#1] arrived at cell (99,67) pos=(98.1,67.0) assigned_trucks=1
+2026/03/22 21:01:02 [EX#1] START excavating (99,67) with truck#2
+2026/03/22 21:01:02 [EX#4] DONE cell (96,67) total_excav=154/191
+2026/03/22 21:01:02 [EX#4] reserved cell (100,67) path_len=9
+2026/03/22 21:01:02 [EX#4] arrived at cell (100,67) pos=(100.4,66.0) assigned_trucks=1
+2026/03/22 21:01:02 [EX#4] START excavating (100,67) with truck#3
+2026/03/22 21:01:02 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:02 [EX#1] DONE cell (99,67) total_excav=155/191
+2026/03/22 21:01:02 [EX#1] reserved cell (93,68) path_len=6
+2026/03/22 21:01:02 [EX#1] arrived at cell (93,68) pos=(95.0,68.1) assigned_trucks=1
+2026/03/22 21:01:02 [EX#1] START excavating (93,68) with truck#2
+2026/03/22 21:01:02 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:02 [DT#5] assigned to EX#1 (priority=2) path_len=87
+2026/03/22 21:01:02 [EX#4] DONE cell (100,67) total_excav=156/191
+2026/03/22 21:01:02 [EX#4] reserved cell (94,68) path_len=9
+2026/03/22 21:01:02 [t=3120.8] STATUS excav=156/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:02 [EX#4] arrived at cell (94,68) pos=(94.6,69.9) assigned_trucks=1
+2026/03/22 21:01:02 [EX#4] START excavating (94,68) with truck#3
+2026/03/22 21:01:02 [EX#1] DONE cell (93,68) total_excav=157/191
+2026/03/22 21:01:02 [EX#1] reserved cell (95,68) path_len=2
+2026/03/22 21:01:02 [EX#1] arrived at cell (95,68) pos=(95.0,68.1) assigned_trucks=2
+2026/03/22 21:01:02 [EX#1] START excavating (95,68) with truck#2
+2026/03/22 21:01:02 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:02 [EX#4] DONE cell (94,68) total_excav=158/191
+2026/03/22 21:01:02 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:02 [EX#4] reserved cell (96,68) path_len=8
+2026/03/22 21:01:02 [EX#4] arrived at cell (96,68) pos=(97.5,69.6) assigned_trucks=0
+2026/03/22 21:01:02 [EX#1] DONE cell (95,68) total_excav=159/191
+2026/03/22 21:01:03 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:03 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:03 [EX#1] reserved cell (97,68) path_len=7
+2026/03/22 21:01:03 [EX#1] arrived at cell (97,68) pos=(97.4,67.1) assigned_trucks=1
+2026/03/22 21:01:03 [EX#1] START excavating (97,68) with truck#5
+2026/03/22 21:01:03 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:03 [t=3180.8] STATUS excav=159/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:03 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:03 [EX#1] DONE cell (97,68) total_excav=160/191
+2026/03/22 21:01:03 [EX#1] reserved cell (98,68) path_len=3
+2026/03/22 21:01:03 [EX#1] arrived at cell (98,68) pos=(97.6,67.3) assigned_trucks=1
+2026/03/22 21:01:03 [EX#1] START excavating (98,68) with truck#5
+2026/03/22 21:01:03 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:03 [DT#3] assigned to EX#4 (priority=0) path_len=90
+2026/03/22 21:01:03 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:03 [DT#2] assigned to EX#1 (priority=2) path_len=94
+2026/03/22 21:01:03 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:03 [EX#4] START excavating (96,68) with truck#3
+2026/03/22 21:01:03 [EX#1] DONE cell (98,68) total_excav=161/191
+2026/03/22 21:01:03 [EX#1] reserved cell (99,68) path_len=3
+2026/03/22 21:01:03 [EX#1] arrived at cell (99,68) pos=(98.4,67.6) assigned_trucks=2
+2026/03/22 21:01:03 [EX#1] START excavating (99,68) with truck#5
+2026/03/22 21:01:03 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:03 [t=3240.8] STATUS excav=161/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:03 [EX#4] DONE cell (96,68) total_excav=162/191
+2026/03/22 21:01:03 [EX#4] reserved cell (100,68) path_len=5
+2026/03/22 21:01:03 [EX#4] arrived at cell (100,68) pos=(100.0,69.9) assigned_trucks=1
+2026/03/22 21:01:03 [EX#4] START excavating (100,68) with truck#3
+2026/03/22 21:01:03 [EX#1] DONE cell (99,68) total_excav=163/191
+2026/03/22 21:01:03 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:03 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:03 [EX#1] reserved cell (93,69) path_len=6
+2026/03/22 21:01:03 [EX#1] arrived at cell (93,69) pos=(94.9,69.2) assigned_trucks=1
+2026/03/22 21:01:03 [EX#1] START excavating (93,69) with truck#2
+2026/03/22 21:01:04 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:04 [EX#4] DONE cell (100,68) total_excav=164/191
+2026/03/22 21:01:04 [EX#4] reserved cell (94,69) path_len=10
+2026/03/22 21:01:04 [EX#1] DONE cell (93,69) total_excav=165/191
+2026/03/22 21:01:04 [EX#1] reserved cell (95,69) path_len=2
+2026/03/22 21:01:04 [EX#1] arrived at cell (95,69) pos=(94.8,69.2) assigned_trucks=1
+2026/03/22 21:01:04 [EX#1] START excavating (95,69) with truck#2
+2026/03/22 21:01:04 [EX#4] arrived at cell (94,69) pos=(94.6,71.0) assigned_trucks=1
+2026/03/22 21:01:04 [EX#4] START excavating (94,69) with truck#3
+2026/03/22 21:01:04 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:04 [DT#5] assigned to EX#1 (priority=2) path_len=87
+2026/03/22 21:01:04 [t=3300.8] STATUS excav=165/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:04 [EX#1] DONE cell (95,69) total_excav=166/191
+2026/03/22 21:01:04 [EX#1] reserved cell (96,69) path_len=3
+2026/03/22 21:01:04 [EX#4] DONE cell (94,69) total_excav=167/191
+2026/03/22 21:01:04 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:04 [EX#4] reserved cell (97,69) path_len=9
+2026/03/22 21:01:04 [EX#1] arrived at cell (96,69) pos=(95.0,69.4) assigned_trucks=2
+2026/03/22 21:01:04 [EX#1] START excavating (96,69) with truck#2
+2026/03/22 21:01:04 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:04 [EX#4] arrived at cell (97,69) pos=(97.5,71.0) assigned_trucks=0
+2026/03/22 21:01:04 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:04 [EX#1] DONE cell (96,69) total_excav=168/191
+2026/03/22 21:01:04 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:04 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:04 [EX#1] reserved cell (98,69) path_len=5
+2026/03/22 21:01:04 [EX#1] arrived at cell (98,69) pos=(97.3,68.7) assigned_trucks=1
+2026/03/22 21:01:04 [EX#1] START excavating (98,69) with truck#5
+2026/03/22 21:01:05 [t=3360.9] STATUS excav=168/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:05 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:05 [DT#3] assigned to EX#4 (priority=0) path_len=90
+2026/03/22 21:01:05 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:05 [EX#1] DONE cell (98,69) total_excav=169/191
+2026/03/22 21:01:05 [EX#1] reserved cell (99,69) path_len=3
+2026/03/22 21:01:05 [EX#1] arrived at cell (99,69) pos=(98.3,68.6) assigned_trucks=1
+2026/03/22 21:01:05 [EX#1] START excavating (99,69) with truck#5
+2026/03/22 21:01:05 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:05 [EX#4] START excavating (97,69) with truck#3
+2026/03/22 21:01:05 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:05 [DT#2] assigned to EX#1 (priority=2) path_len=95
+2026/03/22 21:01:05 [EX#1] DONE cell (99,69) total_excav=170/191
+2026/03/22 21:01:05 [EX#1] reserved cell (100,69) path_len=3
+2026/03/22 21:01:05 [EX#1] arrived at cell (100,69) pos=(99.3,68.6) assigned_trucks=2
+2026/03/22 21:01:05 [EX#1] START excavating (100,69) with truck#5
+2026/03/22 21:01:05 [t=3420.9] STATUS excav=170/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:05 [EX#4] DONE cell (97,69) total_excav=171/191
+2026/03/22 21:01:05 [EX#4] reserved cell (93,70) path_len=6
+2026/03/22 21:01:05 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:05 [EX#4] arrived at cell (93,70) pos=(94.6,71.5) assigned_trucks=1
+2026/03/22 21:01:05 [EX#4] START excavating (93,70) with truck#3
+2026/03/22 21:01:05 [EX#1] DONE cell (100,69) total_excav=172/191
+2026/03/22 21:01:05 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:05 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:05 [EX#1] reserved cell (94,70) path_len=7
+2026/03/22 21:01:05 [EX#1] arrived at cell (94,70) pos=(95.6,69.6) assigned_trucks=1
+2026/03/22 21:01:05 [EX#1] START excavating (94,70) with truck#2
+2026/03/22 21:01:05 [EX#4] DONE cell (93,70) total_excav=173/191
+2026/03/22 21:01:05 [EX#4] reserved cell (95,70) path_len=2
+2026/03/22 21:01:05 [EX#4] arrived at cell (95,70) pos=(94.6,71.5) assigned_trucks=1
+2026/03/22 21:01:05 [EX#4] START excavating (95,70) with truck#3
+2026/03/22 21:01:06 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:06 [t=3480.9] STATUS excav=173/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:06 [EX#1] DONE cell (94,70) total_excav=174/191
+2026/03/22 21:01:06 [EX#1] reserved cell (96,70) path_len=2
+2026/03/22 21:01:06 [EX#1] arrived at cell (96,70) pos=(95.6,69.6) assigned_trucks=1
+2026/03/22 21:01:06 [EX#1] START excavating (96,70) with truck#2
+2026/03/22 21:01:06 [EX#4] DONE cell (95,70) total_excav=175/191
+2026/03/22 21:01:06 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:06 [EX#4] reserved cell (97,70) path_len=5
+2026/03/22 21:01:06 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:06 [DT#5] assigned to EX#4 (priority=1) path_len=89
+2026/03/22 21:01:06 [EX#4] arrived at cell (97,70) pos=(97.0,71.9) assigned_trucks=1
+2026/03/22 21:01:06 [EX#1] DONE cell (96,70) total_excav=176/191
+2026/03/22 21:01:06 [EX#1] reserved cell (98,70) path_len=7
+2026/03/22 21:01:06 [EX#1] arrived at cell (98,70) pos=(98.4,69.0) assigned_trucks=1
+2026/03/22 21:01:06 [EX#1] START excavating (98,70) with truck#2
+2026/03/22 21:01:06 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:06 [EX#4] START excavating (97,70) with truck#5
+2026/03/22 21:01:06 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:06 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:06 [DT#3] assigned to EX#1 (priority=2) path_len=98
+2026/03/22 21:01:06 [t=3540.9] STATUS excav=176/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:06 [EX#1] DONE cell (98,70) total_excav=177/191
+2026/03/22 21:01:06 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:06 [EX#1] reserved cell (99,70) path_len=2
+2026/03/22 21:01:06 [EX#1] arrived at cell (99,70) pos=(98.5,69.3) assigned_trucks=1
+2026/03/22 21:01:06 [EX#4] DONE cell (97,70) total_excav=178/191
+2026/03/22 21:01:06 [EX#4] reserved cell (100,70) path_len=5
+2026/03/22 21:01:06 [EX#4] arrived at cell (100,70) pos=(100.0,71.9) assigned_trucks=1
+2026/03/22 21:01:06 [EX#4] START excavating (100,70) with truck#5
+2026/03/22 21:01:07 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:07 [EX#1] START excavating (99,70) with truck#3
+2026/03/22 21:01:07 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:07 [EX#4] DONE cell (100,70) total_excav=179/191
+2026/03/22 21:01:07 [EX#4] reserved cell (94,71) path_len=8
+2026/03/22 21:01:07 [EX#4] arrived at cell (94,71) pos=(95.5,72.5) assigned_trucks=1
+2026/03/22 21:01:07 [EX#4] START excavating (94,71) with truck#5
+2026/03/22 21:01:07 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:07 [DT#2] assigned to EX#1 (priority=2) path_len=91
+2026/03/22 21:01:07 [EX#1] DONE cell (99,70) total_excav=180/191
+2026/03/22 21:01:07 [EX#1] reserved cell (95,71) path_len=6
+2026/03/22 21:01:07 [EX#1] arrived at cell (95,71) pos=(95.6,70.1) assigned_trucks=2
+2026/03/22 21:01:07 [EX#1] START excavating (95,71) with truck#3
+2026/03/22 21:01:07 [t=3600.9] STATUS excav=180/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:07 [EX#4] DONE cell (94,71) total_excav=181/191
+2026/03/22 21:01:07 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:07 [EX#4] reserved cell (96,71) path_len=2
+2026/03/22 21:01:07 [EX#4] arrived at cell (96,71) pos=(95.5,72.5) assigned_trucks=0
+2026/03/22 21:01:07 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:07 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:07 [EX#1] DONE cell (95,71) total_excav=182/191
+2026/03/22 21:01:07 [EX#1] reserved cell (97,71) path_len=10
+2026/03/22 21:01:07 [EX#1] arrived at cell (97,71) pos=(98.5,70.4) assigned_trucks=2
+2026/03/22 21:01:07 [EX#1] START excavating (97,71) with truck#3
+2026/03/22 21:01:07 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:07 [t=3660.9] STATUS excav=182/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:08 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:08 [DT#5] assigned to EX#4 (priority=0) path_len=88
+2026/03/22 21:01:08 [EX#1] DONE cell (97,71) total_excav=183/191
+2026/03/22 21:01:08 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:08 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:08 [EX#1] reserved cell (98,71) path_len=2
+2026/03/22 21:01:08 [EX#1] arrived at cell (98,71) pos=(98.5,70.4) assigned_trucks=1
+2026/03/22 21:01:08 [EX#1] START excavating (98,71) with truck#2
+2026/03/22 21:01:08 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:08 [EX#4] START excavating (96,71) with truck#5
+2026/03/22 21:01:08 [EX#1] DONE cell (98,71) total_excav=184/191
+2026/03/22 21:01:08 [EX#1] reserved cell (99,71) path_len=2
+2026/03/22 21:01:08 [EX#1] arrived at cell (99,71) pos=(98.5,70.4) assigned_trucks=1
+2026/03/22 21:01:08 [EX#1] START excavating (99,71) with truck#2
+2026/03/22 21:01:08 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:08 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:08 [DT#3] assigned to EX#1 (priority=2) path_len=95
+2026/03/22 21:01:08 [EX#4] DONE cell (96,71) total_excav=185/191
+2026/03/22 21:01:08 [EX#4] reserved cell (100,71) path_len=7
+2026/03/22 21:01:08 [t=3720.9] STATUS excav=185/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:08 [EX#1] DONE cell (99,71) total_excav=186/191
+2026/03/22 21:01:08 [EX#1] reserved cell (96,72) path_len=4
+2026/03/22 21:01:08 [EX#4] arrived at cell (100,71) pos=(100.0,72.9) assigned_trucks=1
+2026/03/22 21:01:08 [EX#1] arrived at cell (96,72) pos=(97.4,71.3) assigned_trucks=2
+2026/03/22 21:01:08 [EX#4] START excavating (100,71) with truck#5
+2026/03/22 21:01:08 [EX#1] START excavating (96,72) with truck#2
+2026/03/22 21:01:08 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:08 [EX#4] DONE cell (100,71) total_excav=187/191
+2026/03/22 21:01:08 [EX#4] reserved cell (97,72) path_len=7
+2026/03/22 21:01:08 [EX#1] DONE cell (96,72) total_excav=188/191
+2026/03/22 21:01:08 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:08 [EX#1] DT#3 is now active truck
+2026/03/22 21:01:08 [EX#1] reserved cell (98,72) path_len=3
+2026/03/22 21:01:08 [EX#1] arrived at cell (98,72) pos=(97.4,71.5) assigned_trucks=1
+2026/03/22 21:01:08 [EX#1] START excavating (98,72) with truck#3
+2026/03/22 21:01:08 [EX#4] arrived at cell (97,72) pos=(97.6,73.9) assigned_trucks=1
+2026/03/22 21:01:08 [EX#4] START excavating (97,72) with truck#5
+2026/03/22 21:01:09 [t=3780.9] STATUS excav=188/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:09 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:09 [EX#1] DONE cell (98,72) total_excav=189/191
+2026/03/22 21:01:09 [EX#1] reserved cell (99,72) path_len=3
+2026/03/22 21:01:09 [EX#1] arrived at cell (99,72) pos=(98.4,71.6) assigned_trucks=1
+2026/03/22 21:01:09 [EX#1] START excavating (99,72) with truck#3
+2026/03/22 21:01:09 [EX#4] DONE cell (97,72) total_excav=190/191
+2026/03/22 21:01:09 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:09 [EX#4] no cells left, leaving
+2026/03/22 21:01:09 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:09 [DT#2] assigned to EX#4 (priority=1) path_len=79
+2026/03/22 21:01:09 [EX#1] DONE cell (99,72) total_excav=191/191
+2026/03/22 21:01:09 [t=3815.9] PHASE 1 COMPLETE
+2026/03/22 21:01:09 [CR#6] positioning toward (41,45) dist=43.1 path_len=42
+2026/03/22 21:01:09 [t=3840.9] STATUS excav=191/191 constr=0/5 vehicles=7 pending_spawns=0
+2026/03/22 21:01:10 [CR#6] target in range for 5s → WORKING pos=(29.6,45.5)
+2026/03/22 21:01:10 [CR#6] taking material from MT#7 → placing on (41,45)
+2026/03/22 21:01:10 [t=3900.9] STATUS excav=191/191 constr=0/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:10 [CR#6] taking material from MT#7 → placing on (41,44)
+2026/03/22 21:01:10 [t=3960.9] STATUS excav=191/191 constr=1/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:11 [CR#6] taking material from MT#7 → placing on (42,45)
+2026/03/22 21:01:11 [t=4020.9] STATUS excav=191/191 constr=2/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:11 [CR#6] taking material from MT#7 → placing on (42,44)
+2026/03/22 21:01:12 [CR#6] positioning toward (98,70) dist=73.3 path_len=70
+2026/03/22 21:01:12 [t=4081.0] STATUS excav=191/191 constr=4/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:12 [t=4141.0] STATUS excav=191/191 constr=4/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:13 [CR#6] target in range for 5s → WORKING pos=(87.0,68.5)
+2026/03/22 21:01:13 [CR#6] taking material from MT#8 → placing on (98,70)
+2026/03/22 21:01:13 [t=4201.0] STATUS excav=191/191 constr=4/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:13 [t=4226.0] PHASE 2 COMPLETE
+2026/03/22 21:01:13 [t=4261.0] STATUS excav=191/191 constr=5/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:14 [t=4321.0] STATUS excav=191/191 constr=5/5 vehicles=3 pending_spawns=0
+2026/03/22 21:01:15 [t=4381.1] STATUS excav=191/191 constr=5/5 vehicles=2 pending_spawns=0
+2026/03/22 21:01:15 [t=4404.9] DONE
+INFO: VAO: [ID 2] Unloaded vertex array data from VRAM (GPU)
+INFO: MODEL: Unloaded model (and meshes) from RAM and VRAM
+INFO: TEXTURE: [ID 2] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 1] Default texture unloaded successfully
+INFO: Window closed successfully
+INFO: Initializing raylib 5.5
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+WARNING: GLFW: Error: 65548 Description: Wayland: The platform does not provide the window position
+INFO: DISPLAY: Device initialized successfully
+INFO:     > Display size: 2560 x 1440
+INFO:     > Screen size:  1280 x 720
+INFO:     > Render size:  1280 x 720
+INFO:     > Viewport offsets: 0, 0
+WARNING: GLFW: Error: 65548 Description: Wayland: The platform does not support setting the window position
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 232
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   Intel
+INFO:     > Renderer: Mesa Intel(R) UHD Graphics 620 (KBL GT2)
+INFO:     > Version:  4.6 (Core Profile) Mesa 25.2.6
+INFO:     > GLSL:     4.60
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - Wayland): Initialized successfully
+INFO: TEXTURE: [ID 1] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: /home/winterveil/lab/constructionsim
+INFO: TIMER: Target time per frame: 16.667 milliseconds
+INFO: VAO: [ID 2] Mesh uploaded successfully to VRAM (GPU)
+2026/03/22 21:01:15 [t=0.1] SPAWN id=1 type=excavator pos=(5.5,50.5)
+2026/03/22 21:01:15 [t=0.1] SPAWN id=2 type=dirt_truck pos=(5.5,50.5)
+2026/03/22 21:01:15 [t=0.1] SPAWN id=3 type=dirt_truck pos=(5.5,50.5)
+2026/03/22 21:01:15 [DT#2] assigned to EX#1 (priority=1) path_len=1
+2026/03/22 21:01:15 [DT#3] assigned to EX#1 (priority=2) path_len=1
+2026/03/22 21:01:15 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:15 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:15 [EX#1] reserved cell (35,40) path_len=19
+2026/03/22 21:01:15 [EX#1] arrived at cell (35,40) pos=(34.5,41.5) assigned_trucks=2
+2026/03/22 21:01:15 [t=30.0] SPAWN id=4 type=excavator pos=(5.5,50.5)
+2026/03/22 21:01:15 [t=30.0] SPAWN id=5 type=dirt_truck pos=(5.5,50.5)
+2026/03/22 21:01:15 [DT#5] assigned to EX#4 (priority=1) path_len=1
+2026/03/22 21:01:15 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:15 [EX#4] reserved cell (36,40) path_len=20
+2026/03/22 21:01:15 [EX#1] START excavating (35,40) with truck#3
+2026/03/22 21:01:16 [EX#4] arrived at cell (36,40) pos=(36.0,39.1) assigned_trucks=1
+2026/03/22 21:01:16 [EX#4] START excavating (36,40) with truck#5
+2026/03/22 21:01:16 [t=60.0] STATUS excav=0/191 constr=0/5 vehicles=5 pending_spawns=3
+2026/03/22 21:01:16 [EX#1] DONE cell (35,40) total_excav=1/191
+2026/03/22 21:01:16 [EX#1] reserved cell (37,40) path_len=5
+2026/03/22 21:01:16 [EX#1] arrived at cell (37,40) pos=(36.4,41.5) assigned_trucks=2
+2026/03/22 21:01:16 [EX#1] START excavating (37,40) with truck#2
+2026/03/22 21:01:16 [EX#4] DONE cell (36,40) total_excav=2/191
+2026/03/22 21:01:16 [EX#4] reserved cell (38,40) path_len=5
+2026/03/22 21:01:16 [EX#4] arrived at cell (38,40) pos=(38.0,39.1) assigned_trucks=1
+2026/03/22 21:01:16 [EX#4] START excavating (38,40) with truck#5
+2026/03/22 21:01:16 [EX#1] DONE cell (37,40) total_excav=3/191
+2026/03/22 21:01:16 [EX#1] reserved cell (39,40) path_len=5
+2026/03/22 21:01:16 [EX#1] arrived at cell (39,40) pos=(38.5,41.5) assigned_trucks=2
+2026/03/22 21:01:16 [EX#1] START excavating (39,40) with truck#2
+2026/03/22 21:01:16 [EX#4] DONE cell (38,40) total_excav=4/191
+2026/03/22 21:01:16 [EX#4] reserved cell (40,40) path_len=3
+2026/03/22 21:01:16 [t=120.0] SPAWN id=6 type=crane pos=(5.5,50.5)
+2026/03/22 21:01:16 [t=120.0] SPAWN id=7 type=material_truck pos=(5.5,50.5)
+2026/03/22 21:01:16 [t=120.0] SPAWN id=8 type=material_truck pos=(5.5,50.5)
+2026/03/22 21:01:16 [t=120.1] STATUS excav=4/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:16 [EX#4] arrived at cell (40,40) pos=(39.3,39.6) assigned_trucks=1
+2026/03/22 21:01:16 [EX#4] START excavating (40,40) with truck#5
+2026/03/22 21:01:16 [EX#1] DONE cell (39,40) total_excav=5/191
+2026/03/22 21:01:16 [EX#1] reserved cell (41,40) path_len=5
+2026/03/22 21:01:16 [EX#1] arrived at cell (41,40) pos=(41.0,41.9) assigned_trucks=2
+2026/03/22 21:01:16 [EX#1] START excavating (41,40) with truck#3
+2026/03/22 21:01:17 [EX#4] DONE cell (40,40) total_excav=6/191
+2026/03/22 21:01:17 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:17 [EX#4] reserved cell (42,40) path_len=5
+2026/03/22 21:01:17 [EX#4] arrived at cell (42,40) pos=(41.4,39.5) assigned_trucks=0
+2026/03/22 21:01:17 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:17 [EX#1] DONE cell (41,40) total_excav=7/191
+2026/03/22 21:01:17 [EX#1] reserved cell (43,40) path_len=3
+2026/03/22 21:01:17 [EX#1] arrived at cell (43,40) pos=(42.4,41.4) assigned_trucks=2
+2026/03/22 21:01:17 [EX#1] START excavating (43,40) with truck#3
+2026/03/22 21:01:17 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:17 [DT#5] assigned to EX#4 (priority=0) path_len=34
+2026/03/22 21:01:17 [t=180.1] STATUS excav=7/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:17 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:17 [EX#4] START excavating (42,40) with truck#5
+2026/03/22 21:01:17 [EX#1] DONE cell (43,40) total_excav=8/191
+2026/03/22 21:01:17 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:17 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:17 [EX#1] reserved cell (44,40) path_len=3
+2026/03/22 21:01:17 [EX#1] arrived at cell (44,40) pos=(43.3,41.4) assigned_trucks=1
+2026/03/22 21:01:17 [EX#1] START excavating (44,40) with truck#2
+2026/03/22 21:01:17 [EX#4] DONE cell (42,40) total_excav=9/191
+2026/03/22 21:01:17 [EX#4] reserved cell (45,40) path_len=6
+2026/03/22 21:01:17 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:17 [EX#4] arrived at cell (45,40) pos=(45.0,39.1) assigned_trucks=1
+2026/03/22 21:01:17 [EX#4] START excavating (45,40) with truck#5
+2026/03/22 21:01:17 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:17 [DT#3] assigned to EX#1 (priority=2) path_len=39
+2026/03/22 21:01:17 [EX#1] DONE cell (44,40) total_excav=10/191
+2026/03/22 21:01:17 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:17 [EX#1] reserved cell (46,40) path_len=5
+2026/03/22 21:01:17 [EX#1] arrived at cell (46,40) pos=(45.4,41.5) assigned_trucks=1
+2026/03/22 21:01:17 [t=240.1] STATUS excav=10/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:17 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:17 [EX#1] START excavating (46,40) with truck#3
+2026/03/22 21:01:18 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:18 [EX#4] DONE cell (45,40) total_excav=11/191
+2026/03/22 21:01:18 [EX#4] reserved cell (47,40) path_len=3
+2026/03/22 21:01:18 [EX#4] arrived at cell (47,40) pos=(46.3,39.6) assigned_trucks=1
+2026/03/22 21:01:18 [EX#4] START excavating (47,40) with truck#5
+2026/03/22 21:01:18 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:18 [DT#2] assigned to EX#1 (priority=2) path_len=41
+2026/03/22 21:01:18 [EX#1] DONE cell (46,40) total_excav=12/191
+2026/03/22 21:01:18 [EX#1] reserved cell (48,40) path_len=5
+2026/03/22 21:01:18 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:18 [EX#1] arrived at cell (48,40) pos=(48.0,41.9) assigned_trucks=2
+2026/03/22 21:01:18 [EX#1] START excavating (48,40) with truck#3
+2026/03/22 21:01:18 [EX#4] DONE cell (47,40) total_excav=13/191
+2026/03/22 21:01:18 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:18 [EX#4] reserved cell (35,41) path_len=12
+2026/03/22 21:01:18 [EX#4] arrived at cell (35,41) pos=(37.0,41.5) assigned_trucks=0
+2026/03/22 21:01:18 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:18 [t=300.1] STATUS excav=13/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:18 [EX#1] DONE cell (48,40) total_excav=14/191
+2026/03/22 21:01:18 [EX#1] reserved cell (36,41) path_len=18
+2026/03/22 21:01:18 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:18 [DT#5] assigned to EX#4 (priority=0) path_len=29
+2026/03/22 21:01:18 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:18 [EX#4] START excavating (35,41) with truck#5
+2026/03/22 21:01:18 [EX#1] arrived at cell (36,41) pos=(35.5,40.4) assigned_trucks=2
+2026/03/22 21:01:18 [EX#1] START excavating (36,41) with truck#3
+2026/03/22 21:01:18 [EX#4] DONE cell (35,41) total_excav=15/191
+2026/03/22 21:01:18 [EX#4] reserved cell (37,41) path_len=2
+2026/03/22 21:01:18 [EX#4] arrived at cell (37,41) pos=(37.0,41.5) assigned_trucks=1
+2026/03/22 21:01:18 [EX#4] START excavating (37,41) with truck#5
+2026/03/22 21:01:19 [EX#1] DONE cell (36,41) total_excav=16/191
+2026/03/22 21:01:19 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:19 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:19 [EX#1] reserved cell (38,41) path_len=8
+2026/03/22 21:01:19 [EX#1] arrived at cell (38,41) pos=(39.2,40.2) assigned_trucks=1
+2026/03/22 21:01:19 [EX#1] START excavating (38,41) with truck#2
+2026/03/22 21:01:19 [t=360.1] STATUS excav=16/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:19 [EX#4] DONE cell (37,41) total_excav=17/191
+2026/03/22 21:01:19 [EX#4] reserved cell (39,41) path_len=5
+2026/03/22 21:01:19 [EX#4] arrived at cell (39,41) pos=(38.4,42.5) assigned_trucks=1
+2026/03/22 21:01:19 [EX#4] START excavating (39,41) with truck#5
+2026/03/22 21:01:19 [EX#1] DONE cell (38,41) total_excav=18/191
+2026/03/22 21:01:19 [EX#1] reserved cell (40,41) path_len=2
+2026/03/22 21:01:19 [EX#1] arrived at cell (40,41) pos=(39.5,40.5) assigned_trucks=1
+2026/03/22 21:01:19 [EX#1] START excavating (40,41) with truck#2
+2026/03/22 21:01:19 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:19 [EX#4] DONE cell (39,41) total_excav=19/191
+2026/03/22 21:01:19 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:19 [EX#4] reserved cell (41,41) path_len=5
+2026/03/22 21:01:19 [EX#4] arrived at cell (41,41) pos=(41.0,42.9) assigned_trucks=0
+2026/03/22 21:01:19 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:19 [DT#3] assigned to EX#4 (priority=0) path_len=40
+2026/03/22 21:01:19 [EX#1] DONE cell (40,41) total_excav=20/191
+2026/03/22 21:01:19 [EX#1] reserved cell (42,41) path_len=5
+2026/03/22 21:01:19 [EX#1] arrived at cell (42,41) pos=(41.4,40.5) assigned_trucks=1
+2026/03/22 21:01:19 [EX#1] START excavating (42,41) with truck#2
+2026/03/22 21:01:19 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:19 [t=420.2] STATUS excav=20/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:19 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:19 [EX#4] START excavating (41,41) with truck#3
+2026/03/22 21:01:19 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:19 [DT#5] assigned to EX#1 (priority=2) path_len=37
+2026/03/22 21:01:19 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:20 [EX#1] DONE cell (42,41) total_excav=21/191
+2026/03/22 21:01:20 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:20 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:20 [EX#1] reserved cell (43,41) path_len=3
+2026/03/22 21:01:20 [EX#1] arrived at cell (43,41) pos=(42.4,40.6) assigned_trucks=1
+2026/03/22 21:01:20 [EX#1] START excavating (43,41) with truck#5
+2026/03/22 21:01:20 [EX#4] DONE cell (41,41) total_excav=22/191
+2026/03/22 21:01:20 [EX#4] reserved cell (44,41) path_len=7
+2026/03/22 21:01:20 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:20 [EX#4] arrived at cell (44,41) pos=(44.4,43.0) assigned_trucks=1
+2026/03/22 21:01:20 [EX#4] START excavating (44,41) with truck#3
+2026/03/22 21:01:20 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:20 [DT#2] assigned to EX#1 (priority=2) path_len=35
+2026/03/22 21:01:20 [EX#1] DONE cell (43,41) total_excav=23/191
+2026/03/22 21:01:20 [EX#1] reserved cell (45,41) path_len=5
+2026/03/22 21:01:20 [t=480.2] STATUS excav=23/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:20 [EX#1] arrived at cell (45,41) pos=(44.4,40.5) assigned_trucks=2
+2026/03/22 21:01:20 [EX#1] START excavating (45,41) with truck#5
+2026/03/22 21:01:20 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:20 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:20 [EX#4] DONE cell (44,41) total_excav=24/191
+2026/03/22 21:01:20 [EX#4] reserved cell (46,41) path_len=3
+2026/03/22 21:01:20 [EX#4] arrived at cell (46,41) pos=(45.4,42.4) assigned_trucks=1
+2026/03/22 21:01:20 [EX#4] START excavating (46,41) with truck#3
+2026/03/22 21:01:20 [EX#1] DONE cell (45,41) total_excav=25/191
+2026/03/22 21:01:20 [EX#1] reserved cell (47,41) path_len=5
+2026/03/22 21:01:20 [EX#1] arrived at cell (47,41) pos=(47.0,40.1) assigned_trucks=2
+2026/03/22 21:01:20 [EX#1] START excavating (47,41) with truck#2
+2026/03/22 21:01:20 [EX#4] DONE cell (46,41) total_excav=26/191
+2026/03/22 21:01:20 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:20 [EX#4] reserved cell (48,41) path_len=5
+2026/03/22 21:01:20 [EX#4] arrived at cell (48,41) pos=(47.4,42.5) assigned_trucks=0
+2026/03/22 21:01:20 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:20 [t=540.2] STATUS excav=26/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:20 [EX#1] DONE cell (47,41) total_excav=27/191
+2026/03/22 21:01:20 [EX#1] reserved cell (35,42) path_len=14
+2026/03/22 21:01:20 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:20 [DT#3] assigned to EX#4 (priority=0) path_len=40
+2026/03/22 21:01:21 [EX#1] arrived at cell (35,42) pos=(36.6,41.6) assigned_trucks=2
+2026/03/22 21:01:21 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:21 [EX#4] START excavating (48,41) with truck#3
+2026/03/22 21:01:21 [EX#1] START excavating (35,42) with truck#5
+2026/03/22 21:01:21 [EX#4] DONE cell (48,41) total_excav=28/191
+2026/03/22 21:01:21 [EX#4] reserved cell (36,42) path_len=15
+2026/03/22 21:01:21 [EX#1] DONE cell (35,42) total_excav=29/191
+2026/03/22 21:01:21 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:21 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:21 [EX#1] reserved cell (37,42) path_len=2
+2026/03/22 21:01:21 [EX#1] arrived at cell (37,42) pos=(36.6,41.6) assigned_trucks=1
+2026/03/22 21:01:21 [EX#1] START excavating (37,42) with truck#2
+2026/03/22 21:01:21 [t=600.3] STATUS excav=29/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:21 [EX#4] arrived at cell (36,42) pos=(36.5,44.0) assigned_trucks=1
+2026/03/22 21:01:21 [EX#4] START excavating (36,42) with truck#3
+2026/03/22 21:01:21 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:21 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:21 [DT#5] assigned to EX#1 (priority=2) path_len=29
+2026/03/22 21:01:21 [EX#1] DONE cell (37,42) total_excav=30/191
+2026/03/22 21:01:21 [EX#1] reserved cell (38,42) path_len=3
+2026/03/22 21:01:21 [EX#1] arrived at cell (38,42) pos=(37.1,42.1) assigned_trucks=2
+2026/03/22 21:01:21 [EX#1] START excavating (38,42) with truck#2
+2026/03/22 21:01:21 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:21 [EX#4] DONE cell (36,42) total_excav=31/191
+2026/03/22 21:01:21 [EX#4] reserved cell (39,42) path_len=4
+2026/03/22 21:01:21 [EX#4] arrived at cell (39,42) pos=(38.3,43.4) assigned_trucks=1
+2026/03/22 21:01:21 [EX#4] START excavating (39,42) with truck#3
+2026/03/22 21:01:22 [EX#1] DONE cell (38,42) total_excav=32/191
+2026/03/22 21:01:22 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:22 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:22 [EX#1] reserved cell (40,42) path_len=4
+2026/03/22 21:01:22 [t=660.3] STATUS excav=32/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:22 [EX#1] arrived at cell (40,42) pos=(40.4,41.1) assigned_trucks=1
+2026/03/22 21:01:22 [EX#1] START excavating (40,42) with truck#5
+2026/03/22 21:01:22 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:22 [EX#4] DONE cell (39,42) total_excav=33/191
+2026/03/22 21:01:22 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:22 [EX#4] reserved cell (41,42) path_len=5
+2026/03/22 21:01:22 [EX#4] arrived at cell (41,42) pos=(40.4,43.5) assigned_trucks=0
+2026/03/22 21:01:22 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:22 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:22 [DT#2] assigned to EX#4 (priority=0) path_len=33
+2026/03/22 21:01:22 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:22 [EX#4] START excavating (41,42) with truck#2
+2026/03/22 21:01:22 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:22 [DT#3] assigned to EX#1 (priority=2) path_len=34
+2026/03/22 21:01:22 [EX#1] DONE cell (40,42) total_excav=34/191
+2026/03/22 21:01:22 [EX#1] reserved cell (42,42) path_len=3
+2026/03/22 21:01:22 [EX#1] arrived at cell (42,42) pos=(41.4,41.6) assigned_trucks=2
+2026/03/22 21:01:22 [EX#1] START excavating (42,42) with truck#5
+2026/03/22 21:01:22 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:22 [EX#4] DONE cell (41,42) total_excav=35/191
+2026/03/22 21:01:22 [EX#4] reserved cell (43,42) path_len=5
+2026/03/22 21:01:22 [t=720.3] STATUS excav=35/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:22 [EX#4] arrived at cell (43,42) pos=(43.0,43.9) assigned_trucks=1
+2026/03/22 21:01:22 [EX#4] START excavating (43,42) with truck#2
+2026/03/22 21:01:22 [EX#1] DONE cell (42,42) total_excav=36/191
+2026/03/22 21:01:22 [EX#1] reserved cell (44,42) path_len=5
+2026/03/22 21:01:22 [EX#1] arrived at cell (44,42) pos=(43.4,41.5) assigned_trucks=2
+2026/03/22 21:01:22 [EX#1] START excavating (44,42) with truck#3
+2026/03/22 21:01:23 [EX#4] DONE cell (43,42) total_excav=37/191
+2026/03/22 21:01:23 [EX#4] reserved cell (45,42) path_len=3
+2026/03/22 21:01:23 [EX#4] arrived at cell (45,42) pos=(44.4,43.4) assigned_trucks=1
+2026/03/22 21:01:23 [EX#4] START excavating (45,42) with truck#2
+2026/03/22 21:01:23 [EX#1] DONE cell (44,42) total_excav=38/191
+2026/03/22 21:01:23 [EX#1] reserved cell (46,42) path_len=5
+2026/03/22 21:01:23 [EX#1] arrived at cell (46,42) pos=(46.0,41.1) assigned_trucks=2
+2026/03/22 21:01:23 [EX#1] START excavating (46,42) with truck#3
+2026/03/22 21:01:23 [t=780.4] STATUS excav=38/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:23 [EX#4] DONE cell (45,42) total_excav=39/191
+2026/03/22 21:01:23 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:23 [EX#4] reserved cell (47,42) path_len=5
+2026/03/22 21:01:23 [EX#4] arrived at cell (47,42) pos=(46.4,43.5) assigned_trucks=0
+2026/03/22 21:01:23 [EX#1] DONE cell (46,42) total_excav=40/191
+2026/03/22 21:01:23 [EX#1] reserved cell (48,42) path_len=5
+2026/03/22 21:01:23 [EX#1] arrived at cell (48,42) pos=(48.0,41.1) assigned_trucks=2
+2026/03/22 21:01:23 [EX#1] START excavating (48,42) with truck#5
+2026/03/22 21:01:23 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:23 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:23 [DT#2] assigned to EX#4 (priority=0) path_len=39
+2026/03/22 21:01:23 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:23 [EX#4] START excavating (47,42) with truck#2
+2026/03/22 21:01:23 [EX#1] DONE cell (48,42) total_excav=41/191
+2026/03/22 21:01:23 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:23 [EX#1] DT#3 is now active truck
+2026/03/22 21:01:23 [EX#1] reserved cell (35,43) path_len=15
+2026/03/22 21:01:23 [EX#1] arrived at cell (35,43) pos=(36.6,42.6) assigned_trucks=1
+2026/03/22 21:01:23 [EX#1] START excavating (35,43) with truck#3
+2026/03/22 21:01:23 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:23 [t=840.4] STATUS excav=41/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:24 [EX#4] DONE cell (47,42) total_excav=42/191
+2026/03/22 21:01:24 [EX#4] reserved cell (36,43) path_len=14
+2026/03/22 21:01:24 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:24 [DT#5] assigned to EX#1 (priority=2) path_len=29
+2026/03/22 21:01:24 [EX#4] arrived at cell (36,43) pos=(36.6,45.0) assigned_trucks=1
+2026/03/22 21:01:24 [EX#4] START excavating (36,43) with truck#2
+2026/03/22 21:01:24 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:24 [EX#1] DONE cell (35,43) total_excav=43/191
+2026/03/22 21:01:24 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:24 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:24 [EX#1] reserved cell (37,43) path_len=2
+2026/03/22 21:01:24 [EX#1] arrived at cell (37,43) pos=(36.6,42.6) assigned_trucks=1
+2026/03/22 21:01:24 [EX#1] START excavating (37,43) with truck#5
+2026/03/22 21:01:24 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:24 [EX#4] DONE cell (36,43) total_excav=44/191
+2026/03/22 21:01:24 [EX#4] reserved cell (38,43) path_len=3
+2026/03/22 21:01:24 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:24 [DT#3] assigned to EX#1 (priority=2) path_len=31
+2026/03/22 21:01:24 [EX#4] arrived at cell (38,43) pos=(37.4,44.5) assigned_trucks=1
+2026/03/22 21:01:24 [EX#4] START excavating (38,43) with truck#2
+2026/03/22 21:01:24 [EX#1] DONE cell (37,43) total_excav=45/191
+2026/03/22 21:01:24 [EX#1] reserved cell (39,43) path_len=5
+2026/03/22 21:01:24 [EX#1] arrived at cell (39,43) pos=(39.0,42.1) assigned_trucks=2
+2026/03/22 21:01:24 [EX#1] START excavating (39,43) with truck#5
+2026/03/22 21:01:24 [DT#3] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:24 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:24 [t=900.5] STATUS excav=45/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:24 [EX#4] DONE cell (38,43) total_excav=46/191
+2026/03/22 21:01:24 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:24 [EX#4] reserved cell (40,43) path_len=5
+2026/03/22 21:01:24 [EX#4] arrived at cell (40,43) pos=(39.4,44.5) assigned_trucks=0
+2026/03/22 21:01:24 [EX#1] DONE cell (39,43) total_excav=47/191
+2026/03/22 21:01:24 [EX#1] reserved cell (41,43) path_len=5
+2026/03/22 21:01:24 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:24 [EX#1] arrived at cell (41,43) pos=(41.0,42.1) assigned_trucks=2
+2026/03/22 21:01:24 [EX#1] START excavating (41,43) with truck#5
+2026/03/22 21:01:24 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:24 [DT#2] assigned to EX#4 (priority=0) path_len=32
+2026/03/22 21:01:25 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:25 [EX#4] START excavating (40,43) with truck#2
+2026/03/22 21:01:25 [EX#1] DONE cell (41,43) total_excav=48/191
+2026/03/22 21:01:25 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:25 [EX#1] DT#3 is now active truck
+2026/03/22 21:01:25 [EX#1] reserved cell (42,43) path_len=2
+2026/03/22 21:01:25 [EX#1] arrived at cell (42,43) pos=(41.4,42.5) assigned_trucks=1
+2026/03/22 21:01:25 [EX#1] START excavating (42,43) with truck#3
+2026/03/22 21:01:25 [t=960.5] STATUS excav=48/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:25 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:25 [EX#4] DONE cell (40,43) total_excav=49/191
+2026/03/22 21:01:25 [EX#4] reserved cell (43,43) path_len=6
+2026/03/22 21:01:25 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:25 [DT#5] assigned to EX#1 (priority=2) path_len=34
+2026/03/22 21:01:25 [EX#4] arrived at cell (43,43) pos=(43.0,44.9) assigned_trucks=1
+2026/03/22 21:01:25 [EX#4] START excavating (43,43) with truck#2
+2026/03/22 21:01:25 [EX#1] DONE cell (42,43) total_excav=50/191
+2026/03/22 21:01:25 [EX#1] reserved cell (44,43) path_len=5
+2026/03/22 21:01:25 [EX#1] arrived at cell (44,43) pos=(43.4,42.5) assigned_trucks=2
+2026/03/22 21:01:25 [EX#1] START excavating (44,43) with truck#3
+2026/03/22 21:01:25 [DT#5] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:25 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:25 [EX#4] DONE cell (43,43) total_excav=51/191
+2026/03/22 21:01:25 [EX#4] reserved cell (45,43) path_len=3
+2026/03/22 21:01:25 [EX#4] arrived at cell (45,43) pos=(44.4,44.4) assigned_trucks=1
+2026/03/22 21:01:25 [EX#4] START excavating (45,43) with truck#2
+2026/03/22 21:01:25 [t=1020.5] STATUS excav=51/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:25 [EX#1] DONE cell (44,43) total_excav=52/191
+2026/03/22 21:01:25 [EX#1] reserved cell (46,43) path_len=5
+2026/03/22 21:01:25 [EX#1] arrived at cell (46,43) pos=(46.0,42.1) assigned_trucks=2
+2026/03/22 21:01:25 [EX#1] START excavating (46,43) with truck#5
+2026/03/22 21:01:25 [EX#4] DONE cell (45,43) total_excav=53/191
+2026/03/22 21:01:25 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:25 [EX#4] reserved cell (47,43) path_len=5
+2026/03/22 21:01:26 [EX#4] arrived at cell (47,43) pos=(46.4,44.5) assigned_trucks=0
+2026/03/22 21:01:26 [EX#1] DONE cell (46,43) total_excav=54/191
+2026/03/22 21:01:26 [EX#1] reserved cell (48,43) path_len=5
+2026/03/22 21:01:26 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:26 [EX#1] arrived at cell (48,43) pos=(48.0,42.1) assigned_trucks=2
+2026/03/22 21:01:26 [EX#1] START excavating (48,43) with truck#5
+2026/03/22 21:01:26 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:26 [DT#2] assigned to EX#4 (priority=0) path_len=39
+2026/03/22 21:01:26 [t=1080.5] STATUS excav=54/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:26 [DT#2] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:26 [EX#4] START excavating (47,43) with truck#2
+2026/03/22 21:01:26 [EX#1] DONE cell (48,43) total_excav=55/191
+2026/03/22 21:01:26 [EX#1] reserved cell (35,44) path_len=15
+2026/03/22 21:01:26 [EX#1] arrived at cell (35,44) pos=(36.7,43.6) assigned_trucks=2
+2026/03/22 21:01:26 [EX#1] START excavating (35,44) with truck#3
+2026/03/22 21:01:26 [EX#4] DONE cell (47,43) total_excav=56/191
+2026/03/22 21:01:26 [EX#4] reserved cell (36,44) path_len=14
+2026/03/22 21:01:26 [EX#4] arrived at cell (36,44) pos=(36.6,46.0) assigned_trucks=1
+2026/03/22 21:01:26 [EX#4] START excavating (36,44) with truck#2
+2026/03/22 21:01:26 [EX#1] DONE cell (35,44) total_excav=57/191
+2026/03/22 21:01:26 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:26 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:26 [EX#1] reserved cell (37,44) path_len=2
+2026/03/22 21:01:26 [EX#1] arrived at cell (37,44) pos=(36.7,43.6) assigned_trucks=1
+2026/03/22 21:01:26 [EX#1] START excavating (37,44) with truck#5
+2026/03/22 21:01:26 [t=1140.5] STATUS excav=57/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:27 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:27 [EX#4] DONE cell (36,44) total_excav=58/191
+2026/03/22 21:01:27 [EX#4] reserved cell (38,44) path_len=3
+2026/03/22 21:01:27 [EX#4] arrived at cell (38,44) pos=(37.4,45.5) assigned_trucks=1
+2026/03/22 21:01:27 [EX#4] START excavating (38,44) with truck#2
+2026/03/22 21:01:27 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:27 [DT#3] assigned to EX#1 (priority=2) path_len=29
+2026/03/22 21:01:27 [EX#1] DONE cell (37,44) total_excav=59/191
+2026/03/22 21:01:27 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:27 [EX#1] reserved cell (39,44) path_len=7
+2026/03/22 21:01:27 [EX#1] arrived at cell (39,44) pos=(38.6,43.4) assigned_trucks=1
+2026/03/22 21:01:27 [DT#3] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:27 [DT#3] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:27 [EX#1] START excavating (39,44) with truck#3
+2026/03/22 21:01:27 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:27 [EX#4] DONE cell (38,44) total_excav=60/191
+2026/03/22 21:01:27 [DT#2] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:27 [EX#4] reserved cell (40,44) path_len=4
+2026/03/22 21:01:27 [EX#4] arrived at cell (40,44) pos=(39.4,45.4) assigned_trucks=0
+2026/03/22 21:01:27 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:27 [DT#5] assigned to EX#4 (priority=0) path_len=35
+2026/03/22 21:01:27 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:27 [t=1200.5] STATUS excav=60/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:27 [DT#5] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:27 [EX#4] START excavating (40,44) with truck#5
+2026/03/22 21:01:27 [EX#1] DONE cell (39,44) total_excav=61/191
+2026/03/22 21:01:27 [EX#1] reserved cell (41,44) path_len=5
+2026/03/22 21:01:27 [EX#1] arrived at cell (41,44) pos=(41.0,43.1) assigned_trucks=1
+2026/03/22 21:01:27 [EX#1] START excavating (41,44) with truck#3
+2026/03/22 21:01:27 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:27 [DT#2] assigned to EX#1 (priority=2) path_len=34
+2026/03/22 21:01:27 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:27 [EX#4] DONE cell (40,44) total_excav=62/191
+2026/03/22 21:01:27 [EX#4] reserved cell (42,44) path_len=5
+2026/03/22 21:01:27 [EX#4] arrived at cell (42,44) pos=(41.4,45.5) assigned_trucks=1
+2026/03/22 21:01:27 [EX#4] START excavating (42,44) with truck#5
+2026/03/22 21:01:27 [EX#1] DONE cell (41,44) total_excav=63/191
+2026/03/22 21:01:27 [EX#1] reserved cell (43,44) path_len=5
+2026/03/22 21:01:27 [EX#1] arrived at cell (43,44) pos=(43.0,43.1) assigned_trucks=2
+2026/03/22 21:01:27 [EX#1] START excavating (43,44) with truck#3
+2026/03/22 21:01:28 [t=1260.6] STATUS excav=63/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:28 [EX#4] DONE cell (42,44) total_excav=64/191
+2026/03/22 21:01:28 [EX#4] reserved cell (44,44) path_len=5
+2026/03/22 21:01:28 [EX#4] arrived at cell (44,44) pos=(43.4,45.5) assigned_trucks=1
+2026/03/22 21:01:28 [EX#4] START excavating (44,44) with truck#5
+2026/03/22 21:01:28 [EX#1] DONE cell (43,44) total_excav=65/191
+2026/03/22 21:01:28 [DT#3] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:28 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:28 [EX#1] reserved cell (45,44) path_len=3
+2026/03/22 21:01:28 [EX#1] arrived at cell (45,44) pos=(44.4,43.6) assigned_trucks=1
+2026/03/22 21:01:28 [EX#1] START excavating (45,44) with truck#2
+2026/03/22 21:01:28 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:28 [EX#4] DONE cell (44,44) total_excav=66/191
+2026/03/22 21:01:28 [DT#5] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:28 [EX#4] reserved cell (46,44) path_len=5
+2026/03/22 21:01:28 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:28 [DT#3] assigned to EX#4 (priority=1) path_len=37
+2026/03/22 21:01:28 [EX#4] arrived at cell (46,44) pos=(46.0,45.9) assigned_trucks=1
+2026/03/22 21:01:28 [EX#1] DONE cell (45,44) total_excav=67/191
+2026/03/22 21:01:28 [EX#1] reserved cell (47,44) path_len=5
+2026/03/22 21:01:28 [EX#1] arrived at cell (47,44) pos=(46.4,43.5) assigned_trucks=1
+2026/03/22 21:01:28 [EX#1] START excavating (47,44) with truck#2
+2026/03/22 21:01:28 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:28 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:28 [EX#4] START excavating (46,44) with truck#3
+2026/03/22 21:01:28 [t=1320.6] STATUS excav=67/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:28 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:28 [DT#5] assigned to EX#1 (priority=2) path_len=41
+2026/03/22 21:01:28 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:28 [EX#1] DONE cell (47,44) total_excav=68/191
+2026/03/22 21:01:28 [EX#1] reserved cell (48,44) path_len=3
+2026/03/22 21:01:28 [EX#1] arrived at cell (48,44) pos=(47.3,43.6) assigned_trucks=2
+2026/03/22 21:01:28 [EX#1] START excavating (48,44) with truck#2
+2026/03/22 21:01:28 [EX#4] DONE cell (46,44) total_excav=69/191
+2026/03/22 21:01:28 [EX#4] reserved cell (35,45) path_len=12
+2026/03/22 21:01:29 [EX#4] arrived at cell (35,45) pos=(36.6,44.6) assigned_trucks=1
+2026/03/22 21:01:29 [EX#4] START excavating (35,45) with truck#3
+2026/03/22 21:01:29 [EX#1] DONE cell (48,44) total_excav=70/191
+2026/03/22 21:01:29 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:29 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:29 [EX#1] reserved cell (36,45) path_len=13
+2026/03/22 21:01:29 [EX#1] arrived at cell (36,45) pos=(37.7,46.4) assigned_trucks=1
+2026/03/22 21:01:29 [EX#1] START excavating (36,45) with truck#5
+2026/03/22 21:01:29 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:29 [EX#4] DONE cell (35,45) total_excav=71/191
+2026/03/22 21:01:29 [EX#4] reserved cell (37,45) path_len=2
+2026/03/22 21:01:29 [EX#4] arrived at cell (37,45) pos=(36.6,44.6) assigned_trucks=1
+2026/03/22 21:01:29 [EX#4] START excavating (37,45) with truck#3
+2026/03/22 21:01:29 [t=1380.6] STATUS excav=71/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:29 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:29 [DT#2] assigned to EX#1 (priority=2) path_len=30
+2026/03/22 21:01:29 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:29 [EX#1] DONE cell (36,45) total_excav=72/191
+2026/03/22 21:01:29 [EX#1] reserved cell (38,45) path_len=2
+2026/03/22 21:01:29 [EX#1] arrived at cell (38,45) pos=(37.7,46.4) assigned_trucks=2
+2026/03/22 21:01:29 [EX#1] START excavating (38,45) with truck#5
+2026/03/22 21:01:29 [EX#4] DONE cell (37,45) total_excav=73/191
+2026/03/22 21:01:29 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:29 [EX#4] reserved cell (39,45) path_len=7
+2026/03/22 21:01:29 [EX#4] arrived at cell (39,45) pos=(38.5,44.4) assigned_trucks=0
+2026/03/22 21:01:29 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:29 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:29 [DT#3] assigned to EX#4 (priority=0) path_len=31
+2026/03/22 21:01:29 [EX#1] DONE cell (38,45) total_excav=74/191
+2026/03/22 21:01:29 [EX#1] reserved cell (40,45) path_len=5
+2026/03/22 21:01:29 [EX#1] arrived at cell (40,45) pos=(40.0,46.9) assigned_trucks=2
+2026/03/22 21:01:29 [EX#1] START excavating (40,45) with truck#5
+2026/03/22 21:01:29 [t=1440.6] STATUS excav=74/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:29 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:29 [EX#4] START excavating (39,45) with truck#3
+2026/03/22 21:01:30 [EX#1] DONE cell (40,45) total_excav=75/191
+2026/03/22 21:01:30 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:30 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:30 [EX#1] reserved cell (41,45) path_len=3
+2026/03/22 21:01:30 [EX#4] DONE cell (39,45) total_excav=76/191
+2026/03/22 21:01:30 [EX#4] reserved cell (42,45) path_len=5
+2026/03/22 21:01:30 [EX#1] arrived at cell (41,45) pos=(40.4,46.5) assigned_trucks=1
+2026/03/22 21:01:30 [EX#1] START excavating (41,45) with truck#2
+2026/03/22 21:01:30 [EX#4] arrived at cell (42,45) pos=(41.5,44.5) assigned_trucks=1
+2026/03/22 21:01:30 [EX#4] START excavating (42,45) with truck#3
+2026/03/22 21:01:30 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:30 [t=1500.6] STATUS excav=76/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:30 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:30 [DT#5] assigned to EX#1 (priority=2) path_len=36
+2026/03/22 21:01:30 [EX#1] DONE cell (41,45) total_excav=77/191
+2026/03/22 21:01:30 [EX#1] reserved cell (43,45) path_len=5
+2026/03/22 21:01:30 [EX#4] DONE cell (42,45) total_excav=78/191
+2026/03/22 21:01:30 [EX#4] reserved cell (44,45) path_len=4
+2026/03/22 21:01:30 [EX#4] arrived at cell (44,45) pos=(43.4,44.6) assigned_trucks=1
+2026/03/22 21:01:30 [EX#4] START excavating (44,45) with truck#3
+2026/03/22 21:01:30 [EX#1] arrived at cell (43,45) pos=(43.0,46.9) assigned_trucks=2
+2026/03/22 21:01:30 [EX#1] START excavating (43,45) with truck#2
+2026/03/22 21:01:30 [DT#5] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:30 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:30 [EX#4] DONE cell (44,45) total_excav=79/191
+2026/03/22 21:01:30 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:30 [EX#4] reserved cell (45,45) path_len=3
+2026/03/22 21:01:30 [EX#1] DONE cell (43,45) total_excav=80/191
+2026/03/22 21:01:30 [EX#1] reserved cell (46,45) path_len=7
+2026/03/22 21:01:30 [EX#4] arrived at cell (45,45) pos=(44.4,44.6) assigned_trucks=0
+2026/03/22 21:01:30 [EX#1] arrived at cell (46,45) pos=(46.4,46.9) assigned_trucks=2
+2026/03/22 21:01:30 [EX#1] START excavating (46,45) with truck#5
+2026/03/22 21:01:30 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:31 [t=1560.6] STATUS excav=80/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:31 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:31 [DT#3] assigned to EX#4 (priority=0) path_len=37
+2026/03/22 21:01:31 [EX#1] DONE cell (46,45) total_excav=81/191
+2026/03/22 21:01:31 [EX#1] reserved cell (47,45) path_len=2
+2026/03/22 21:01:31 [EX#1] arrived at cell (47,45) pos=(46.6,46.6) assigned_trucks=2
+2026/03/22 21:01:31 [EX#1] START excavating (47,45) with truck#2
+2026/03/22 21:01:31 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:31 [EX#4] START excavating (45,45) with truck#3
+2026/03/22 21:01:31 [EX#1] DONE cell (47,45) total_excav=82/191
+2026/03/22 21:01:31 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:31 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:31 [EX#1] reserved cell (48,45) path_len=3
+2026/03/22 21:01:31 [EX#1] arrived at cell (48,45) pos=(47.4,46.4) assigned_trucks=1
+2026/03/22 21:01:31 [EX#1] START excavating (48,45) with truck#5
+2026/03/22 21:01:31 [EX#4] DONE cell (45,45) total_excav=83/191
+2026/03/22 21:01:31 [EX#4] reserved cell (35,46) path_len=11
+2026/03/22 21:01:31 [EX#4] arrived at cell (35,46) pos=(37.0,46.5) assigned_trucks=1
+2026/03/22 21:01:31 [EX#4] START excavating (35,46) with truck#3
+2026/03/22 21:01:31 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:31 [t=1620.6] STATUS excav=83/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:31 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:31 [DT#2] assigned to EX#1 (priority=2) path_len=43
+2026/03/22 21:01:31 [EX#1] DONE cell (48,45) total_excav=84/191
+2026/03/22 21:01:31 [EX#1] reserved cell (36,46) path_len=15
+2026/03/22 21:01:31 [EX#4] DONE cell (35,46) total_excav=85/191
+2026/03/22 21:01:31 [EX#4] reserved cell (37,46) path_len=2
+2026/03/22 21:01:31 [EX#4] arrived at cell (37,46) pos=(36.9,46.5) assigned_trucks=1
+2026/03/22 21:01:31 [EX#4] START excavating (37,46) with truck#3
+2026/03/22 21:01:31 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:31 [EX#1] arrived at cell (36,46) pos=(35.6,45.3) assigned_trucks=2
+2026/03/22 21:01:31 [EX#1] START excavating (36,46) with truck#5
+2026/03/22 21:01:31 [DT#2] path done but not within 2m of EX#1, re-pathing
+2026/03/22 21:01:31 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:32 [EX#4] DONE cell (37,46) total_excav=86/191
+2026/03/22 21:01:32 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:32 [EX#4] reserved cell (38,46) path_len=3
+2026/03/22 21:01:32 [EX#4] arrived at cell (38,46) pos=(37.0,46.5) assigned_trucks=0
+2026/03/22 21:01:32 [EX#1] DONE cell (36,46) total_excav=87/191
+2026/03/22 21:01:32 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:32 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:32 [EX#1] reserved cell (39,46) path_len=9
+2026/03/22 21:01:32 [t=1680.6] STATUS excav=87/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:32 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:32 [EX#1] arrived at cell (39,46) pos=(39.1,47.9) assigned_trucks=1
+2026/03/22 21:01:32 [EX#1] START excavating (39,46) with truck#2
+2026/03/22 21:01:32 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:32 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:32 [DT#3] assigned to EX#4 (priority=0) path_len=33
+2026/03/22 21:01:32 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:32 [DT#5] assigned to EX#1 (priority=2) path_len=38
+2026/03/22 21:01:32 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:32 [EX#4] START excavating (38,46) with truck#3
+2026/03/22 21:01:32 [EX#1] DONE cell (39,46) total_excav=88/191
+2026/03/22 21:01:32 [EX#1] reserved cell (40,46) path_len=2
+2026/03/22 21:01:32 [EX#1] arrived at cell (40,46) pos=(39.4,47.6) assigned_trucks=2
+2026/03/22 21:01:32 [EX#1] START excavating (40,46) with truck#2
+2026/03/22 21:01:32 [DT#5] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:32 [EX#4] DONE cell (38,46) total_excav=89/191
+2026/03/22 21:01:32 [EX#4] reserved cell (41,46) path_len=6
+2026/03/22 21:01:32 [t=1740.6] STATUS excav=89/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:32 [EX#4] arrived at cell (41,46) pos=(41.0,45.1) assigned_trucks=1
+2026/03/22 21:01:32 [EX#4] START excavating (41,46) with truck#3
+2026/03/22 21:01:32 [EX#1] DONE cell (40,46) total_excav=90/191
+2026/03/22 21:01:32 [EX#1] reserved cell (42,46) path_len=7
+2026/03/22 21:01:32 [EX#1] arrived at cell (42,46) pos=(42.4,48.0) assigned_trucks=2
+2026/03/22 21:01:32 [EX#1] START excavating (42,46) with truck#5
+2026/03/22 21:01:33 [EX#4] DONE cell (41,46) total_excav=91/191
+2026/03/22 21:01:33 [EX#4] reserved cell (43,46) path_len=5
+2026/03/22 21:01:33 [EX#4] arrived at cell (43,46) pos=(42.4,45.5) assigned_trucks=1
+2026/03/22 21:01:33 [EX#4] START excavating (43,46) with truck#3
+2026/03/22 21:01:33 [EX#1] DONE cell (42,46) total_excav=92/191
+2026/03/22 21:01:33 [EX#1] reserved cell (44,46) path_len=3
+2026/03/22 21:01:33 [EX#1] arrived at cell (44,46) pos=(43.4,47.4) assigned_trucks=2
+2026/03/22 21:01:33 [EX#1] START excavating (44,46) with truck#2
+2026/03/22 21:01:33 [t=1800.6] STATUS excav=92/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:33 [EX#4] DONE cell (43,46) total_excav=93/191
+2026/03/22 21:01:33 [DT#3] cargo full → RETURNING (unassigned from EX#4)
+2026/03/22 21:01:33 [EX#4] reserved cell (45,46) path_len=5
+2026/03/22 21:01:33 [EX#4] arrived at cell (45,46) pos=(45.0,45.1) assigned_trucks=0
+2026/03/22 21:01:33 [EX#1] DONE cell (44,46) total_excav=94/191
+2026/03/22 21:01:33 [DT#2] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:33 [EX#1] DT#5 is now active truck
+2026/03/22 21:01:33 [EX#1] reserved cell (46,46) path_len=5
+2026/03/22 21:01:33 [EX#1] arrived at cell (46,46) pos=(45.4,47.5) assigned_trucks=1
+2026/03/22 21:01:33 [EX#1] START excavating (46,46) with truck#5
+2026/03/22 21:01:33 [DT#3] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:33 [DT#2] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:33 [DT#3] unloaded → SEARCHING
+2026/03/22 21:01:33 [DT#3] assigned to EX#4 (priority=0) path_len=37
+2026/03/22 21:01:33 [DT#2] unloaded → SEARCHING
+2026/03/22 21:01:33 [DT#2] assigned to EX#1 (priority=2) path_len=41
+2026/03/22 21:01:33 [DT#3] arrived at EX#4 → FOLLOWING
+2026/03/22 21:01:33 [EX#4] START excavating (45,46) with truck#3
+2026/03/22 21:01:33 [EX#1] DONE cell (46,46) total_excav=95/191
+2026/03/22 21:01:33 [EX#1] reserved cell (47,46) path_len=3
+2026/03/22 21:01:33 [EX#1] arrived at cell (47,46) pos=(46.4,47.4) assigned_trucks=2
+2026/03/22 21:01:33 [EX#1] START excavating (47,46) with truck#5
+2026/03/22 21:01:33 [DT#2] arrived at EX#1 → FOLLOWING
+2026/03/22 21:01:34 [t=1860.6] STATUS excav=95/191 constr=0/5 vehicles=8 pending_spawns=0
+2026/03/22 21:01:34 [EX#4] DONE cell (45,46) total_excav=96/191
+2026/03/22 21:01:34 [EX#4] reserved cell (48,46) path_len=6
+2026/03/22 21:01:34 [EX#1] DONE cell (47,46) total_excav=97/191
+2026/03/22 21:01:34 [DT#5] cargo full → RETURNING (unassigned from EX#1)
+2026/03/22 21:01:34 [EX#1] DT#2 is now active truck
+2026/03/22 21:01:34 [EX#1] reserved cell (35,47) path_len=15
+2026/03/22 21:01:34 [EX#4] arrived at cell (48,46) pos=(48.0,45.1) assigned_trucks=1
+2026/03/22 21:01:34 [EX#4] START excavating (48,46) with truck#3
+2026/03/22 21:01:34 [EX#1] arrived at cell (35,47) pos=(36.7,48.4) assigned_trucks=1
+2026/03/22 21:01:34 [EX#1] START excavating (35,47) with truck#2
+2026/03/22 21:01:34 [DT#5] at spawn → UNLOADING (cargo=3)
+2026/03/22 21:01:34 [DT#5] unloaded → SEARCHING
+2026/03/22 21:01:34 [DT#5] assigned to EX#1 (priority=2) path_len=29
+2026/03/22 21:01:34 [EX#4] DONE cell (48,46) total_excav=98/191

@@ -1,17 +1,18 @@
 class_name MaterialTruck
 extends BaseNavigation
 
+var park_rng = RandomNumberGenerator.new() # For deciding what point should be chosen to park during idle
 var is_empty: bool = false
 var load_count: int = 2
 
 var crane_parent: Node = null   # Set by agent_spawner; used to find an available crane
 var target_crane: Crane = null  # Cached once a WORKING crane is found
-var _log_throttle: int = 0
+var _log_throttle: float = 0.0
 
 # Timing
 var _spawn_sim_t: float = 0.0
 var _crane_wait_start_sim_t: float = 0.0  # how long truck waited for crane to park
-var _trips_completed: int = 0
+var _trips_completed: float = 0.0
 
 @onready var pipe_1: MeshInstance3D = $Pivot/LKW_with_pipes/pipe_1
 @onready var pipe_2: MeshInstance3D = $Pivot/LKW_with_pipes/pipe_2
@@ -21,24 +22,25 @@ var current_state = WorkState.IDLE
 
 
 func _ready():
-	navigation_agent.radius = 2.0
 	super._ready()
+	navigation_agent.radius = 2.0
+	navigation_agent.target_desired_distance = 10
 	_spawn_sim_t = simulation_main.stop_watch.get_time()
 	DebugLog.log_printer("[MAT_TRUCK] %s spawned | load=%d | speed=%.1f | spawn_sim_t=%.2f" % [
 		name, load_count, movement_speed, _spawn_sim_t])
 
-func _process(_delta: float) -> void:
-	# Poll until a crane in WORKING state is available, then start driving toward it
+func _process(delta: float) -> void:
+	super._process(delta)
+	# Poll until a crane in WORKING state is available, then start driving towards it
 	if target_crane == null:
-		var found := _find_working_crane()
-		if found and target_crane == null:
-			target_crane = found
+		target_crane = _find_working_crane()
+		if target_crane:
 			_crane_wait_start_sim_t = simulation_main.stop_watch.get_time()
 			DebugLog.log_printer("[MAT_TRUCK] %s CRANE_FOUND | crane=%s | crane_state=%s" % [
 				name, target_crane.name, Crane.WorkState.keys()[target_crane.curr_work_state]])
 
-	_log_throttle += 1
-	if _log_throttle >= 60:
+	_log_throttle += delta
+	if _log_throttle >= 1.0:
 		_log_throttle = 0
 		var crane_state_str := "null"
 		var has_parked_str := "null"
@@ -69,11 +71,9 @@ func get_target() -> Vector3:
 		return target_crane.global_position
 	elif current_state == WorkState.EXITING:
 		return spawnpoint
-	# Pick a random navmesh point near spawn so multiple trucks don't stack on each other
-	var base := Vector3(spawnpoint.x - 5, 0, spawnpoint.z - 5)
-	var random_offset := Vector3(randf_range(-6.0, 6.0), 0.0, randf_range(-6.0, 6.0))
-	var nav_map := navigation_agent.get_navigation_map()
-	return NavigationServer3D.map_get_closest_point(nav_map, base + random_offset)
+	var x_random = park_rng.randi_range(10, 20)
+	var z_random = park_rng.randi_range(10, 20)
+	return Vector3(spawnpoint.x + x_random, 0, spawnpoint.z - z_random)
 
 func perform_work():
 	DebugLog.log_printer("[MAT_TRUCK perform_work] %s | state=%s | pos=%s | crane=%s | dist_to_crane=%.2f | load=%d" % [

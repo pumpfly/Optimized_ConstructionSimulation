@@ -5,6 +5,8 @@ var simulation_instance: Node = null  # Store the instantiated scene
 var timer: Timer
 var stop_watch: Node = null
 var current_task_id: int = -1
+
+# Debug log data
 var _run_wall_start_ms: int = 0
 
 # Checks if the simulation scene is currently running
@@ -40,15 +42,20 @@ func _http_request_completed(result, _response_code, _headers, body):
 		push_error("something went wrong")
 		return
 
-	# If all tasks are done: terminate
-	if body.size() > 0 and body[0] == 102:
+	var response_text = body.get_string_from_utf8()
+
+	# "finished" → no more work, this worker can stop polling
+	if response_text == "finished":
 		print("finished")
+		return
+
+	# "wait" → orchestrator is between generations, retry after the timer fires
+	if response_text == "wait":
 		return
 
 	timer.stop()
 
-	# Parse the JSON response from the orchestrator
-	var response_text = body.get_string_from_utf8()
+	# Parse the JSON task from the orchestrator
 	var parsed = JSON.parse_string(response_text)
 	if parsed == null:
 		push_error("Failed to parse JSON from orchestrator: " + response_text)
@@ -82,11 +89,11 @@ func _http_request_completed(result, _response_code, _headers, body):
 	simulation_instance.stop_watch.timeout.connect(_construction_timout)
 
 
-func _send_handover():
-	# TODO: replace randi answer with real simulation metric
-	var answer = randi_range(0, 1000)
+func _send_handover(sim_time: float):
+	# Send the actual simulated completion time (seconds) as the fitness value.
+	# The GA orchestrator uses this to rank individuals: lower time = better.
 	var url_string = "http://127.0.0.1:7999/handover?answer=%s&id=%s"
-	var actual_url = url_string % [answer, current_task_id]
+	var actual_url = url_string % [sim_time, current_task_id]
 
 	var http_request = HTTPRequest.new()
 	http_request.request_completed.connect(http_request.queue_free.unbind(4))
@@ -99,20 +106,22 @@ func _send_handover():
 
 func _construction_timout():
 	var wall_elapsed = Time.get_ticks_msec() - _run_wall_start_ms
-	DebugLog.log_printer("[MAIN] TIMEOUT | sim_time=%.2fs | wall_elapsed=%dms" % [stop_watch.get_time(), wall_elapsed])
+	var sim_time = stop_watch.get_time()
+	DebugLog.log_printer("[MAIN] TIMEOUT | sim_time=%.2fs | wall_elapsed=%dms" % [sim_time, wall_elapsed])
 	DebugLog.end_run("timeout")
 	print("!!construction took too long!! - Freeing simulation")
-	_send_handover()
+	_send_handover(sim_time)
 	simulation_instance.queue_free()
 	timer.start()
 
 func _construction_finished():
 	var wall_elapsed = Time.get_ticks_msec() - _run_wall_start_ms
+	var sim_time = stop_watch.get_time()
 	DebugLog.log_printer("[MAIN] FINISHED | sim_time=%.2fs | wall_elapsed=%dms | speedup=%.1fx" % [
-		stop_watch.get_time(), wall_elapsed,
-		stop_watch.get_time() / (wall_elapsed / 1000.0) if wall_elapsed > 0 else 0.0])
+		sim_time, wall_elapsed,
+		sim_time / (wall_elapsed / 1000.0) if wall_elapsed > 0 else 0.0])
 	DebugLog.end_run("finished")
 	print("construction finished - Freeing simulation")
-	_send_handover()
+	_send_handover(sim_time)
 	simulation_instance.queue_free()
 	timer.start()

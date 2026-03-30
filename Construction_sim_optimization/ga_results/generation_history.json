@@ -1,0 +1,86 @@
+[
+  {
+    "generation": 0,
+    "best_seconds": 108000.0,
+    "average_seconds": 108000.0,
+    "worst_seconds": 108000.0,
+    "best_baggers": 2,
+    "best_dirt_trucks": 1,
+    "best_schedule": {
+      "311": [
+        "Bagger"
+      ],
+      "2990": [
+        "Bagger"
+      ],
+      "9957": [
+        "DirtTruck"
+      ],
+      "2467": [
+        "MaterialTruck"
+      ],
+      "3797": [
+        "MaterialTruck"
+      ],
+      "9142": [
+        "Crane"
+      ]
+    }
+  },
+  {
+    "generation": 1,
+    "best_seconds": 108000.0,
+    "average_seconds": 108000.0,
+    "worst_seconds": 108000.0,
+    "best_baggers": 2,
+    "best_dirt_trucks": 1,
+    "best_schedule": {
+      "311": [
+        "Bagger"
+      ],
+      "2990": [
+        "Bagger"
+      ],
+      "9957": [
+        "DirtTruck"
+      ],
+      "2467": [
+        "MaterialTruck"
+      ],
+      "3797": [
+        "MaterialTruck"
+      ],
+      "9142": [
+        "Crane"
+      ]
+    }
+  },
+  {
+    "generation": 2,
+    "best_seconds": 108000.0,
+    "average_seconds": 108000.0,
+    "worst_seconds": 108000.0,
+    "best_baggers": 2,
+    "best_dirt_trucks": 1,
+    "best_schedule": {
+      "311": [
+        "Bagger"
+      ],
+      "2990": [
+        "Bagger"
+      ],
+      "9957": [
+        "DirtTruck"
+      ],
+      "2467": [
+        "MaterialTruck"
+      ],
+      "3797": [
+        "MaterialTruck"
+      ],
+      "9142": [
+        "Crane"
+      ]
+    }
+  }
+]

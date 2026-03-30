@@ -6,7 +6,7 @@ var timer_digging: Timer
 
 var current_construction_cell: Cell = null  # Track which cell is currently being excavated
 
-var dirt_truck: CharacterBody3D = null # The Truck which stands next to the bagger and can be loaded
+var dirt_truck: Node3D = null # The Truck which stands next to the bagger and can be loaded
 
 var is_available = true
 var work_target: Vector3  # The cell position the bagger is currently assigned to work at
@@ -19,32 +19,31 @@ var current_state = WorkState.WORKING
 # Timing
 var _cell_assign_sim_t: float = 0.0   # sim time when bagger was assigned this cell
 var _dig_start_sim_t:   float = 0.0   # sim time when digging timer started
-var _cells_completed:   int   = 0
-var _no_cell_poll_counter: int = 0
+var _cells_completed:   float   = 0.0
+var _no_cell_poll_counter: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Call parent _ready() so base navigation setup runs (sets up main)
 	super._ready()
 	id = get_parent().get_child_count()
-	# Resolve via main so the node name is explicit rather than a fragile child index
-
-	# Get construction zone from the grid (available via main.grid from parent)
-
+	
 	# Set agent-specific properties
-	movement_speed = 5.0
+	movement_speed = 1500.0
 	navigation_agent.target_desired_distance = 0.5
 	
-	navigation_agent.radius = 0.6
+	navigation_agent.radius = 1
 
 	timer_digging = Timer.new()
-	timer_digging.wait_time = 120 # That is how long it takes for a midsized excavator to finish one cubic meter (on average)
+	timer_digging.one_shot = true
+	timer_digging.wait_time = 0.4 # 120s / 300 — scaled down by constant factor
 	timer_digging.timeout.connect(_on_timer_timeout)
 	add_child(timer_digging)
 	DebugLog.log_printer("[BAGGER] id=%d spawned | dig_timer=%.1fs | speed=%.1f" % [id, timer_digging.wait_time, movement_speed])
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	super._process(delta)
 	# If excavation finished while we were idle, release any paired truck then self-exit
 	if simulation_main.grid.is_construction_zone_excavated and current_state == WorkState.WORKING:
 		DebugLog.log_printer("[BAGGER] id=%d detected excavation_done while idle → EXITING" % id)
@@ -56,8 +55,8 @@ func _process(_delta: float) -> void:
 		return
 	# Poll for an empty cell if we're stuck with none assigned
 	if has_reached_goal and current_construction_cell == null and current_state == WorkState.WORKING:
-		_no_cell_poll_counter += 1
-		if _no_cell_poll_counter >= 120:
+		_no_cell_poll_counter += delta
+		if _no_cell_poll_counter >= 0.0067:
 			_no_cell_poll_counter = 0
 			var next := get_target()
 			if next != Vector3.ZERO:
@@ -109,7 +108,7 @@ func perform_work():
 			DebugLog.log_printer("[BAGGER] id=%d ARRIVED_NO_TRUCK | cell=(%d,%d) | travel=%.2fs — waiting for truck" % [
 				id, current_construction_cell.grid_x, current_construction_cell.grid_y, travel_to_cell])
 	elif current_state == WorkState.EXITING:
-		DebugLog.log_printer("[BAGGER] id=%d EXITING — queue_free | total_cells_completed=%d" % [id, _cells_completed])
+		#DebugLog.log_printer("[BAGGER] id=%d EXITING — queue_free | total_cells_completed=%d" % [id, _cells_completed])
 		self.queue_free()
 
 
@@ -121,8 +120,10 @@ func _on_timer_timeout():
 		# Only release the pairing when the truck is now full and about to leave.
 		# If the truck still has capacity it will follow the bagger to the next cell.
 		if dirt_truck == null || dirt_truck.is_full:
+			
 			DebugLog.log_printer("[BAGGER] id=%d CELL_DONE (no truck) | cell=(%d,%d) | dig_duration=%.2fs — resetting to EMPTY" % [
 				id, current_construction_cell.grid_x, current_construction_cell.grid_y, dig_duration])
+			
 			is_available = true
 			dirt_truck = null
 		elif dirt_truck:
@@ -131,16 +132,20 @@ func _on_timer_timeout():
 			current_construction_cell.current_state = Cell.WorkState.COMPLETED
 			simulation_main.grid.on_construction_cell_completed()
 			_cells_completed += 1
+			
 			DebugLog.log_printer("[BAGGER] id=%d CELL_COMPLETED | cell=(%d,%d) | dig_duration=%.2fs | cells_done=%d/%d" % [
 				id, current_construction_cell.grid_x, current_construction_cell.grid_y,
 				dig_duration, simulation_main.grid.completed_cc_zone,
 				simulation_main.grid.construction_zone.size()])
+			
 			# Give pixel a darker red, because the height has been lowerd
 			var x: int = current_construction_cell.grid_x
 			var y: int = current_construction_cell.grid_y
 			simulation_main.set_heightmap_depth_by_pixel(1.0/255, x, y)
+			
 			if dirt_truck.is_full:
 				is_available = true
+				dirt_truck = null
 			else:
 				dirt_truck.set_movement_target(work_target)
 	else:

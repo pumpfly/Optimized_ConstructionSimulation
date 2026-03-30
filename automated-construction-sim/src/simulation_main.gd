@@ -43,7 +43,7 @@ func _ready() -> void:
 	if simulation_speed:
 		var speed: int = simulation_speed.to_int()
 		Engine.time_scale = speed
-		Engine.physics_ticks_per_second = 60 * speed
+		#Engine.physics_ticks_per_second = 60 * speed
 		DebugLog.log_printer("[SIM_MAIN] Speed=%dx | time_scale=%d" % [speed, Engine.time_scale])
 	else:
 		DebugLog.log_printer("[SIM_MAIN] No speed argument — running at 1x (time_scale=1)")
@@ -69,7 +69,8 @@ func _get_heightmap_image(heightmap_path: String) -> Image:
 
 # Helper function to find the value of a specific argument
 func _get_cmd_argument(argument_name: String) -> String:
-	var args = OS.get_cmdline_args()
+	var args = OS.get_cmdline_user_args()
+	#var args = OS.get_cmdline_args() #For using the debug run instance arguments
 
 	# Iterate through the arguments
 	for i in range(args.size()):
@@ -94,7 +95,7 @@ func set_heightmap_depth_by_pixel(height_increment: float, x: int, y: int):
 	var t := DebugLog.start_perf()
 	terrain.build_terrain_with_heightmap(img, img.get_width(), img.get_height())
 	var us := Time.get_ticks_usec() - t
-
+#
 	_terrain_rebuild_count += 1
 	_terrain_rebuild_total_us += us
 

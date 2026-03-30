@@ -1,0 +1,28 @@
+{
+  "generation": -1,
+  "fitness_seconds": 108000.0,
+  "num_baggers": 2,
+  "num_dirt_trucks": 1,
+  "material_truck_count": 2,
+  "crane_count": 1,
+  "schedule": {
+    "311": [
+      "Bagger"
+    ],
+    "2990": [
+      "Bagger"
+    ],
+    "9957": [
+      "DirtTruck"
+    ],
+    "2467": [
+      "MaterialTruck"
+    ],
+    "3797": [
+      "MaterialTruck"
+    ],
+    "9142": [
+      "Crane"
+    ]
+  }
+}

@@ -1,14 +1,15 @@
 class_name BaseNavigation
-extends CharacterBody3D
+extends Node3D
 
 var spawnpoint: Vector3
 
-var movement_speed: float = 5.0
+var movement_speed: float = 1500.0
 var movement_target_position: Vector3 = Vector3.ZERO
 var has_reached_goal: bool = false
+var velocity: Vector3
 # Guards against is_navigation_finished() returning a stale true immediately after
 # set_movement_target() is called, before the NavigationServer has computed the new path.
-var _path_cooldown: int = 0
+var _path_cooldown: float = 0.0
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var simulation_main: SimulationMain = self.get_parent().get_parent().get_parent()
@@ -23,8 +24,8 @@ var _travel_trip_index:   int    = 0  # counts how many trips this agent has mad
 # --- Idle timing (time between arriving and starting next movement) ---
 var _idle_start_wall_us: int = 0
 
-var _ptick_count: int = 0
-var _ptick_window_us: int = 0
+var _ptick_count: float = 0.0
+var _ptick_window_us: float = 0.0
 
 ## "Virtual" methods - agents should override them
 func get_target() -> Vector3:
@@ -61,10 +62,6 @@ func _ready():
 
 
 func actor_setup():
-	# Wait until the NavigationServer has completed at least one map sync.
-	# physics_frame fires BEFORE NavigationServer.physics_process() (which does the sync),
-	# so on the very first frame query_path() silently returns [] (iteration_id == 0).
-	# map_changed is emitted AFTER sync completes, guaranteeing a valid map.
 	var nav_map = navigation_agent.get_navigation_map()
 	while NavigationServer3D.map_get_iteration_id(nav_map) == 0:
 		await NavigationServer3D.map_changed
@@ -74,7 +71,7 @@ func actor_setup():
 
 	# Now that the navigation map is no longer empty, set the movement target.
 	set_movement_target(movement_target_position)
-	# _physics_process may have set has_reached_goal = true during the await
+	#_process may have set has_reached_goal = true during the await
 	# (is_navigation_finished() returns true before any path is set). Reset it
 	# so on_destination_reached() fires correctly when the real target is reached.
 	has_reached_goal = false
@@ -85,8 +82,8 @@ func set_movement_target(movement_target: Vector3):
 		var idle_ms := (Time.get_ticks_usec() - _idle_start_wall_us) / 1000.0
 		DebugLog.log_printer("[IDLE] %s | waited %.2fms wall before next move" % [name, idle_ms])
 		_idle_start_wall_us = 0
-
-	# Start travel timer
+#
+	## Start travel timer
 	_travel_start_sim_t   = simulation_main.stop_watch.get_time()
 	_travel_start_wall_us = Time.get_ticks_usec()
 	_travel_start_pos     = global_position
@@ -101,30 +98,32 @@ func set_movement_target(movement_target: Vector3):
 	# NOTE: do NOT call is_navigation_finished() here — it calls _update_navigation() which has
 	# side effects (can set target_position_submitted=false, navigation_finished=true immediately).
 	has_reached_goal = false
-	_path_cooldown = 2
+	_path_cooldown = 0.05
 
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
-	move_and_slide()
 
-func _physics_process(_delta):
-	# Tick sampler
-	_ptick_count += 1
+func _process(delta):
+	# Tick sampler (Updated label to reflect process frames)
+	_ptick_count += delta
 	if _ptick_count == 1:
 		_ptick_window_us = Time.get_ticks_usec()
 	elif _ptick_count > 300:
 		var avg := float(Time.get_ticks_usec() - _ptick_window_us) / 300.0
-		DebugLog.log_printer("[PERF_PTICK] %s | avg=%.1fµs/tick over 300 ticks" % [name, avg])
+		DebugLog.log_printer("[PERF_PROCESS] %s | avg=%.1fµs/frame over 300 frames" % [name, avg])
 		_ptick_count = 1
 		_ptick_window_us = Time.get_ticks_usec()
 
+	# Note: This now decrements per RENDER frame, not physics frame.
+	# Since render frames are faster, this cooldown will expire in less real-time.
 	if _path_cooldown > 0:
-		_path_cooldown -= 1
+		_path_cooldown -= delta
 		return
+
 	if navigation_agent.is_navigation_finished():
 		if !has_reached_goal:
 			has_reached_goal = true
-
+	
 			# Log travel completion
 			var elapsed_sim: float  = simulation_main.stop_watch.get_time() - _travel_start_sim_t
 			var elapsed_wall_ms := (Time.get_ticks_usec() - _travel_start_wall_us) / 1000.0
@@ -132,7 +131,7 @@ func _physics_process(_delta):
 			DebugLog.log_printer("[TRAVEL_END] %s trip#%d | pos=%s | dist_actual=%.1f | sim_elapsed=%.2fs | wall=%.2fms" % [
 				name, _travel_trip_index, global_position, dist_actual, elapsed_sim, elapsed_wall_ms])
 
-			# Start idle timer — measures how long until next set_movement_target()
+			 # Start idle timer — measures how long until next set_movement_target()
 			_idle_start_wall_us = Time.get_ticks_usec()
 
 			on_destination_reached()
@@ -141,17 +140,25 @@ func _physics_process(_delta):
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 
 	# DIAGNOSTIC: print when path is empty (agent would stand still)
-	#if navigation_agent.get_current_navigation_path().is_empty():
-		#var nav_map = navigation_agent.get_navigation_map()
-		#print("[NAV] path empty in _physics_process | map_iteration_id=%s | target=%s | agent_pos=%s" % [
-			#NavigationServer3D.map_get_iteration_id(nav_map),
-			#navigation_agent.get_target_position(),
-			#global_position
-		#])
+	if navigation_agent.get_current_navigation_path().is_empty():
+		var nav_map = navigation_agent.get_navigation_map()
+		print("[NAV] path empty in _process | map_iteration_id=%s | target=%s | agent_pos=%s" % [
+			NavigationServer3D.map_get_iteration_id(nav_map),
+			navigation_agent.get_target_position(),
+			global_position
+		])
 
-	# Push desired velocity into the agent; velocity_computed fires with the avoidance-adjusted result
-	var desired_velocity = current_agent_position.direction_to(next_path_position) * movement_speed
+	# Push desired velocity into the agent.
+	# The NavigationServer will apply this velocity during the next physics sync.
+	var flat_next := Vector3(next_path_position.x, current_agent_position.y, next_path_position.z)
+	var desired_velocity = current_agent_position.direction_to(flat_next) * movement_speed
 	navigation_agent.velocity = desired_velocity
+
+	# Cap movement so we never overshoot the next waypoint.
+	var dist_to_next: float = current_agent_position.distance_to(flat_next)
+	var capped_delta: float = min(delta, dist_to_next / movement_speed)
+	global_position += velocity * capped_delta
+	global_position.y = next_path_position.y
 
 	var look_target = Vector3(next_path_position.x, current_agent_position.y, next_path_position.z)
 	if current_agent_position.distance_to(look_target) > 0.01:

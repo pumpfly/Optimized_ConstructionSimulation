@@ -13,7 +13,7 @@ var current_height: int  # Equals to the color the pixel on the heightmap has
 
 # Occupancy and state tracking
 var is_occupied: bool = false
-var assigned_agent: CharacterBody3D = null  # Reference to agent working here
+var assigned_agent: Node3D = null  # Reference to agent working here
 var obstacle_node: Node3D = null # Refrence to node that holds NavigationObstacles
 
 enum WorkState{EMPTY, ASSIGNED, RESERVED, UNDER_CONSTRUCTION, COMPLETED}
@@ -33,7 +33,7 @@ func _init(x: int, y: int, world_position: Vector3, height: int = 0):
 	current_height = height
 
 # Assign an agent to this cell
-func assign_agent(agent: CharacterBody3D) -> bool:
+func assign_agent(agent: Node3D) -> bool:
 	if is_occupied:
 		return false
 
