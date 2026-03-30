@@ -33,7 +33,7 @@ func NewExcavator(id int, spawnPos Vec2) *Excavator {
 		BaseVehicle: BaseVehicle{
 			ID:                 id,
 			Pos:                spawnPos,
-			Radius:             1,
+			Radius:             1.5,
 			BaseSpeed:          2.5,
 			SpawnImmunityTicks: 20,
 		},

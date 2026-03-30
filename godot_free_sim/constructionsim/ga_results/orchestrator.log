@@ -4616,3 +4616,62 @@
 2026/03/30 19:33:35 Result   id=0     gen=0    time=8838.9s  (1/20 done)
 2026/03/30 19:33:35 Dispatched  id=1     gen=0    excavators=8 dirt_trucks=15 material_trucks=7 fitness=<unevaluated>
 2026/03/30 19:33:37 Shutting down…
+2026/03/30 19:55:26 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 19:55:26 Generation 0 ready — 20 tasks queued
+2026/03/30 19:55:26 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 19:55:28 Dispatched  id=0     gen=0    excavators=1 dirt_trucks=1 material_trucks=5 fitness=<unevaluated>
+2026/03/30 19:58:15 Shutting down…
+2026/03/30 19:58:16 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 19:58:16 Generation 0 ready — 20 tasks queued
+2026/03/30 19:58:16 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 19:58:18 Dispatched  id=0     gen=0    excavators=7 dirt_trucks=8 material_trucks=4 fitness=<unevaluated>
+2026/03/30 19:58:44 Shutting down…
+2026/03/30 20:18:34 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:18:34 Generation 0 ready — 20 tasks queued
+2026/03/30 20:18:34 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:18:35 Dispatched  id=0     gen=0    excavators=12 dirt_trucks=11 material_trucks=1 fitness=<unevaluated>
+2026/03/30 20:18:58 Shutting down…
+2026/03/30 20:21:28 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:21:28 Generation 0 ready — 20 tasks queued
+2026/03/30 20:21:28 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:21:30 Dispatched  id=0     gen=0    excavators=3 dirt_trucks=8 material_trucks=6 fitness=<unevaluated>
+2026/03/30 20:22:34 Shutting down…
+2026/03/30 20:23:00 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:23:00 Generation 0 ready — 20 tasks queued
+2026/03/30 20:23:00 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:23:02 Dispatched  id=0     gen=0    excavators=5 dirt_trucks=11 material_trucks=4 fitness=<unevaluated>
+2026/03/30 20:24:19 Shutting down…
+2026/03/30 20:25:45 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:25:45 Generation 0 ready — 20 tasks queued
+2026/03/30 20:25:45 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:25:47 Dispatched  id=0     gen=0    excavators=7 dirt_trucks=12 material_trucks=3 fitness=<unevaluated>
+2026/03/30 20:26:33 Shutting down…
+2026/03/30 20:29:55 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:29:55 Generation 0 ready — 20 tasks queued
+2026/03/30 20:29:55 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:29:57 Dispatched  id=0     gen=0    excavators=9 dirt_trucks=3 material_trucks=2 fitness=<unevaluated>
+2026/03/30 20:31:13 Shutting down…
+2026/03/30 20:31:14 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:31:14 Generation 0 ready — 20 tasks queued
+2026/03/30 20:31:14 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:31:15 Dispatched  id=0     gen=0    excavators=6 dirt_trucks=15 material_trucks=9 fitness=<unevaluated>
+2026/03/30 20:31:21 Shutting down…
+2026/03/30 20:31:22 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:31:22 Generation 0 ready — 20 tasks queued
+2026/03/30 20:31:22 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:31:24 Dispatched  id=0     gen=0    excavators=2 dirt_trucks=6 material_trucks=5 fitness=<unevaluated>
+2026/03/30 20:32:20 Shutting down…
+2026/03/30 20:33:45 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:33:45 Generation 0 ready — 20 tasks queued
+2026/03/30 20:33:45 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:33:48 Dispatched  id=0     gen=0    excavators=8 dirt_trucks=6 material_trucks=6 fitness=<unevaluated>
+2026/03/30 20:35:48 Result   id=0     gen=0    time=8897.7s  (1/20 done)
+2026/03/30 20:35:48 Dispatched  id=1     gen=0    excavators=6 dirt_trucks=3 material_trucks=1 fitness=<unevaluated>
+2026/03/30 20:36:08 Shutting down…
+2026/03/30 20:36:36 Initialising GA — population_size=20  max_generations=50  max_sim_time=54000s
+2026/03/30 20:36:36 Generation 0 ready — 20 tasks queued
+2026/03/30 20:36:36 Server starting on 127.0.0.1:7050  (population=20  generations=50  max_sim=54000s)
+2026/03/30 20:36:39 Dispatched  id=0     gen=0    excavators=5 dirt_trucks=5 material_trucks=9 fitness=<unevaluated>
+2026/03/30 20:36:53 Dispatched  id=1     gen=0    excavators=14 dirt_trucks=8 material_trucks=1 fitness=<unevaluated>
+2026/03/30 20:37:00 Dispatched  id=2     gen=0    excavators=9 dirt_trucks=11 material_trucks=5 fitness=<unevaluated>
+2026/03/30 20:40:26 Shutting down…

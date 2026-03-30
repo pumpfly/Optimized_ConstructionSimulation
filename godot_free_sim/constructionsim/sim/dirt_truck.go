@@ -33,7 +33,7 @@ func NewDirtTruck(id int, spawnPos Vec2) *DirtTruck {
 		BaseVehicle: BaseVehicle{
 			ID:                 id,
 			Pos:                spawnPos,
-			Radius:             1.2,
+			Radius:             1.7,
 			BaseSpeed:          5.0,
 			SpawnImmunityTicks: 20,
 		},

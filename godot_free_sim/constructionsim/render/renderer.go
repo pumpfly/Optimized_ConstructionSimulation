@@ -122,12 +122,23 @@ func (r *Renderer) Draw(s *sim.Simulation) {
 	}
 
 	// [UP]/[DOWN] arrows shift the look-at target (and camera) vertically.
-	liftSpeed := float32(60.0) * dt
+	// [LEFT]/[RIGHT] arrows pan the target horizontally perpendicular to the view.
+	panSpeed := float32(60.0) * dt
 	if rl.IsKeyDown(rl.KeyUp) {
-		r.camera.Target.Y += liftSpeed
+		r.camera.Target.Y += panSpeed
 	}
 	if rl.IsKeyDown(rl.KeyDown) {
-		r.camera.Target.Y -= liftSpeed
+		r.camera.Target.Y -= panSpeed
+	}
+	rightX := float32(math.Sin(float64(r.orbitAngle)))
+	rightZ := float32(-math.Cos(float64(r.orbitAngle)))
+	if rl.IsKeyDown(rl.KeyLeft) {
+		r.camera.Target.X -= rightX * panSpeed
+		r.camera.Target.Z -= rightZ * panSpeed
+	}
+	if rl.IsKeyDown(rl.KeyRight) {
+		r.camera.Target.X += rightX * panSpeed
+		r.camera.Target.Z += rightZ * panSpeed
 	}
 
 	r.updateCameraPosition()
@@ -248,7 +259,7 @@ func (r *Renderer) Draw(s *sim.Simulation) {
 			wp := path[0]
 			dx := float32(wp.X) + 0.5 - pos.X
 			dz := float32(wp.Y) + 0.5 - pos.Y
-			yaw = float32(math.Atan2(float64(dx), float64(dz))) * 180 / math.Pi
+			yaw = float32(math.Atan2(float64(dx), float64(dz)))*180/math.Pi + 180
 		}
 
 		rotAxis := rl.Vector3{X: 0, Y: 1, Z: 0}
@@ -318,14 +329,8 @@ func (r *Renderer) Draw(s *sim.Simulation) {
 	if r.autoOrbit {
 		orbitLabel = "ON"
 	}
-	rl.DrawText(fmt.Sprintf("[UP]/[DOWN] adjust height  |  left-drag: orbit  |  scroll: zoom  |  [O] auto-orbit: %s  |  [P] pause", orbitLabel), 10, int32(r.height)-30, 18, rl.DarkGray)
+	rl.DrawText(fmt.Sprintf("[UP]/[DOWN] height  |  [LEFT]/[RIGHT] pan  |  left-drag: orbit  |  scroll: zoom  |  [O] auto-orbit: %s  |  [P] pause", orbitLabel), 10, int32(r.height)-30, 18, rl.DarkGray)
 
-	if r.Paused {
-		overlay := rl.Color{R: 0, G: 0, B: 0, A: 120}
-		rl.DrawRectangle(0, 0, r.width, r.height, overlay)
-		rl.DrawText("PAUSED", r.width/2-60, r.height/2-20, 40, rl.White)
-		rl.DrawText("press [P] to resume", r.width/2-95, r.height/2+30, 20, rl.Color{R: 0, G: 0, B: 0, A: 0})
-	}
 
 	rl.EndDrawing()
 }
