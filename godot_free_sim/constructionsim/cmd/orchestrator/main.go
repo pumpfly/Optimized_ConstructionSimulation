@@ -43,16 +43,17 @@ import (
 const (
 	defaultAddr  = "127.0.0.1:7050"
 	outputDir    = "ga_results"
-	maxSimTime   = 43200 // 12 hours in simulated seconds
+	maxSimTime   = 54000 // 15 hours in simulated seconds
 	minSpawnTime = 1
 	maxSpawnTime = maxSimTime
 
-	minExcavators      = 1
-	maxExcavators      = 15
-	minDirtTrucks      = 1
-	maxDirtTrucks      = 15
-	materialTruckCount = 2 // fixed number
-	craneCount         = 1 // fixed number
+	minExcavators     = 1
+	maxExcavators     = 15
+	minDirtTrucks     = 1
+	maxDirtTrucks     = 15
+	minMaterialTrucks = 1
+	maxMaterialTrucks = 10
+	craneCount        = 1 // fixed number
 
 	tournamentSize       = 3
 	crossoverProbability = 0.85
@@ -74,7 +75,7 @@ var testSchedule = map[string][]string{
 	"32":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
 	"33":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
 	"120":  {"crane"},
-	"5000": {"material_truck", "material_truck"},
+	"5000": {"material_truck"},
 }
 
 // ---------------------------------------------------------------------------
@@ -87,6 +88,7 @@ var testSchedule = map[string][]string{
 type Individual struct {
 	NumExcavators       int
 	NumDirtTrucks       int
+	NumMaterialTrucks   int
 	ExcavatorSpawns     []int
 	DirtTruckSpawns     []int
 	MaterialTruckSpawns []int
@@ -98,6 +100,7 @@ func (ind *Individual) clone() *Individual {
 	c := &Individual{
 		NumExcavators:       ind.NumExcavators,
 		NumDirtTrucks:       ind.NumDirtTrucks,
+		NumMaterialTrucks:   ind.NumMaterialTrucks,
 		ExcavatorSpawns:     append([]int(nil), ind.ExcavatorSpawns...),
 		DirtTruckSpawns:     append([]int(nil), ind.DirtTruckSpawns...),
 		MaterialTruckSpawns: append([]int(nil), ind.MaterialTruckSpawns...),
@@ -133,11 +136,11 @@ func (ind *Individual) toSchedule() map[string][]string {
 
 func (ind *Individual) summary() string {
 	if ind.Fitness != nil {
-		return fmt.Sprintf("excavators=%d dirt_trucks=%d fitness=%.1fs",
-			ind.NumExcavators, ind.NumDirtTrucks, *ind.Fitness)
+		return fmt.Sprintf("excavators=%d dirt_trucks=%d material_trucks=%d fitness=%.1fs",
+			ind.NumExcavators, ind.NumDirtTrucks, ind.NumMaterialTrucks, *ind.Fitness)
 	}
-	return fmt.Sprintf("excavators=%d dirt_trucks=%d fitness=<unevaluated>",
-		ind.NumExcavators, ind.NumDirtTrucks)
+	return fmt.Sprintf("excavators=%d dirt_trucks=%d material_trucks=%d fitness=<unevaluated>",
+		ind.NumExcavators, ind.NumDirtTrucks, ind.NumMaterialTrucks)
 }
 
 // ---------------------------------------------------------------------------
@@ -170,12 +173,14 @@ func randomSpawnTimes(rng *rand.Rand, count int) []int {
 func randomIndividual(rng *rand.Rand) *Individual {
 	nExc := minExcavators + rng.Intn(maxExcavators-minExcavators+1)
 	nDirt := minDirtTrucks + rng.Intn(maxDirtTrucks-minDirtTrucks+1)
+	nMat := minMaterialTrucks + rng.Intn(maxMaterialTrucks-minMaterialTrucks+1)
 	return &Individual{
 		NumExcavators:       nExc,
 		NumDirtTrucks:       nDirt,
+		NumMaterialTrucks:   nMat,
 		ExcavatorSpawns:     randomSpawnTimes(rng, nExc),
 		DirtTruckSpawns:     randomSpawnTimes(rng, nDirt),
-		MaterialTruckSpawns: randomSpawnTimes(rng, materialTruckCount),
+		MaterialTruckSpawns: randomSpawnTimes(rng, nMat),
 		CraneSpawn:          randSpawn(rng),
 	}
 }
@@ -245,21 +250,25 @@ func crossover(rng *rand.Rand, a, b *Individual) (*Individual, *Individual) {
 	nExcB := pick(b.NumExcavators, a.NumExcavators)
 	nDirtA := pick(a.NumDirtTrucks, b.NumDirtTrucks)
 	nDirtB := pick(b.NumDirtTrucks, a.NumDirtTrucks)
+	nMatA := pick(a.NumMaterialTrucks, b.NumMaterialTrucks)
+	nMatB := pick(b.NumMaterialTrucks, a.NumMaterialTrucks)
 
 	childA := &Individual{
 		NumExcavators:       nExcA,
 		NumDirtTrucks:       nDirtA,
+		NumMaterialTrucks:   nMatA,
 		ExcavatorSpawns:     crossTimes(rng, a.ExcavatorSpawns, b.ExcavatorSpawns, nExcA),
 		DirtTruckSpawns:     crossTimes(rng, a.DirtTruckSpawns, b.DirtTruckSpawns, nDirtA),
-		MaterialTruckSpawns: crossTimes(rng, a.MaterialTruckSpawns, b.MaterialTruckSpawns, materialTruckCount),
+		MaterialTruckSpawns: crossTimes(rng, a.MaterialTruckSpawns, b.MaterialTruckSpawns, nMatA),
 		CraneSpawn:          pick(a.CraneSpawn, b.CraneSpawn),
 	}
 	childB := &Individual{
 		NumExcavators:       nExcB,
 		NumDirtTrucks:       nDirtB,
+		NumMaterialTrucks:   nMatB,
 		ExcavatorSpawns:     crossTimes(rng, a.ExcavatorSpawns, b.ExcavatorSpawns, nExcB),
 		DirtTruckSpawns:     crossTimes(rng, a.DirtTruckSpawns, b.DirtTruckSpawns, nDirtB),
-		MaterialTruckSpawns: crossTimes(rng, a.MaterialTruckSpawns, b.MaterialTruckSpawns, materialTruckCount),
+		MaterialTruckSpawns: crossTimes(rng, a.MaterialTruckSpawns, b.MaterialTruckSpawns, nMatB),
 		CraneSpawn:          pick(b.CraneSpawn, a.CraneSpawn),
 	}
 	return childA, childB
@@ -315,6 +324,10 @@ func mutate(rng *rand.Rand, ind *Individual) {
 		ind.NumDirtTrucks, ind.DirtTruckSpawns = mutateCount(
 			rng, ind.NumDirtTrucks, minDirtTrucks, maxDirtTrucks, ind.DirtTruckSpawns)
 	}
+	if rng.Float64() < countMutationRate {
+		ind.NumMaterialTrucks, ind.MaterialTruckSpawns = mutateCount(
+			rng, ind.NumMaterialTrucks, minMaterialTrucks, maxMaterialTrucks, ind.MaterialTruckSpawns)
+	}
 	ind.ExcavatorSpawns = mutateTimes(rng, ind.ExcavatorSpawns)
 	ind.DirtTruckSpawns = mutateTimes(rng, ind.DirtTruckSpawns)
 	ind.MaterialTruckSpawns = mutateTimes(rng, ind.MaterialTruckSpawns)
@@ -333,13 +346,14 @@ type pendingTask struct {
 }
 
 type genStats struct {
-	Generation     int                 `json:"generation"`
-	BestSeconds    float64             `json:"best_seconds"`
-	AvgSeconds     float64             `json:"average_seconds"`
-	WorstSeconds   float64             `json:"worst_seconds"`
-	BestExcavators int                 `json:"best_excavators"`
-	BestDirtTrucks int                 `json:"best_dirt_trucks"`
-	BestSchedule   map[string][]string `json:"best_schedule"`
+	Generation         int                 `json:"generation"`
+	BestSeconds        float64             `json:"best_seconds"`
+	AvgSeconds         float64             `json:"average_seconds"`
+	WorstSeconds       float64             `json:"worst_seconds"`
+	BestExcavators     int                 `json:"best_excavators"`
+	BestDirtTrucks     int                 `json:"best_dirt_trucks"`
+	BestMaterialTrucks int                 `json:"best_material_trucks"`
+	BestSchedule       map[string][]string `json:"best_schedule"`
 }
 
 // WorkData matches sim.WorkData in the worker binary.
@@ -501,13 +515,14 @@ func (o *Orchestrator) evolve() {
 	}
 
 	o.history = append(o.history, genStats{
-		Generation:     o.currentGeneration,
-		BestSeconds:    *best.Fitness,
-		AvgSeconds:     avg,
-		WorstSeconds:   *worst.Fitness,
-		BestExcavators: best.NumExcavators,
-		BestDirtTrucks: best.NumDirtTrucks,
-		BestSchedule:   best.toSchedule(),
+		Generation:         o.currentGeneration,
+		BestSeconds:        *best.Fitness,
+		AvgSeconds:         avg,
+		WorstSeconds:       *worst.Fitness,
+		BestExcavators:     best.NumExcavators,
+		BestDirtTrucks:     best.NumDirtTrucks,
+		BestMaterialTrucks: best.NumMaterialTrucks,
+		BestSchedule:       best.toSchedule(),
 	})
 	o.saveHistory()
 
@@ -568,7 +583,7 @@ func (o *Orchestrator) saveBest() {
 		FitnessSeconds:     *o.bestEver.Fitness,
 		NumExcavators:      o.bestEver.NumExcavators,
 		NumDirtTrucks:      o.bestEver.NumDirtTrucks,
-		MaterialTruckCount: materialTruckCount,
+		MaterialTruckCount: o.bestEver.NumMaterialTrucks,
 		CraneCount:         craneCount,
 		Schedule:           o.bestEver.toSchedule(),
 	}
@@ -660,8 +675,8 @@ func (o *Orchestrator) handleAnswers(w http.ResponseWriter, _ *http.Request) {
 		start = 0
 	}
 	for _, e := range history[start:] {
-		fmt.Fprintf(&sb, "  gen %3d  best=%8.1fs  avg=%8.1fs  excavators=%d  dirt_trucks=%d\n",
-			e.Generation, e.BestSeconds, e.AvgSeconds, e.BestExcavators, e.BestDirtTrucks)
+		fmt.Fprintf(&sb, "  gen %3d  best=%8.1fs  avg=%8.1fs  excavators=%d  dirt_trucks=%d  material_trucks=%d\n",
+			e.Generation, e.BestSeconds, e.AvgSeconds, e.BestExcavators, e.BestDirtTrucks, e.BestMaterialTrucks)
 	}
 	fmt.Fprint(w, sb.String())
 }

@@ -87,14 +87,6 @@ func (m *MaterialTruck) Update(s *Simulation, dt float32) {
 }
 
 func (m *MaterialTruck) handleSpawned(s *Simulation) {
-	if !s.Phase.Phase1Complete {
-		target := s.RandomWalkable(5, 15)
-		m.WanderTarget = target
-		m.IsWandering = false
-		m.PathfindTo(s.Grid, target)
-		m.State = MatWaitingForPhase2
-		return
-	}
 	if s.Grid.PipePlacementCellCount > 1 {
 		s.Grid.PipePlacementCellCount -= 2
 	} else if s.Grid.PipePlacementCellCount == 1 {
@@ -103,6 +95,15 @@ func (m *MaterialTruck) handleSpawned(s *Simulation) {
 	} else {
 		m.Cargo = 0
 		m.State = MatLeaving
+		return
+	}
+	if !s.Phase.Phase1Complete {
+		target := s.RandomWalkable(5, 15)
+		m.WanderTarget = target
+		m.IsWandering = false
+		m.PathfindTo(s.Grid, target)
+		m.State = MatWaitingForPhase2
+		return
 	}
 	m.State = MatSearching
 	m.searchCrane(s)
@@ -170,7 +171,7 @@ func (m *MaterialTruck) handleMovingToCrane(s *Simulation, dt float32) {
 	m.RetryPathfind(s.Grid, m.AssignedCrane.CurrentCell(s.Grid), dt)
 	m.CheckRepath(s.Grid, m.AssignedCrane.CurrentCell(s.Grid), dt)
 	m.FollowPath(s.Grid, dt)
-	attendDist := m.AssignedCrane.Radius + m.Radius
+	attendDist := m.AssignedCrane.Radius + m.Radius + 10
 	if dist2(m.Pos, m.AssignedCrane.Pos) <= attendDist+5.0 {
 		m.State = MatAttending
 	}
@@ -219,8 +220,13 @@ func (m *MaterialTruck) handleRestocking(s *Simulation, dt float32, stockCount i
 	if m.RestockTimer >= 1800.0 { // The stock place for pipes is about 15 minutes away + return time
 		if stockCount > 1 {
 			m.Cargo = 2
+			s.Grid.PipePlacementCellCount -= 2
 		} else if stockCount == 1 {
 			m.Cargo = 1
+			s.Grid.PipePlacementCellCount -= 1
+		} else {
+			m.State = MatLeaving
+			return
 		}
 
 		m.State = MatSearching

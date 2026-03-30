@@ -218,7 +218,7 @@ func (t *DirtTruck) handleReturning(s *Simulation, dt float32) {
 
 func (t *DirtTruck) handleUnloading(s *Simulation, dt float32) {
 	t.UnloadTimer += dt
-	if t.UnloadTimer >= 15.0 {
+	if t.UnloadTimer >= 1800.0 {
 		log.Printf("[DT#%d] unloaded → SEARCHING", t.ID)
 		t.Cargo = 0
 		t.State = DirtSearching
