@@ -1,8 +1,8 @@
 // Genetic Algorithm Orchestrator for the Construction Simulation
 //
 // GA lifecycle:
-//  1. Initialise a random population of populationSize individuals.
-//  2. Encode each individual as a schedule and enqueue it.
+//  1. Initialise a random population of populationSize individualividuals.
+//  2. Encode each individualividual as a schedule and enqueue it.
 //  3. Workers poll GET /work:
 //     - Task available                 → JSON WorkData
 //     - Queue empty but gen incomplete → "wait"
@@ -12,7 +12,7 @@
 //     a. Compute fitness (lower time = better).
 //     b. Select parents via tournament selection.
 //     c. Produce offspring via uniform crossover + Gaussian mutation.
-//     d. Elitism: carry the best eliteCount individuals unchanged.
+//     d. Elitism: carry the best eliteCount individualividuals unchanged.
 //     e. Log generation statistics and save best schedule to disk.
 //     f. Increment generation counter and re-fill the task queue.
 //  6. After maxGenerations, mark finished; workers receive "end".
@@ -45,7 +45,7 @@ const (
 	outputDir    = "ga_results"
 	maxSimTime   = 54000 // 15 hours in simulated seconds
 	minSpawnTime = 1
-	maxSpawnTime = maxSimTime
+	maxSpawnTime = maxSimTime/2
 
 	minExcavators     = 1
 	maxExcavators     = 15
@@ -66,8 +66,8 @@ const (
 	timeoutPenalty = float64(maxSimTime) * 10.0
 )
 
-// testSchedule is the fixed schedule used for manual test runs.
-// Swap getNextTask's return to use this instead of the GA when debugging.
+// testSchedule is a debugging schedule
+// Swap schedule inside getNextTask's.
 var testSchedule = map[string][]string{
 	"0":    {"excavator", "dirt_truck", "excavator", "dirt_truck"},
 	"30":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
@@ -83,7 +83,7 @@ var testSchedule = map[string][]string{
 // ---------------------------------------------------------------------------
 
 // Individual encodes a complete agent-spawn schedule.
-// Fitness is nil until the simulation has evaluated this individual.
+// Fitness is nil until the simulation has evaluated this individualividual.
 // Lower fitness = faster construction = better.
 type Individual struct {
 	NumExcavators       int
@@ -96,18 +96,18 @@ type Individual struct {
 	Fitness             *float64
 }
 
-func (ind *Individual) clone() *Individual {
+func (individualividual *Individual) clone() *Individual {
 	c := &Individual{
-		NumExcavators:       ind.NumExcavators,
-		NumDirtTrucks:       ind.NumDirtTrucks,
-		NumMaterialTrucks:   ind.NumMaterialTrucks,
-		ExcavatorSpawns:     append([]int(nil), ind.ExcavatorSpawns...),
-		DirtTruckSpawns:     append([]int(nil), ind.DirtTruckSpawns...),
-		MaterialTruckSpawns: append([]int(nil), ind.MaterialTruckSpawns...),
-		CraneSpawn:          ind.CraneSpawn,
+		NumExcavators:       individual.NumExcavators,
+		NumDirtTrucks:       individual.NumDirtTrucks,
+		NumMaterialTrucks:   individual.NumMaterialTrucks,
+		ExcavatorSpawns:     append([]int(nil), individual.ExcavatorSpawns...),
+		DirtTruckSpawns:     append([]int(nil), individual.DirtTruckSpawns...),
+		MaterialTruckSpawns: append([]int(nil), individual.MaterialTruckSpawns...),
+		CraneSpawn:          individual.CraneSpawn,
 	}
-	if ind.Fitness != nil {
-		f := *ind.Fitness
+	if individual.Fitness != nil {
+		f := *individual.Fitness
 		c.Fitness = &f
 	}
 	return c
@@ -115,32 +115,32 @@ func (ind *Individual) clone() *Individual {
 
 // toSchedule converts the chromosome to the map[time][]agentType format
 // expected by the worker's WorkData.
-func (ind *Individual) toSchedule() map[string][]string {
+func (individual *Individual) toSchedule() map[string][]string {
 	sched := make(map[string][]string)
-	add := func(t int, kind string) {
+	add := func(t int, kindividual string) {
 		key := strconv.Itoa(t)
-		sched[key] = append(sched[key], kind)
+		sched[key] = append(sched[key], kindividual)
 	}
-	for _, t := range ind.ExcavatorSpawns {
+	for _, t := range individual.ExcavatorSpawns {
 		add(t, "excavator")
 	}
-	for _, t := range ind.DirtTruckSpawns {
+	for _, t := range individual.DirtTruckSpawns {
 		add(t, "dirt_truck")
 	}
-	for _, t := range ind.MaterialTruckSpawns {
+	for _, t := range individual.MaterialTruckSpawns {
 		add(t, "material_truck")
 	}
-	add(ind.CraneSpawn, "crane")
+	add(individual.CraneSpawn, "crane")
 	return sched
 }
 
-func (ind *Individual) summary() string {
-	if ind.Fitness != nil {
+func (individual *Individual) summary() string {
+	if individual.Fitness != nil {
 		return fmt.Sprintf("excavators=%d dirt_trucks=%d material_trucks=%d fitness=%.1fs",
-			ind.NumExcavators, ind.NumDirtTrucks, ind.NumMaterialTrucks, *ind.Fitness)
+			individual.NumExcavators, individual.NumDirtTrucks, individual.NumMaterialTrucks, *individual.Fitness)
 	}
 	return fmt.Sprintf("excavators=%d dirt_trucks=%d material_trucks=%d fitness=<unevaluated>",
-		ind.NumExcavators, ind.NumDirtTrucks, ind.NumMaterialTrucks)
+		individual.NumExcavators, individual.NumDirtTrucks, individual.NumMaterialTrucks)
 }
 
 // ---------------------------------------------------------------------------
@@ -186,15 +186,15 @@ func randomIndividual(rng *rand.Rand) *Individual {
 }
 
 // tournamentSelect picks the fittest of tournamentSize randomly sampled
-// individuals. All members of population must have Fitness set.
+// individualividuals. All members of population must have Fitness set.
 func tournamentSelect(rng *rand.Rand, population []*Individual) *Individual {
 	size := tournamentSize
 	if size > len(population) {
 		size = len(population)
 	}
-	indices := rng.Perm(len(population))[:size]
-	best := population[indices[0]]
-	for _, i := range indices[1:] {
+	individualices := rng.Perm(len(population))[:size]
+	best := population[individualices[0]]
+	for _, i := range individualices[1:] {
 		if *population[i].Fitness < *best.Fitness {
 			best = population[i]
 		}
@@ -314,25 +314,25 @@ func mutateCount(rng *rand.Rand, current, lo, hi int, times []int) (int, []int) 
 	return newCount, newTimes
 }
 
-// mutate applies count and spawn-time mutations to ind in place.
-func mutate(rng *rand.Rand, ind *Individual) {
+// mutate applies count and spawn-time mutations to individual in place.
+func mutate(rng *rand.Rand, individual *Individual) {
 	if rng.Float64() < countMutationRate {
-		ind.NumExcavators, ind.ExcavatorSpawns = mutateCount(
-			rng, ind.NumExcavators, minExcavators, maxExcavators, ind.ExcavatorSpawns)
+		individual.NumExcavators, individual.ExcavatorSpawns = mutateCount(
+			rng, individual.NumExcavators, minExcavators, maxExcavators, individual.ExcavatorSpawns)
 	}
 	if rng.Float64() < countMutationRate {
-		ind.NumDirtTrucks, ind.DirtTruckSpawns = mutateCount(
-			rng, ind.NumDirtTrucks, minDirtTrucks, maxDirtTrucks, ind.DirtTruckSpawns)
+		individual.NumDirtTrucks, individual.DirtTruckSpawns = mutateCount(
+			rng, individual.NumDirtTrucks, minDirtTrucks, maxDirtTrucks, individual.DirtTruckSpawns)
 	}
 	if rng.Float64() < countMutationRate {
-		ind.NumMaterialTrucks, ind.MaterialTruckSpawns = mutateCount(
-			rng, ind.NumMaterialTrucks, minMaterialTrucks, maxMaterialTrucks, ind.MaterialTruckSpawns)
+		individual.NumMaterialTrucks, individual.MaterialTruckSpawns = mutateCount(
+			rng, individual.NumMaterialTrucks, minMaterialTrucks, maxMaterialTrucks, individual.MaterialTruckSpawns)
 	}
-	ind.ExcavatorSpawns = mutateTimes(rng, ind.ExcavatorSpawns)
-	ind.DirtTruckSpawns = mutateTimes(rng, ind.DirtTruckSpawns)
-	ind.MaterialTruckSpawns = mutateTimes(rng, ind.MaterialTruckSpawns)
+	individual.ExcavatorSpawns = mutateTimes(rng, individual.ExcavatorSpawns)
+	individual.DirtTruckSpawns = mutateTimes(rng, individual.DirtTruckSpawns)
+	individual.MaterialTruckSpawns = mutateTimes(rng, individual.MaterialTruckSpawns)
 	if rng.Float64() < mutationRate {
-		ind.CraneSpawn = clampSpawn(ind.CraneSpawn + int(rng.NormFloat64()*mutationSigma))
+		individual.CraneSpawn = clampSpawn(individual.CraneSpawn + int(rng.NormFloat64()*mutationSigma))
 	}
 }
 
@@ -342,7 +342,7 @@ func mutate(rng *rand.Rand, ind *Individual) {
 
 type pendingTask struct {
 	id         int
-	individual *Individual
+	individualividual *Individual
 }
 
 type genStats struct {
@@ -409,14 +409,14 @@ func newOrchestrator(populationSize, maxGenerations int) *Orchestrator {
 	return o
 }
 
-// enqueue resets fitness on each individual and appends it to pendingTasks.
+// enqueue resets fitness on each individualividual and appends it to pendingTasks.
 // Must be called with mu held (or before the server starts).
 func (o *Orchestrator) enqueue(pop []*Individual) {
-	for _, ind := range pop {
-		ind.Fitness = nil
+	for _, individual := range pop {
+		individual.Fitness = nil
 		o.pendingTasks = append(o.pendingTasks, pendingTask{
 			id:         o.nextTaskID,
-			individual: ind,
+			individualividual: individual,
 		})
 		o.nextTaskID++
 	}
@@ -436,16 +436,16 @@ func (o *Orchestrator) getNextTask() string {
 
 	t := o.pendingTasks[0]
 	o.pendingTasks = o.pendingTasks[1:]
-	o.inFlight[t.id] = t.individual
+	o.inFlight[t.id] = t.individualividual
 
 	payload := WorkData{
 		ID: strconv.Itoa(t.id),
-		// Schedule: t.individual.toSchedule(),
+		// Schedule: t.individualividual.toSchedule(),
 		Schedule: testSchedule,
 	}
 	data, _ := json.Marshal(payload)
 	log.Printf("Dispatched  id=%-4d  gen=%-3d  %s",
-		t.id, o.currentGeneration, t.individual.summary())
+		t.id, o.currentGeneration, t.individualividual.summary())
 	return string(data)
 }
 
@@ -455,7 +455,7 @@ func (o *Orchestrator) submitResult(taskID int, m Metrics) string {
 	o.mu.Lock()
 	defer o.mu.Unlock()
 
-	ind, ok := o.inFlight[taskID]
+	individual, ok := o.inFlight[taskID]
 	if !ok {
 		log.Printf("Handover for unknown task id=%d — ignored", taskID)
 		return "unknown_task"
@@ -473,8 +473,8 @@ func (o *Orchestrator) submitResult(taskID int, m Metrics) string {
 			taskID, o.currentGeneration, fitness,
 			len(o.generationResults)+1, o.populationSize)
 	}
-	ind.Fitness = &fitness
-	o.generationResults = append(o.generationResults, ind)
+	individual.Fitness = &fitness
+	o.generationResults = append(o.generationResults, individual)
 
 	if len(o.generationResults) >= o.populationSize {
 		o.evolve()
@@ -491,14 +491,14 @@ func (o *Orchestrator) evolve() {
 	best := evaluated[0]
 	worst := evaluated[0]
 	var sum float64
-	for _, ind := range evaluated {
-		f := *ind.Fitness
+	for _, individual := range evaluated {
+		f := *individual.Fitness
 		sum += f
 		if f < *best.Fitness {
-			best = ind
+			best = individual
 		}
 		if f > *worst.Fitness {
-			worst = ind
+			worst = individual
 		}
 	}
 	avg := sum / float64(len(evaluated))
