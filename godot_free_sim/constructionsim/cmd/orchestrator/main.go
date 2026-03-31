@@ -45,7 +45,7 @@ const (
 	outputDir    = "ga_results"
 	maxSimTime   = 54000 // 15 hours in simulated seconds
 	minSpawnTime = 1
-	maxSpawnTime = maxSimTime/2
+	maxSpawnTime = maxSimTime / 2
 
 	minExcavators     = 1
 	maxExcavators     = 15
@@ -57,9 +57,9 @@ const (
 
 	tournamentSize       = 3
 	crossoverProbability = 0.85
-	mutationRate         = 0.15
-	mutationSigma        = 600.0
-	countMutationRate    = 0.2
+	mutationRate         = 0.15   // Mutation for the schedule
+	mutationSigma        = 2160.0 // standard deviation of gaussian noise
+	countMutationRate    = 0.2    // Mutation for the agents count
 	eliteCount           = 2
 
 	// Larger than any valid completion time so timeout runs rank worst.
@@ -96,7 +96,7 @@ type Individual struct {
 	Fitness             *float64
 }
 
-func (individualividual *Individual) clone() *Individual {
+func (individual *Individual) clone() *Individual {
 	c := &Individual{
 		NumExcavators:       individual.NumExcavators,
 		NumDirtTrucks:       individual.NumDirtTrucks,
@@ -341,7 +341,7 @@ func mutate(rng *rand.Rand, individual *Individual) {
 // ---------------------------------------------------------------------------
 
 type pendingTask struct {
-	id         int
+	id                int
 	individualividual *Individual
 }
 
@@ -415,7 +415,7 @@ func (o *Orchestrator) enqueue(pop []*Individual) {
 	for _, individual := range pop {
 		individual.Fitness = nil
 		o.pendingTasks = append(o.pendingTasks, pendingTask{
-			id:         o.nextTaskID,
+			id:                o.nextTaskID,
 			individualividual: individual,
 		})
 		o.nextTaskID++

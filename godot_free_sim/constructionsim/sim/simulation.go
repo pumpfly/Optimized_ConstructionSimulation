@@ -137,7 +137,7 @@ func (s *Simulation) Tick(dt float32) {
 	s.SimTime += dt
 
 	// Timeout check
-	if s.SimTime > 43200.0 {
+	if s.SimTime > 54000.0 {
 		s.finalize(true)
 		return
 	}
