@@ -72,7 +72,7 @@ func (t *DirtTruck) Update(s *Simulation, dt float32) {
 	case DirtFollowing:
 		t.handleFollowing(s, dt)
 	case DirtReturning:
-		t.handleReturning(s, dt)
+		t.handleLeavingForUnloading(s, dt)
 	case DirtUnloading:
 		t.handleUnloading(s, dt)
 	case DirtLeaving:
@@ -129,7 +129,7 @@ func (t *DirtTruck) searchExcavator(s *Simulation) {
 
 func (t *DirtTruck) handleSearching(s *Simulation, dt float32) {
 	if t.IsWandering {
-		t.FollowPath(s.Grid, dt)
+		t.FollowPath(s.Grid, s.Vehicles, dt)
 		if t.PathDone() {
 			t.IsWandering = false
 		}
@@ -163,7 +163,7 @@ func (t *DirtTruck) handleMovingToExcavator(s *Simulation, dt float32) {
 		t.PathfindTo(s.Grid, t.AssignedExcav.CurrentCell(s.Grid))
 	}
 	t.CheckRepath(s.Grid, t.AssignedExcav.CurrentCell(s.Grid), dt)
-	t.FollowPath(s.Grid, dt)
+	t.FollowPath(s.Grid, s.Vehicles, dt)
 
 	if dist2(t.Pos, t.AssignedExcav.Pos) <= 2.0 {
 		log.Printf("[DT#%d] arrived at EX#%d → FOLLOWING", t.ID, t.AssignedExcav.ID)
@@ -203,12 +203,13 @@ func (t *DirtTruck) handleFollowing(s *Simulation, dt float32) {
 		t.PathfindTo(s.Grid, goal)
 	}
 	t.CheckRepath(s.Grid, goal, dt)
-	t.FollowPath(s.Grid, dt)
+	t.FollowPath(s.Grid, s.Vehicles, dt)
 }
 
-func (t *DirtTruck) handleReturning(s *Simulation, dt float32) {
+func (t *DirtTruck) handleLeavingForUnloading(s *Simulation, dt float32) {
+	t.BaseSpeed = 3.0 // The trailer is full, which is why the truck has to drive slower
 	t.CheckRepath(s.Grid, s.SpawnCell(), dt)
-	t.FollowPath(s.Grid, dt)
+	t.FollowPath(s.Grid, s.Vehicles, dt)
 	if dist2(t.Pos, s.SpawnPos) < 3.0 {
 		log.Printf("[DT#%d] at spawn → UNLOADING (cargo=%d)", t.ID, t.Cargo)
 		t.State = DirtUnloading
@@ -219,6 +220,7 @@ func (t *DirtTruck) handleReturning(s *Simulation, dt float32) {
 func (t *DirtTruck) handleUnloading(s *Simulation, dt float32) {
 	t.UnloadTimer += dt
 	if t.UnloadTimer >= 1800.0 {
+		t.BaseSpeed = 5.0 // trailer is empty, back to original speed
 		log.Printf("[DT#%d] unloaded → SEARCHING", t.ID)
 		t.Cargo = 0
 		t.State = DirtSearching
@@ -229,7 +231,7 @@ func (t *DirtTruck) handleUnloading(s *Simulation, dt float32) {
 
 func (t *DirtTruck) handleLeaving(s *Simulation, dt float32) {
 	t.RetryPathfind(s.Grid, s.SpawnCell(), dt)
-	t.FollowPath(s.Grid, dt)
+	t.FollowPath(s.Grid, s.Vehicles, dt)
 	if dist2(t.Pos, s.SpawnPos) < 3.0 {
 		ClearOccupancy(s.Grid, &t.BaseVehicle)
 		t.State = DirtDespawned

@@ -110,13 +110,13 @@ func (b *BaseVehicle) RetryPathfind(g *Grid, goal Point, dt float32) {
 	b.PathfindTo(g, goal)
 }
 
-func (b *BaseVehicle) FollowPath(g *Grid, dt float32) {
+func (b *BaseVehicle) FollowPath(g *Grid, vehicles []Updatable, dt float32) {
 	if b.PathIdx >= len(b.Path) {
 		return
 	}
 
 	others := g.Cells[b.CurrentCell(g).Y][b.CurrentCell(g).X].OthersOccupancy(b.ID)
-	speedMul := float32(1.0) - others*2.0
+	speedMul := float32(1.0) - others
 	if speedMul < 0.05 {
 		speedMul = 0.05
 	}
@@ -133,13 +133,45 @@ func (b *BaseVehicle) FollowPath(g *Grid, dt float32) {
 		b.PathIdx++
 		return
 	}
+
+	// Steering separation: accumulate a push force away from nearby agents.
+	var sepX, sepY float32
+	for _, other := range vehicles {
+		if other.GetID() == b.ID || other.IsDespawned() {
+			continue
+		}
+		op := other.GetPos()
+		ddx := b.Pos.X - op.X
+		ddy := b.Pos.Y - op.Y
+		dist := float32(math.Sqrt(float64(ddx*ddx + ddy*ddy)))
+		sepDist := b.Radius + other.GetRadius()
+		if dist >= sepDist || dist < 0.001 {
+			continue
+		}
+		w := 1.0 - dist/sepDist
+		sepX += (ddx / dist) * w
+		sepY += (ddy / dist) * w
+	}
+
+	const sepStrength = 0.35
+	dirX := dx/d + sepX*sepStrength
+	dirY := dy/d + sepY*sepStrength
+	dirLen := float32(math.Sqrt(float64(dirX*dirX + dirY*dirY)))
+	if dirLen > 0.001 {
+		dirX /= dirLen
+		dirY /= dirLen
+	} else {
+		dirX = dx / d
+		dirY = dy / d
+	}
+
 	move := spd * dt
 	if move > d {
 		move = d
 	}
-	b.Heading = Vec2{dx / d, dy / d}
-	b.Pos.X += dx / d * move
-	b.Pos.Y += dy / d * move
+	b.Heading = Vec2{dirX, dirY}
+	b.Pos.X += dirX * move
+	b.Pos.Y += dirY * move
 }
 
 func (b *BaseVehicle) CheckRepath(g *Grid, goal Point, dt float32) {

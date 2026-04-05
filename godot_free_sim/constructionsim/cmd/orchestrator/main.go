@@ -55,28 +55,28 @@ const (
 	maxMaterialTrucks = 10
 	craneCount        = 1 // fixed number
 
-	tournamentSize       = 3
+	tournamentSize       = 4
 	crossoverProbability = 0.85
-	mutationRate         = 0.15   // Mutation for the schedule
-	mutationSigma        = 2160.0 // standard deviation of gaussian noise
-	countMutationRate    = 0.2    // Mutation for the agents count
+	mutationRate         = 0.05   // Mutation for the schedule
+	mutationSigma        = 2160.0 // standard deviation for gaussian noise
+	countMutationRate    = 0.1    // Mutation for the agents count
 	eliteCount           = 2
 
-	// Larger than any valid completion time so timeout runs rank worst.
-	timeoutPenalty = float64(maxSimTime) * 10.0
+	// Equal to the maximum simulation time so timeout runs rank worst.
+	timeoutPenalty = float64(maxSimTime)
 )
 
 // testSchedule is a debugging schedule
 // Swap schedule inside getNextTask's.
-var testSchedule = map[string][]string{
-	"0":    {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-	"30":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-	"31":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-	"32":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-	"33":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-	"120":  {"crane"},
-	"5000": {"material_truck"},
-}
+// var testSchedule = map[string][]string{
+// 	"0":    {"excavator", "dirt_truck", "excavator", "dirt_truck"},
+// 	"30":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
+// 	"31":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
+// 	"32":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
+// 	"33":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
+// 	"120":  {"crane"},
+// 	"5000": {"material_truck"},
+// }
 
 // ---------------------------------------------------------------------------
 // Individuals
@@ -439,9 +439,9 @@ func (o *Orchestrator) getNextTask() string {
 	o.inFlight[t.id] = t.individualividual
 
 	payload := WorkData{
-		ID: strconv.Itoa(t.id),
-		// Schedule: t.individualividual.toSchedule(),
-		Schedule: testSchedule,
+		ID:       strconv.Itoa(t.id),
+		Schedule: t.individualividual.toSchedule(),
+		// Schedule: testSchedule,
 	}
 	data, _ := json.Marshal(payload)
 	log.Printf("Dispatched  id=%-4d  gen=%-3d  %s",
@@ -601,6 +601,9 @@ func (o *Orchestrator) saveHistory() {
 	path := outputDir + "/generation_history.json"
 	if err := os.WriteFile(path, b, 0644); err != nil {
 		log.Printf("saveHistory: %v", err)
+	}
+	if err := saveFitnessChart(o.history, outputDir+"/fitness_curve.jpg"); err != nil {
+		log.Printf("saveFitnessChart: %v", err)
 	}
 }
 

@@ -78,7 +78,7 @@ func (m *MaterialTruck) Update(s *Simulation, dt float32) {
 	case MatAttending:
 		m.handleAttending(s, dt)
 	case MatReturning:
-		m.handleReturning(s, dt)
+		m.handleLeavingForNewPipes(s, dt)
 	case MatRestocking:
 		m.handleRestocking(s, dt, s.Grid.PipePlacementCellCount)
 	case MatLeaving:
@@ -88,11 +88,14 @@ func (m *MaterialTruck) Update(s *Simulation, dt float32) {
 
 func (m *MaterialTruck) handleSpawned(s *Simulation) {
 	if s.Grid.PipePlacementCellCount > 1 {
+		m.BaseSpeed = 3.0
 		s.Grid.PipePlacementCellCount -= 2
 	} else if s.Grid.PipePlacementCellCount == 1 {
+		m.BaseSpeed = 4.0
 		s.Grid.PipePlacementCellCount -= 1
 		m.Cargo = 1
 	} else {
+		m.BaseSpeed = 5.0
 		m.Cargo = 0
 		m.State = MatLeaving
 		return
@@ -110,7 +113,7 @@ func (m *MaterialTruck) handleSpawned(s *Simulation) {
 }
 
 func (m *MaterialTruck) handleWaiting(s *Simulation, dt float32) {
-	m.FollowPath(s.Grid, dt)
+	m.FollowPath(s.Grid, s.Vehicles, dt)
 	if s.Phase.Phase1Complete {
 		m.State = MatSearching
 		m.searchCrane(s)
@@ -143,7 +146,7 @@ func (m *MaterialTruck) searchCrane(s *Simulation) {
 
 func (m *MaterialTruck) handleSearching(s *Simulation, dt float32) {
 	if m.IsWandering {
-		m.FollowPath(s.Grid, dt)
+		m.FollowPath(s.Grid, s.Vehicles, dt)
 		if m.PathDone() {
 			m.IsWandering = false
 		}
@@ -170,7 +173,7 @@ func (m *MaterialTruck) handleMovingToCrane(s *Simulation, dt float32) {
 	}
 	m.RetryPathfind(s.Grid, m.AssignedCrane.CurrentCell(s.Grid), dt)
 	m.CheckRepath(s.Grid, m.AssignedCrane.CurrentCell(s.Grid), dt)
-	m.FollowPath(s.Grid, dt)
+	m.FollowPath(s.Grid, s.Vehicles, dt)
 	attendDist := m.AssignedCrane.Radius + m.Radius + 10
 	if dist2(m.Pos, m.AssignedCrane.Pos) <= attendDist+5.0 {
 		m.State = MatAttending
@@ -202,13 +205,14 @@ func (m *MaterialTruck) handleAttending(s *Simulation, dt float32) {
 		m.PathfindTo(s.Grid, goal)
 	}
 	m.CheckRepath(s.Grid, goal, dt)
-	m.FollowPath(s.Grid, dt)
+	m.FollowPath(s.Grid, s.Vehicles, dt)
 	// Cargo deducted by crane when it takes material
 }
 
-func (m *MaterialTruck) handleReturning(s *Simulation, dt float32) {
+func (m *MaterialTruck) handleLeavingForNewPipes(s *Simulation, dt float32) {
+	m.BaseSpeed = 5.0
 	m.CheckRepath(s.Grid, s.SpawnCell(), dt)
-	m.FollowPath(s.Grid, dt)
+	m.FollowPath(s.Grid, s.Vehicles, dt)
 	if dist2(m.Pos, s.SpawnPos) < 3.0 {
 		m.State = MatRestocking
 		m.RestockTimer = 0
@@ -219,12 +223,15 @@ func (m *MaterialTruck) handleRestocking(s *Simulation, dt float32, stockCount i
 	m.RestockTimer += dt
 	if m.RestockTimer >= 1800.0 { // The stock place for pipes is about 15 minutes away + return time
 		if stockCount > 1 {
+			m.BaseSpeed = 3.0
 			m.Cargo = 2
 			s.Grid.PipePlacementCellCount -= 2
 		} else if stockCount == 1 {
+			m.BaseSpeed = 4.0
 			m.Cargo = 1
 			s.Grid.PipePlacementCellCount -= 1
 		} else {
+			m.BaseSpeed = 5.0
 			m.State = MatLeaving
 			return
 		}
@@ -236,8 +243,9 @@ func (m *MaterialTruck) handleRestocking(s *Simulation, dt float32, stockCount i
 }
 
 func (m *MaterialTruck) handleLeaving(s *Simulation, dt float32) {
+	m.BaseSpeed = 5.0
 	m.RetryPathfind(s.Grid, s.SpawnCell(), dt)
-	m.FollowPath(s.Grid, dt)
+	m.FollowPath(s.Grid, s.Vehicles, dt)
 	if dist2(m.Pos, s.SpawnPos) < 3.0 {
 		ClearOccupancy(s.Grid, &m.BaseVehicle)
 		m.State = MatDespawned
