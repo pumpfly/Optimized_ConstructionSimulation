@@ -77,7 +77,7 @@ func (e *Excavator) handleSpawned(s *Simulation, dt float32) {
 	e.LastActivityTime = s.SimTime // wandering counts as active
 	spawn := s.SpawnPos
 	if dist2(e.Pos, spawn) < 3.0 && !e.HasWandered {
-		target := s.RandomWalkable(5, 15)
+		target := s.WanderTarget(e.ID, 5, 15)
 		e.WanderTarget = CellCenter(target)
 		e.PathfindTo(s.Grid, target)
 		e.HasWandered = true

@@ -1,10 +1,8 @@
 package sim
 
 import (
-	"hash/fnv"
 	"log"
 	"math"
-	"math/rand"
 	"strconv"
 )
 
@@ -31,7 +29,6 @@ type Simulation struct {
 	SimTime       float32
 	LastDT        float32
 	nextID        int
-	rng           *rand.Rand
 	pendingSpawns []pendingSpawn
 	done          bool
 	metrics       Metrics
@@ -45,15 +42,11 @@ type pendingSpawn struct {
 
 func NewSimulation(g *Grid, work WorkData) *Simulation {
 	g.Reset()
-	h := fnv.New64a()
-	h.Write([]byte(work.ID))
-	seed := int64(h.Sum64())
 
 	s := &Simulation{
 		Grid:     g,
 		Phase:    NewPhaseManager(g),
 		SpawnPos: Vec2{float32(g.Spawn.X) + 0.5, float32(g.Spawn.Y) + 0.5},
-		rng:      rand.New(rand.NewSource(seed)),
 		nextID:   1,
 	}
 
@@ -282,14 +275,24 @@ func (s *Simulation) SignalPhase2Complete() {
 	}
 }
 
-func (s *Simulation) RandomWalkable(minDist, maxDist float32) Point {
+// WanderTarget returns a deterministic wander point for the given vehicle ID.
+// The angle is spread evenly across all vehicles using the golden angle, so
+// each vehicle gets a distinct, stable direction regardless of spawn order.
+func (s *Simulation) WanderTarget(vehicleID int, minDist, maxDist float32) Point {
 	spawnX := int(s.SpawnPos.X)
 	spawnY := int(s.SpawnPos.Y)
 	spawnH := s.Grid.At(spawnX, spawnY).Height
 
-	for i := 0; i < 50; i++ {
-		angle := s.rng.Float64() * 2 * math.Pi
-		dist := minDist + s.rng.Float32()*(maxDist-minDist)
+	const goldenAngle = 2.399963 // radians ≈ 137.5°
+	midDist := (minDist + maxDist) / 2
+
+	// Try increasing distances around the base angle until a valid cell is found.
+	for i := 0; i < 16; i++ {
+		angle := float64(vehicleID)*goldenAngle + float64(i)*0.3
+		dist := midDist + float32(i)*0.5
+		if dist > maxDist {
+			dist = maxDist
+		}
 		tx := spawnX + int(float64(dist)*math.Cos(angle))
 		ty := spawnY + int(float64(dist)*math.Sin(angle))
 		if !s.Grid.InBounds(tx, ty) {

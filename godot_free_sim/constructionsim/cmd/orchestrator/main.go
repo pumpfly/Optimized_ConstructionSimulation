@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"math/rand"
 	"net/http"
 	"os"
@@ -58,9 +59,16 @@ const (
 	tournamentSize       = 4
 	crossoverProbability = 0.85
 	mutationRate         = 0.05   // Mutation for the schedule
-	mutationSigma        = 2160.0 // standard deviation for gaussian noise
+	mutationSigma        = 2160.0 // initial standard deviation for gaussian noise
 	countMutationRate    = 0.1    // Mutation for the agents count
 	eliteCount           = 2
+
+	// Adaptive sigma parameters
+	mutationSigmaMin  = 300.0   // ~5 min in sim-seconds; floor for exploration
+	mutationSigmaMax  = 10800.0 // 3 h in sim-seconds; ceiling to avoid chaos
+	sigmaGrowFactor   = 1.3     // multiply sigma when stagnating
+	sigmaShrinkFactor = 0.9     // multiply sigma when improving
+	stagnationWindow  = 5       // consecutive generations without improvement → stagnate
 
 	// Equal to the maximum simulation time so timeout runs rank worst.
 	timeoutPenalty = float64(maxSimTime)
@@ -69,13 +77,29 @@ const (
 // testSchedule is a debugging schedule
 // Swap schedule inside getNextTask's.
 // var testSchedule = map[string][]string{
-// 	"0":    {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-// 	"30":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-// 	"31":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-// 	"32":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-// 	"33":   {"excavator", "dirt_truck", "excavator", "dirt_truck"},
-// 	"120":  {"crane"},
-// 	"5000": {"material_truck"},
+// 	"1": {"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"material_truck"},
+// 	"153":  {"dirt_truck"},
+// 	"4026": {"crane"},
+// 	"468":  {"excavator"},
+// 	"58":   {"excavator"},
+// 	"66":   {"dirt_truck"},
+// 	"7331": {"dirt_truck"},
 // }
 
 // ---------------------------------------------------------------------------
@@ -275,11 +299,11 @@ func crossover(rng *rand.Rand, a, b *Individual) (*Individual, *Individual) {
 }
 
 // mutateTimes applies Gaussian perturbation to each spawn time at rate mutationRate.
-func mutateTimes(rng *rand.Rand, times []int) []int {
+func mutateTimes(rng *rand.Rand, times []int, sigma float64) []int {
 	result := make([]int, len(times))
 	for i, t := range times {
 		if rng.Float64() < mutationRate {
-			t = clampSpawn(t + int(rng.NormFloat64()*mutationSigma))
+			t = clampSpawn(t + int(rng.NormFloat64()*sigma))
 		}
 		result[i] = t
 	}
@@ -315,7 +339,8 @@ func mutateCount(rng *rand.Rand, current, lo, hi int, times []int) (int, []int) 
 }
 
 // mutate applies count and spawn-time mutations to individual in place.
-func mutate(rng *rand.Rand, individual *Individual) {
+// sigma is the current adaptive standard deviation for Gaussian perturbation.
+func mutate(rng *rand.Rand, individual *Individual, sigma float64) {
 	if rng.Float64() < countMutationRate {
 		individual.NumExcavators, individual.ExcavatorSpawns = mutateCount(
 			rng, individual.NumExcavators, minExcavators, maxExcavators, individual.ExcavatorSpawns)
@@ -328,11 +353,11 @@ func mutate(rng *rand.Rand, individual *Individual) {
 		individual.NumMaterialTrucks, individual.MaterialTruckSpawns = mutateCount(
 			rng, individual.NumMaterialTrucks, minMaterialTrucks, maxMaterialTrucks, individual.MaterialTruckSpawns)
 	}
-	individual.ExcavatorSpawns = mutateTimes(rng, individual.ExcavatorSpawns)
-	individual.DirtTruckSpawns = mutateTimes(rng, individual.DirtTruckSpawns)
-	individual.MaterialTruckSpawns = mutateTimes(rng, individual.MaterialTruckSpawns)
+	individual.ExcavatorSpawns = mutateTimes(rng, individual.ExcavatorSpawns, sigma)
+	individual.DirtTruckSpawns = mutateTimes(rng, individual.DirtTruckSpawns, sigma)
+	individual.MaterialTruckSpawns = mutateTimes(rng, individual.MaterialTruckSpawns, sigma)
 	if rng.Float64() < mutationRate {
-		individual.CraneSpawn = clampSpawn(individual.CraneSpawn + int(rng.NormFloat64()*mutationSigma))
+		individual.CraneSpawn = clampSpawn(individual.CraneSpawn + int(rng.NormFloat64()*sigma))
 	}
 }
 
@@ -346,14 +371,18 @@ type pendingTask struct {
 }
 
 type genStats struct {
-	Generation         int                 `json:"generation"`
-	BestSeconds        float64             `json:"best_seconds"`
-	AvgSeconds         float64             `json:"average_seconds"`
-	WorstSeconds       float64             `json:"worst_seconds"`
-	BestExcavators     int                 `json:"best_excavators"`
-	BestDirtTrucks     int                 `json:"best_dirt_trucks"`
-	BestMaterialTrucks int                 `json:"best_material_trucks"`
-	BestSchedule       map[string][]string `json:"best_schedule"`
+	Generation          int                 `json:"generation"`
+	BestSeconds         float64             `json:"best_seconds"`
+	AvgSeconds          float64             `json:"average_seconds"`
+	WorstSeconds        float64             `json:"worst_seconds"`
+	BestExcavators      int                 `json:"best_excavators"`
+	BestDirtTrucks      int                 `json:"best_dirt_trucks"`
+	BestMaterialTrucks  int                 `json:"best_material_trucks"`
+	BestSchedule        map[string][]string `json:"best_schedule"`
+	WorstExcavators     int                 `json:"worst_excavators"`
+	WorstDirtTrucks     int                 `json:"worst_dirt_trucks"`
+	WorstMaterialTrucks int                 `json:"worst_material_trucks"`
+	WorstSchedule       map[string][]string `json:"worst_schedule"`
 }
 
 // WorkData matches sim.WorkData in the worker binary.
@@ -388,6 +417,10 @@ type Orchestrator struct {
 	finished          bool
 	bestEver          *Individual
 	history           []genStats
+
+	// Adaptive sigma state
+	currentSigma      float64
+	stagnationCounter int
 }
 
 func newOrchestrator(populationSize, maxGenerations int) *Orchestrator {
@@ -396,6 +429,7 @@ func newOrchestrator(populationSize, maxGenerations int) *Orchestrator {
 		populationSize: populationSize,
 		maxGenerations: maxGenerations,
 		inFlight:       make(map[int]*Individual),
+		currentSigma:   mutationSigma,
 	}
 	log.Printf("Initialising GA — population_size=%d  max_generations=%d  max_sim_time=%ds",
 		populationSize, maxGenerations, maxSimTime)
@@ -441,7 +475,7 @@ func (o *Orchestrator) getNextTask() string {
 	payload := WorkData{
 		ID:       strconv.Itoa(t.id),
 		Schedule: t.individualividual.toSchedule(),
-		// Schedule: testSchedule,
+		//Schedule: testSchedule,
 	}
 	data, _ := json.Marshal(payload)
 	log.Printf("Dispatched  id=%-4d  gen=%-3d  %s",
@@ -506,23 +540,38 @@ func (o *Orchestrator) evolve() {
 	log.Printf("Gen %-3d  best=%8.1fs  avg=%8.1fs  worst=%8.1fs  | %s",
 		o.currentGeneration, *best.Fitness, avg, *worst.Fitness, best.summary())
 
-	// All-time best
-	if o.bestEver == nil || *best.Fitness < *o.bestEver.Fitness {
+	// All-time best + stagnation-based sigma adaptation
+	improved := o.bestEver == nil || *best.Fitness < *o.bestEver.Fitness
+	if improved {
 		o.bestEver = best.clone()
 		log.Printf("*** New best in generation %d: %.1fs ***",
 			o.currentGeneration, *best.Fitness)
 		o.saveBest()
+		o.stagnationCounter = 0
+		o.currentSigma = math.Max(o.currentSigma*sigmaShrinkFactor, mutationSigmaMin)
+		log.Printf("Sigma shrunk → %.0f", o.currentSigma)
+	} else {
+		o.stagnationCounter++
+		if o.stagnationCounter >= stagnationWindow {
+			o.currentSigma = math.Min(o.currentSigma*sigmaGrowFactor, mutationSigmaMax)
+			log.Printf("Stagnation (%d gens) — sigma grown → %.0f",
+				o.stagnationCounter, o.currentSigma)
+		}
 	}
 
 	o.history = append(o.history, genStats{
-		Generation:         o.currentGeneration,
-		BestSeconds:        *best.Fitness,
-		AvgSeconds:         avg,
-		WorstSeconds:       *worst.Fitness,
-		BestExcavators:     best.NumExcavators,
-		BestDirtTrucks:     best.NumDirtTrucks,
-		BestMaterialTrucks: best.NumMaterialTrucks,
-		BestSchedule:       best.toSchedule(),
+		Generation:          o.currentGeneration,
+		BestSeconds:         *best.Fitness,
+		AvgSeconds:          avg,
+		WorstSeconds:        *worst.Fitness,
+		BestExcavators:      best.NumExcavators,
+		BestDirtTrucks:      best.NumDirtTrucks,
+		BestMaterialTrucks:  best.NumMaterialTrucks,
+		BestSchedule:        best.toSchedule(),
+		WorstExcavators:     worst.NumExcavators,
+		WorstDirtTrucks:     worst.NumDirtTrucks,
+		WorstMaterialTrucks: worst.NumMaterialTrucks,
+		WorstSchedule:       worst.toSchedule(),
 	})
 	o.saveHistory()
 
@@ -554,8 +603,8 @@ func (o *Orchestrator) evolve() {
 		parentA := tournamentSelect(o.rng, evaluated)
 		parentB := tournamentSelect(o.rng, evaluated)
 		childA, childB := crossover(o.rng, parentA, parentB)
-		mutate(o.rng, childA)
-		mutate(o.rng, childB)
+		mutate(o.rng, childA, o.currentSigma)
+		mutate(o.rng, childB, o.currentSigma)
 		nextGen = append(nextGen, childA)
 		if len(nextGen) < o.populationSize {
 			nextGen = append(nextGen, childB)

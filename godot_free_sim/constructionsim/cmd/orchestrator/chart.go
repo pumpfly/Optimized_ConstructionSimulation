@@ -119,24 +119,9 @@ func saveFitnessChart(history []genStats, path string) error {
 	plotW := chartW - marginLeft - marginRight
 	plotH := chartH - marginTop - marginBot
 
-	// Compute Y range (in hours)
-	minFit := history[0].BestSeconds / 3600.0
-	maxFit := history[0].WorstSeconds / 3600.0
-	for _, g := range history {
-		if v := g.BestSeconds / 3600.0; v < minFit {
-			minFit = v
-		}
-		if v := g.WorstSeconds / 3600.0; v > maxFit {
-			maxFit = v
-		}
-	}
-	// Add 5% padding on each side
-	yPad := (maxFit - minFit) * 0.05
-	if yPad == 0 {
-		yPad = 0.1
-	}
-	yMin := math.Max(0, minFit-yPad)
-	yMax := maxFit + yPad
+	// Fixed Y range: 0 to 15 h in 1.5 h steps
+	yMin := 0.0
+	yMax := 15.0
 
 	maxGen := len(history) - 1
 	if maxGen < 1 {
@@ -150,10 +135,9 @@ func saveFitnessChart(history []genStats, path string) error {
 		return px, py
 	}
 
-	// Horizontal grid lines (5 ticks)
-	numYTicks := 5
-	for i := 0; i <= numYTicks; i++ {
-		fy := yMin + float64(i)/float64(numYTicks)*(yMax-yMin)
+	// Horizontal grid lines: fixed ticks every 1.5 h from 0 to 15 h
+	for i := 0; i <= 10; i++ {
+		fy := float64(i) * 1.5
 		_, py := toPixel(0, fy)
 		drawLine(img, marginLeft, py, marginLeft+plotW, py, colorGrid)
 		h := int(fy)

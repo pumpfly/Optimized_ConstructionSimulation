@@ -84,7 +84,7 @@ func (c *Crane) Update(s *Simulation, dt float32) {
 
 func (c *Crane) handleSpawned(s *Simulation) {
 	if !s.Phase.Phase1Complete {
-		target := s.RandomWalkable(5, 15)
+		target := s.WanderTarget(c.ID, 5, 15)
 		c.WanderTarget = target
 		c.WanderDone = false
 		c.PathfindTo(s.Grid, target)

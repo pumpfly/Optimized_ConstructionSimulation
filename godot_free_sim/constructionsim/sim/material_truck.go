@@ -68,7 +68,11 @@ func (m *MaterialTruck) Update(s *Simulation, dt float32) {
 
 	switch m.State {
 	case MatSpawned:
-		m.handleSpawned(s)
+		if s.Phase.Phase2Complete {
+			m.State = MatLeaving
+		} else {
+			m.handleSpawned(s)
+		}
 	case MatWaitingForPhase2:
 		m.handleWaiting(s, dt)
 	case MatSearching:
@@ -101,7 +105,7 @@ func (m *MaterialTruck) handleSpawned(s *Simulation) {
 		return
 	}
 	if !s.Phase.Phase1Complete {
-		target := s.RandomWalkable(5, 15)
+		target := s.WanderTarget(m.ID, 5, 15)
 		m.WanderTarget = target
 		m.IsWandering = false
 		m.PathfindTo(s.Grid, target)
@@ -138,7 +142,7 @@ func (m *MaterialTruck) searchCrane(s *Simulation) {
 	m.SearchTimer = 0
 	if dist2(m.Pos, s.SpawnPos) < 3.0 {
 		m.IsWandering = true
-		target := s.RandomWalkable(5, 15)
+		target := s.WanderTarget(m.ID, 5, 15)
 		m.WanderTarget = target
 		m.PathfindTo(s.Grid, target)
 	}

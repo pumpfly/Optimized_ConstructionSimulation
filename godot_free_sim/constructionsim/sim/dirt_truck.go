@@ -63,8 +63,12 @@ func (t *DirtTruck) Update(s *Simulation, dt float32) {
 
 	switch t.State {
 	case DirtSpawned:
-		t.State = DirtSearching
-		t.searchExcavator(s)
+		if s.Phase.Phase1Complete {
+			t.State = DirtLeaving
+		} else {
+			t.State = DirtSearching
+			t.searchExcavator(s)
+		}
 	case DirtSearching:
 		t.handleSearching(s, dt)
 	case DirtMovingToExcavator:
@@ -120,7 +124,7 @@ func (t *DirtTruck) searchExcavator(s *Simulation) {
 	t.State = DirtSearching
 	t.SearchTimer = 0
 	if dist2(t.Pos, s.SpawnPos) < 3.0 {
-		target := s.RandomWalkable(5, 15)
+		target := s.WanderTarget(t.ID, 5, 15)
 		t.WanderTarget = target
 		t.IsWandering = true
 		t.PathfindTo(s.Grid, target)

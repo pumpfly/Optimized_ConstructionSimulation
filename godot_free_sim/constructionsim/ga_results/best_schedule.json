@@ -1,9 +1,9 @@
 {
-  "generation": 139,
-  "fitness_seconds": 4213.8583984375,
+  "generation": 141,
+  "fitness_seconds": 4195.7294921875,
   "num_excavators": 15,
   "num_dirt_trucks": 15,
-  "material_truck_count": 2,
+  "material_truck_count": 1,
   "crane_count": 1,
   "schedule": {
     "1": [
@@ -19,9 +19,6 @@
       "excavator",
       "excavator",
       "excavator",
-      "excavator",
-      "excavator",
-      "excavator",
       "dirt_truck",
       "dirt_truck",
       "dirt_truck",
@@ -34,14 +31,26 @@
       "dirt_truck",
       "dirt_truck",
       "dirt_truck",
-      "dirt_truck",
-      "dirt_truck",
-      "dirt_truck",
-      "material_truck",
       "material_truck"
     ],
-    "1273": [
+    "114": [
+      "excavator"
+    ],
+    "26": [
+      "excavator"
+    ],
+    "29": [
+      "dirt_truck",
+      "dirt_truck"
+    ],
+    "2913": [
       "crane"
+    ],
+    "53": [
+      "excavator"
+    ],
+    "96": [
+      "dirt_truck"
     ]
   }
 }
