@@ -24,7 +24,6 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"math"
 	"math/rand"
 	"net/http"
 	"os"
@@ -56,19 +55,12 @@ const (
 	maxMaterialTrucks = 10
 	craneCount        = 1 // fixed number
 
-	tournamentSize       = 4
+	tournamentSize       = 3
 	crossoverProbability = 0.85
-	mutationRate         = 0.05   // Mutation for the schedule
-	mutationSigma        = 2160.0 // initial standard deviation for gaussian noise
-	countMutationRate    = 0.1    // Mutation for the agents count
+	mutationRate         = 0.05   // per-gene mutation probability
+	mutationSigma        = 2160.0 // standard deviation for Gaussian noise
+	countMutationRate    = 0.1    // mutation probability for agent counts
 	eliteCount           = 2
-
-	// Adaptive sigma parameters
-	mutationSigmaMin  = 300.0   // ~5 min in sim-seconds; floor for exploration
-	mutationSigmaMax  = 10800.0 // 3 h in sim-seconds; ceiling to avoid chaos
-	sigmaGrowFactor   = 1.3     // multiply sigma when stagnating
-	sigmaShrinkFactor = 0.9     // multiply sigma when improving
-	stagnationWindow  = 5       // consecutive generations without improvement → stagnate
 
 	// Equal to the maximum simulation time so timeout runs rank worst.
 	timeoutPenalty = float64(maxSimTime)
@@ -85,6 +77,12 @@ const (
 // 		"excavator",
 // 		"excavator",
 // 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
+// 		"excavator",
 // 		"dirt_truck",
 // 		"dirt_truck",
 // 		"dirt_truck",
@@ -93,13 +91,18 @@ const (
 // 		"dirt_truck",
 // 		"dirt_truck",
 // 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"dirt_truck",
+// 		"material_truck",
 // 		"material_truck"},
-// 	"153":  {"dirt_truck"},
-// 	"4026": {"crane"},
-// 	"468":  {"excavator"},
-// 	"58":   {"excavator"},
-// 	"66":   {"dirt_truck"},
-// 	"7331": {"dirt_truck"},
+// 	"21718": {"material_truck"},
+// 	"233":   {"dirt_truck"},
+// 	"2860":  {"crane"},
+// 	"89":    {"excavator"},
 // }
 
 // ---------------------------------------------------------------------------
@@ -312,6 +315,7 @@ func mutateTimes(rng *rand.Rand, times []int, sigma float64) []int {
 }
 
 // mutateCount increments or decrements an agent count by ±1, adjusting the
+// mutateCount increments or decrements an agent count by ±1, adjusting the
 // spawn-time list accordingly.
 func mutateCount(rng *rand.Rand, current, lo, hi int, times []int) (int, []int) {
 	delta := 1
@@ -339,7 +343,6 @@ func mutateCount(rng *rand.Rand, current, lo, hi int, times []int) (int, []int) 
 }
 
 // mutate applies count and spawn-time mutations to individual in place.
-// sigma is the current adaptive standard deviation for Gaussian perturbation.
 func mutate(rng *rand.Rand, individual *Individual, sigma float64) {
 	if rng.Float64() < countMutationRate {
 		individual.NumExcavators, individual.ExcavatorSpawns = mutateCount(
@@ -415,12 +418,8 @@ type Orchestrator struct {
 	generationResults []*Individual
 	nextTaskID        int
 	finished          bool
-	bestEver          *Individual
-	history           []genStats
-
-	// Adaptive sigma state
-	currentSigma      float64
-	stagnationCounter int
+	bestEver *Individual
+	history  []genStats
 }
 
 func newOrchestrator(populationSize, maxGenerations int) *Orchestrator {
@@ -429,7 +428,6 @@ func newOrchestrator(populationSize, maxGenerations int) *Orchestrator {
 		populationSize: populationSize,
 		maxGenerations: maxGenerations,
 		inFlight:       make(map[int]*Individual),
-		currentSigma:   mutationSigma,
 	}
 	log.Printf("Initialising GA — population_size=%d  max_generations=%d  max_sim_time=%ds",
 		populationSize, maxGenerations, maxSimTime)
@@ -540,23 +538,12 @@ func (o *Orchestrator) evolve() {
 	log.Printf("Gen %-3d  best=%8.1fs  avg=%8.1fs  worst=%8.1fs  | %s",
 		o.currentGeneration, *best.Fitness, avg, *worst.Fitness, best.summary())
 
-	// All-time best + stagnation-based sigma adaptation
-	improved := o.bestEver == nil || *best.Fitness < *o.bestEver.Fitness
-	if improved {
+	// All-time best tracking
+	if o.bestEver == nil || *best.Fitness < *o.bestEver.Fitness {
 		o.bestEver = best.clone()
 		log.Printf("*** New best in generation %d: %.1fs ***",
 			o.currentGeneration, *best.Fitness)
 		o.saveBest()
-		o.stagnationCounter = 0
-		o.currentSigma = math.Max(o.currentSigma*sigmaShrinkFactor, mutationSigmaMin)
-		log.Printf("Sigma shrunk → %.0f", o.currentSigma)
-	} else {
-		o.stagnationCounter++
-		if o.stagnationCounter >= stagnationWindow {
-			o.currentSigma = math.Min(o.currentSigma*sigmaGrowFactor, mutationSigmaMax)
-			log.Printf("Stagnation (%d gens) — sigma grown → %.0f",
-				o.stagnationCounter, o.currentSigma)
-		}
 	}
 
 	o.history = append(o.history, genStats{
@@ -603,8 +590,8 @@ func (o *Orchestrator) evolve() {
 		parentA := tournamentSelect(o.rng, evaluated)
 		parentB := tournamentSelect(o.rng, evaluated)
 		childA, childB := crossover(o.rng, parentA, parentB)
-		mutate(o.rng, childA, o.currentSigma)
-		mutate(o.rng, childB, o.currentSigma)
+		mutate(o.rng, childA, mutationSigma)
+		mutate(o.rng, childB, mutationSigma)
 		nextGen = append(nextGen, childA)
 		if len(nextGen) < o.populationSize {
 			nextGen = append(nextGen, childB)

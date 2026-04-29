@@ -84,7 +84,7 @@ func (e *Excavator) handleSpawned(s *Simulation, dt float32) {
 		return
 	}
 	if e.HasWandered && !e.PathDone() {
-		e.FollowPath(s.Grid, s.Vehicles, dt)
+		e.FollowPath(s.Grid, s.spatialIdx, dt)
 		return
 	}
 	e.findAndReserveCell(s)
@@ -126,7 +126,7 @@ func (e *Excavator) appendTrail(p Point) {
 func (e *Excavator) handleMovingToCell(s *Simulation, dt float32) {
 	e.LastActivityTime = s.SimTime // moving to cell counts as active
 	e.CheckRepath(s.Grid, e.TargetCell, dt)
-	e.FollowPath(s.Grid, s.Vehicles, dt)
+	e.FollowPath(s.Grid, s.spatialIdx, dt)
 	e.appendTrail(e.CurrentCell(s.Grid))
 	// Safety net: if path was exhausted (e.g. detour ended short) re-pathfind.
 	e.RetryPathfind(s.Grid, e.TargetCell, dt)
@@ -223,7 +223,7 @@ func (e *Excavator) handleExcavating(s *Simulation, dt float32) {
 
 func (e *Excavator) handleLeaving(s *Simulation, dt float32) {
 	e.RetryPathfind(s.Grid, s.SpawnCell(), dt)
-	e.FollowPath(s.Grid, s.Vehicles, dt)
+	e.FollowPath(s.Grid, s.spatialIdx, dt)
 	if dist2(e.Pos, s.SpawnPos) < 3.0 {
 		ClearOccupancy(s.Grid, &e.BaseVehicle)
 		e.State = ExcavDespawned

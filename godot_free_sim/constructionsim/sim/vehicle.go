@@ -29,6 +29,16 @@ type Updatable interface {
 	GetRemainingPath() []Point
 }
 
+// jamThreshold is the OthersOccupancy level that triggers a forced standstill.
+// jamMaxDuration is the freeze time (seconds) when occupancy is at its worst.
+// jamCooldownDuration is the free-movement window after a jam ends, preventing
+// the agent from immediately re-jamming on the same tick.
+const (
+	jamThreshold        = 0.7
+	jamMaxDuration      = 8.0
+	jamCooldownDuration = 1.0
+)
+
 type BaseVehicle struct {
 	ID                 int
 	Pos                Vec2
@@ -43,6 +53,8 @@ type BaseVehicle struct {
 	PathFailed         bool
 	pathRetryTimer     float32
 	repathCooldown     float32
+	jamTimer           float32 // remaining forced-standstill time
+	jamCooldown        float32 // remaining post-jam free-movement window
 }
 
 func (b *BaseVehicle) GetID() int         { return b.ID }
@@ -110,13 +122,51 @@ func (b *BaseVehicle) RetryPathfind(g *Grid, goal Point, dt float32) {
 	b.PathfindTo(g, goal)
 }
 
-func (b *BaseVehicle) FollowPath(g *Grid, vehicles []Updatable, dt float32) {
+func (b *BaseVehicle) FollowPath(g *Grid, idx *SpatialIndex, dt float32) {
 	if b.PathIdx >= len(b.Path) {
 		return
 	}
 
+	// Jam mechanic: when too many agents share the same cell they must stand
+	// still for a while, abstractly simulating vehicles reversing and adjusting
+	// to fit. The worse the congestion, the longer the freeze.
+	if b.jamTimer > 0 {
+		b.jamTimer -= dt
+		if b.jamTimer <= 0 {
+			b.jamCooldown = jamCooldownDuration
+		}
+		return
+	}
+	if b.jamCooldown > 0 {
+		b.jamCooldown -= dt
+	}
+
 	others := g.Cells[b.CurrentCell(g).Y][b.CurrentCell(g).X].OthersOccupancy(b.ID)
-	speedMul := float32(1.0) - others
+
+	// Lookahead: blend in the occupancy of the next cell on the path so that
+	// agents begin slowing down before they enter a congested chokepoint,
+	// producing visible queue formation outside bottlenecks.
+	if b.PathIdx < len(b.Path) {
+		next := b.Path[b.PathIdx]
+		nextOcc := g.Cells[next.Y][next.X].OthersOccupancy(b.ID)
+		if nextOcc > others {
+			others = others*0.4 + nextOcc*0.6
+		}
+	}
+
+	// Trigger a jam when occupancy exceeds the threshold.
+	if b.jamCooldown <= 0 && others > jamThreshold {
+		excess := others - jamThreshold
+		available := float32(1.0 - jamThreshold)
+		if excess > available {
+			excess = available
+		}
+		b.jamTimer = (excess / available) * jamMaxDuration
+		return
+	}
+
+	// Quadratic slowdown: floor at 5% so agents always make some progress.
+	speedMul := (1.0 - others) * (1.0 - others)
 	if speedMul < 0.05 {
 		speedMul = 0.05
 	}
@@ -136,7 +186,7 @@ func (b *BaseVehicle) FollowPath(g *Grid, vehicles []Updatable, dt float32) {
 
 	// Steering separation: accumulate a push force away from nearby agents.
 	var sepX, sepY float32
-	for _, other := range vehicles {
+	for _, other := range idx.Neighbors(b.Pos) {
 		if other.GetID() == b.ID || other.IsDespawned() {
 			continue
 		}
@@ -170,8 +220,21 @@ func (b *BaseVehicle) FollowPath(g *Grid, vehicles []Updatable, dt float32) {
 		move = d
 	}
 	b.Heading = Vec2{dirX, dirY}
+
+	prevCell := b.CurrentCell(g)
+	prevPos := b.Pos
 	b.Pos.X += dirX * move
 	b.Pos.Y += dirY * move
+
+	// If the separation force pushed us into a cell that is impassable from
+	// the previous cell (height diff > 1), revert to only the path-following
+	// component to avoid stranding the agent on an unreachable cell.
+	newCell := b.CurrentCell(g)
+	if newCell != prevCell && !g.edgePassable(prevCell.X, prevCell.Y, newCell.X, newCell.Y) {
+		b.Pos = prevPos
+		b.Pos.X += (dx / d) * move
+		b.Pos.Y += (dy / d) * move
+	}
 }
 
 func (b *BaseVehicle) CheckRepath(g *Grid, goal Point, dt float32) {

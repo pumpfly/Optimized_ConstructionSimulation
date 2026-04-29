@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-const SimStep = 0.05
+const SimStep = 0.1
 
 type WorkData struct {
 	ID       string              `json:"id"`
@@ -33,6 +33,7 @@ type Simulation struct {
 	done          bool
 	metrics       Metrics
 	lastLogTime   float32
+	spatialIdx    *SpatialIndex
 }
 
 type pendingSpawn struct {
@@ -44,10 +45,11 @@ func NewSimulation(g *Grid, work WorkData) *Simulation {
 	g.Reset()
 
 	s := &Simulation{
-		Grid:     g,
-		Phase:    NewPhaseManager(g),
-		SpawnPos: Vec2{float32(g.Spawn.X) + 0.5, float32(g.Spawn.Y) + 0.5},
-		nextID:   1,
+		Grid:       g,
+		Phase:      NewPhaseManager(g),
+		SpawnPos:   Vec2{float32(g.Spawn.X) + 0.5, float32(g.Spawn.Y) + 0.5},
+		nextID:     1,
+		spatialIdx: newSpatialIndex(),
 	}
 
 	// Parse schedule — collect in order: sort by time, then by array index
@@ -140,6 +142,9 @@ func (s *Simulation) Tick(dt float32) {
 		s.spawnVehicle(s.pendingSpawns[0].typeStr)
 		s.pendingSpawns = s.pendingSpawns[1:]
 	}
+
+	// Rebuild the spatial index once so FollowPath uses O(1) neighbour lookups.
+	s.spatialIdx.Build(s.Vehicles)
 
 	// Update vehicles in order
 	for _, v := range s.Vehicles {

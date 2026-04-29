@@ -117,7 +117,7 @@ func (m *MaterialTruck) handleSpawned(s *Simulation) {
 }
 
 func (m *MaterialTruck) handleWaiting(s *Simulation, dt float32) {
-	m.FollowPath(s.Grid, s.Vehicles, dt)
+	m.FollowPath(s.Grid, s.spatialIdx, dt)
 	if s.Phase.Phase1Complete {
 		m.State = MatSearching
 		m.searchCrane(s)
@@ -150,7 +150,7 @@ func (m *MaterialTruck) searchCrane(s *Simulation) {
 
 func (m *MaterialTruck) handleSearching(s *Simulation, dt float32) {
 	if m.IsWandering {
-		m.FollowPath(s.Grid, s.Vehicles, dt)
+		m.FollowPath(s.Grid, s.spatialIdx, dt)
 		if m.PathDone() {
 			m.IsWandering = false
 		}
@@ -177,7 +177,7 @@ func (m *MaterialTruck) handleMovingToCrane(s *Simulation, dt float32) {
 	}
 	m.RetryPathfind(s.Grid, m.AssignedCrane.CurrentCell(s.Grid), dt)
 	m.CheckRepath(s.Grid, m.AssignedCrane.CurrentCell(s.Grid), dt)
-	m.FollowPath(s.Grid, s.Vehicles, dt)
+	m.FollowPath(s.Grid, s.spatialIdx, dt)
 	attendDist := m.AssignedCrane.Radius + m.Radius + 10
 	if dist2(m.Pos, m.AssignedCrane.Pos) <= attendDist+5.0 {
 		m.State = MatAttending
@@ -209,14 +209,14 @@ func (m *MaterialTruck) handleAttending(s *Simulation, dt float32) {
 		m.PathfindTo(s.Grid, goal)
 	}
 	m.CheckRepath(s.Grid, goal, dt)
-	m.FollowPath(s.Grid, s.Vehicles, dt)
+	m.FollowPath(s.Grid, s.spatialIdx, dt)
 	// Cargo deducted by crane when it takes material
 }
 
 func (m *MaterialTruck) handleLeavingForNewPipes(s *Simulation, dt float32) {
 	m.BaseSpeed = 5.0
 	m.CheckRepath(s.Grid, s.SpawnCell(), dt)
-	m.FollowPath(s.Grid, s.Vehicles, dt)
+	m.FollowPath(s.Grid, s.spatialIdx, dt)
 	if dist2(m.Pos, s.SpawnPos) < 3.0 {
 		m.State = MatRestocking
 		m.RestockTimer = 0
@@ -249,7 +249,7 @@ func (m *MaterialTruck) handleRestocking(s *Simulation, dt float32, stockCount i
 func (m *MaterialTruck) handleLeaving(s *Simulation, dt float32) {
 	m.BaseSpeed = 5.0
 	m.RetryPathfind(s.Grid, s.SpawnCell(), dt)
-	m.FollowPath(s.Grid, s.Vehicles, dt)
+	m.FollowPath(s.Grid, s.spatialIdx, dt)
 	if dist2(m.Pos, s.SpawnPos) < 3.0 {
 		ClearOccupancy(s.Grid, &m.BaseVehicle)
 		m.State = MatDespawned

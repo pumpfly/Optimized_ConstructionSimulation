@@ -97,7 +97,7 @@ func (c *Crane) handleSpawned(s *Simulation) {
 
 func (c *Crane) handleWaiting(s *Simulation, dt float32) {
 	if !c.WanderDone {
-		c.FollowPath(s.Grid, s.Vehicles, dt)
+		c.FollowPath(s.Grid, s.spatialIdx, dt)
 		if c.PathDone() {
 			c.WanderDone = true
 		}
@@ -121,7 +121,7 @@ func (c *Crane) appendTrail(p Point) {
 
 func (c *Crane) handlePositioning(s *Simulation, dt float32) {
 	c.CheckRepath(s.Grid, c.WanderTarget, dt)
-	c.FollowPath(s.Grid, s.Vehicles, dt)
+	c.FollowPath(s.Grid, s.spatialIdx, dt)
 	c.appendTrail(c.CurrentCell(s.Grid))
 
 	// Always commit to Working when the path is fully consumed.
@@ -282,7 +282,7 @@ func (c *Crane) handleWorking(s *Simulation, dt float32) {
 
 func (c *Crane) handleLeaving(s *Simulation, dt float32) {
 	c.RetryPathfind(s.Grid, s.SpawnCell(), dt)
-	c.FollowPath(s.Grid, s.Vehicles, dt)
+	c.FollowPath(s.Grid, s.spatialIdx, dt)
 	if dist2(c.Pos, s.SpawnPos) < 3.0 {
 		ClearOccupancy(s.Grid, &c.BaseVehicle)
 		c.State = CraneDespawned

@@ -201,7 +201,7 @@ func (g *Grid) AStarForVehicle(start, goal Point, vehicleID int) []Point {
 			}
 
 			occ := g.Cells[ny][nx].OthersOccupancy(vehicleID)
-			cost := d.cost * (1 + occ*10)
+			cost := d.cost * (1 + occ*20)
 
 			nk := nodeKey{nx, ny}
 			ng := cur.g + cost

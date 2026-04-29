@@ -133,7 +133,7 @@ func (t *DirtTruck) searchExcavator(s *Simulation) {
 
 func (t *DirtTruck) handleSearching(s *Simulation, dt float32) {
 	if t.IsWandering {
-		t.FollowPath(s.Grid, s.Vehicles, dt)
+		t.FollowPath(s.Grid, s.spatialIdx, dt)
 		if t.PathDone() {
 			t.IsWandering = false
 		}
@@ -167,7 +167,7 @@ func (t *DirtTruck) handleMovingToExcavator(s *Simulation, dt float32) {
 		t.PathfindTo(s.Grid, t.AssignedExcav.CurrentCell(s.Grid))
 	}
 	t.CheckRepath(s.Grid, t.AssignedExcav.CurrentCell(s.Grid), dt)
-	t.FollowPath(s.Grid, s.Vehicles, dt)
+	t.FollowPath(s.Grid, s.spatialIdx, dt)
 
 	if dist2(t.Pos, t.AssignedExcav.Pos) <= 2.0 {
 		log.Printf("[DT#%d] arrived at EX#%d → FOLLOWING", t.ID, t.AssignedExcav.ID)
@@ -207,13 +207,13 @@ func (t *DirtTruck) handleFollowing(s *Simulation, dt float32) {
 		t.PathfindTo(s.Grid, goal)
 	}
 	t.CheckRepath(s.Grid, goal, dt)
-	t.FollowPath(s.Grid, s.Vehicles, dt)
+	t.FollowPath(s.Grid, s.spatialIdx, dt)
 }
 
 func (t *DirtTruck) handleLeavingForUnloading(s *Simulation, dt float32) {
 	t.BaseSpeed = 3.0 // The trailer is full, which is why the truck has to drive slower
 	t.CheckRepath(s.Grid, s.SpawnCell(), dt)
-	t.FollowPath(s.Grid, s.Vehicles, dt)
+	t.FollowPath(s.Grid, s.spatialIdx, dt)
 	if dist2(t.Pos, s.SpawnPos) < 3.0 {
 		log.Printf("[DT#%d] at spawn → UNLOADING (cargo=%d)", t.ID, t.Cargo)
 		t.State = DirtUnloading
@@ -235,7 +235,7 @@ func (t *DirtTruck) handleUnloading(s *Simulation, dt float32) {
 
 func (t *DirtTruck) handleLeaving(s *Simulation, dt float32) {
 	t.RetryPathfind(s.Grid, s.SpawnCell(), dt)
-	t.FollowPath(s.Grid, s.Vehicles, dt)
+	t.FollowPath(s.Grid, s.spatialIdx, dt)
 	if dist2(t.Pos, s.SpawnPos) < 3.0 {
 		ClearOccupancy(s.Grid, &t.BaseVehicle)
 		t.State = DirtDespawned

@@ -164,7 +164,7 @@ echo "[start] Waiting for orchestrator to be ready..."
 MAX_WAIT=30
 WAITED=0
 until curl -sf "http://${ORCH_ADDR}/" > /dev/null 2>&1; do
-    sleep 1
+    sleep 0.1
     WAITED=$((WAITED + 1))
     if [[ $WAITED -ge $MAX_WAIT ]]; then
         echo "[ERROR] Orchestrator did not start within ${MAX_WAIT}s."
@@ -189,9 +189,6 @@ for i in $(seq 1 "${WORKER_COUNT}"); do
 
     WORKER_PIDS+=($!)
     echo "[start] Worker ${i} PID: ${WORKER_PIDS[-1]}  (log: ${WORKER_LOG})"
-
-    # Stagger startup slightly so workers don't all hit the server at once
-    sleep 0.2
 done
 
 echo "[start] All ${WORKER_COUNT} workers launched."
